@@ -3,9 +3,13 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.3'
 gem 'annotate'
+gem 'backbone-on-rails'
+gem 'jquery-ui-rails'
 
 # Use postgresql as the database for Active Record
 gem 'pg'
+
+gem 'serialize_json-rails'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
