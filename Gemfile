@@ -37,7 +37,6 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-gem 'annotate'
 
 group :development, :test do
   gem 'rspec-rails'
@@ -45,6 +44,7 @@ group :development, :test do
 end
 
 group :test do 
+  gem 'shoulda-matchers'
   gem 'faker' 
   gem 'capybara' 
   gem 'guard-rspec' 

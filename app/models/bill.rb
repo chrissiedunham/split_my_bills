@@ -19,11 +19,11 @@ class Bill < ActiveRecord::Base
     :class_name => "User",
     :foreign_key => :creditor_id,
     :primary_key => :id
-  
+
   has_many :debtors_bills,
     :class_name => "DebtorsBills",
     :foreign_key => :bill_id,
     :primary_key => :id
-  
+
   has_many :debtors, :through => :debtors_bills, :source => :debtor
 end 

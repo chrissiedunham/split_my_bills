@@ -49,7 +49,7 @@ test:
   database: SplitMyBills_test
   pool: 5
   timeout: 5000
-	
+
 production:
   adapter: postgresql
   encoding: unicode
