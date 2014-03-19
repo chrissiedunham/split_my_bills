@@ -61,7 +61,6 @@
 //= require_tree ./routers
 //= require_tree ./routers
 
-//= require turbolinks
 //= require underscore
 //= require backbone
 //= require split_my_bills

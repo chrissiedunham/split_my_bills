@@ -17,4 +17,12 @@ require 'spec_helper'
 describe User do
   # it "requires a username" do
   # end
+  
+  describe "associations" do
+  
+    it { should have_many(:credit_bills) }
+    it { should have_many(:debit_bills) }
+    # it { should have_many(:_bills)}
+  
+  end
 end

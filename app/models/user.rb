@@ -18,7 +18,19 @@ class User < ActiveRecord::Base
   validates :password, :length => { :minimum => 6, :allow_nil => true }
   validates :session_token, :presence => true, :uniqueness => true
   validates :email, :presence => true, :uniqueness => true
+  
+  has_many :debtors_bills,
+    :class_name => "DebtorsBills",
+    :foreign_key => :debtor_id,
+    :primary_key => :id
 
+  has_many :credit_bills,
+    :class_name => "Bill",
+    :foreign_key => :creditor_id,
+    :primary_key => :id
+  
+  has_many :debit_bills, :through => :bills_debtors, :source => :bill
+  
   before_validation :ensure_session_token
 
   def self.find_by_credentials(email, password)
