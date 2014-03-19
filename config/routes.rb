@@ -1,7 +1,10 @@
 SplitMyBills::Application.routes.draw do
-  root "static_pages#root"
+  root :to => "static_pages#root"
   
   resource :session, only: [:new, :create, :destroy]
+  resources :users, only: [:new, :create, :destroy]
+  
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

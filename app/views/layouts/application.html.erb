@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>SplitMyBills</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>NewAuthDemo</title>
+  </head>
+  <body>
 
-<%= yield %>
+    <% if flash[:errors] %>
+    <ul style="color:red;text-shadow: 1px 1px 1px black;">
+      <% flash[:errors].each do |error| %>
+      <li><%= error %></li>
+      <% end %>
+    </ul>
+    <br>
+    <% end %>
 
-</body>
+    <% if signed_in? %>
+    <ul>
+      <li>Signed in as: <%= current_user.email %></li>
+      <li><%= button_to "Sign Out", session_url, :method => :delete %></li>
+    </ul>
+    <% else %>
+    <%= link_to "Sign In", new_session_url %> or
+    <%= link_to "Sign up", new_user_url %>
+    <% end %>
+
+    <%= yield %>
+
+  </body>
 </html>

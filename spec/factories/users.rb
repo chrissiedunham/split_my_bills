@@ -12,9 +12,13 @@
 #  password_digest :string(255)
 #
 
-require 'spec_helper'
+require 'faker'
 
-describe User do
-  # it "requires a username" do
-  # end
+FactoryGirl.define do
+  factory :user do
+    email Faker::Internet.email
+    name Faker::Name.first_name
+    password "foobar"
+    
+  end
 end
