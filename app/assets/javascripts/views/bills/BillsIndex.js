@@ -8,7 +8,7 @@ window.SplitMyBills.Views.BillsIndex = Backbone.View.extend({
 
   events: {
     "click button.add-bill": "showAddBillButton",
-    "click button.create-bill": "addBill"
+    "click button.create-bill": "createBill"
   },
 
   render: function(){
@@ -17,13 +17,20 @@ window.SplitMyBills.Views.BillsIndex = Backbone.View.extend({
     return this;
   },
 
+  addBill: function(bill){
+    var billShowView = new SplitMyBills.View.BillShow({ model: bill });            
+    this.addSubview(".bills", billShowView);
+    billShowView.render();
+  },
+
   showAddBillButton: function(event){
     event.preventDefault();
 
     $(".add-bill").toggleClass("hidden");
   },
-  addBill: function(event) {
+  createBill: function(event) {
     event.preventDefault();
+    var that = this;
 
     $(".add-bill").toggleClass("hidden");
     var billData = $('form.add-bill').serializeJSON()['bill'];
@@ -31,6 +38,7 @@ window.SplitMyBills.Views.BillsIndex = Backbone.View.extend({
     newBill.save({}, {
       success: function(bill) {
         SplitMyBills.bills.add(bill);
+
       } 
     
     })
