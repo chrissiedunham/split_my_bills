@@ -6,18 +6,24 @@ window.SplitMyBills.Views.BillsIndex = Backbone.CompositeView.extend({
     this.listenTo(this.collection, "add sync remove", this.render);
     this.listenTo(this.collection, "add", this.addBill)
     this.collection.each(this.addBill.bind(this));
-  },
-
-  events: {
-    "click button.add-bill": "showAddBillButton",
-    "click button.create-bill": "createBill"
+    this.addNewBillView();
+    
   },
 
   render: function(){
     var content = this.template({ bills: this.collection });
     this.$el.html(content);
+
     this.renderSubviews();
     return this;
+  },
+
+
+  addNewBillView: function(){
+    var newBillView = new SplitMyBills.Views.BillNew();
+    this.addSubview(".new", newBillView);
+    newBillView.render();
+                 
   },
 
   addBill: function(bill){
@@ -25,28 +31,5 @@ window.SplitMyBills.Views.BillsIndex = Backbone.CompositeView.extend({
     this.addSubview(".bills", billShowView);
     billShowView.render();
   },
-
-  showAddBillButton: function(event){
-    event.preventDefault();
-
-    $(".add-bill").toggleClass("hidden");
-  },
-
-  createBill: function(event) {
-    event.preventDefault();
-    var that = this;
-
-    $(".add-bill").toggleClass("hidden");
-    var billData = $('form.add-bill').serializeJSON()['bill'];
-    var newBill = new SplitMyBills.Models.Bill( billData );
-    newBill.save({}, {
-      success: function(bill) {
-        SplitMyBills.bills.add(bill);
-      } 
-    
-    })
-  }
-
-  
 
 })

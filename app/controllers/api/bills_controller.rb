@@ -20,6 +20,13 @@ class Api::BillsController < ApplicationController
     render json: @bill
   end
 
+  def destroy
+    @bill = Bill.find(params[:id])
+    @bill.destroy
+    render json: @bill
+    
+  end
+
   def bill_params
     params.require(:bill).permit(:name, :amount)
   end

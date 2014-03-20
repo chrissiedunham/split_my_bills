@@ -19,7 +19,7 @@ window.SplitMyBills.Views.BillShow = Backbone.View.extend({
 
   showFull: function(event){
     event.preventDefault();                     
-    $("bill-show bill-link").toggleClass("hidden");
+    $(event.target).parent().find('.bill-show').toggleClass("hidden");
   },
 
   deleteBill: function(event){

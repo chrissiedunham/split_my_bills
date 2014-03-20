@@ -2,9 +2,12 @@ SplitMyBills::Application.routes.draw do
   root :to => "static_pages#root"
   
   resource :session, only: [:new, :create, :destroy]
-  resources :users, only: [:new, :create, :destroy]
+  resources :users, only: [:new, :create, :destroy, :index] do
+    resources :friendships, only: [:create, :destroy ]
+  end
+  resources :friendships, only: [:index]
   namespace :api, defaults: { format: :json } do
-    resources :bills, only: [:index, :show, :new, :create, :update]
+    resources :bills
   end
   
   # The priority is based upon order of creation: first created -> highest priority.

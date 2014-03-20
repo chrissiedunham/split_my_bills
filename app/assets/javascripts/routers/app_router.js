@@ -3,7 +3,7 @@ window.SplitMyBills.Routers.AppRouter = Backbone.Router.extend({
   initialize: function(options){
               
     this.$rootEl = options.$rootEl,
-    this.bills = options.bills
+    this.bills = SplitMyBills.bills
               
   },
 
@@ -14,6 +14,8 @@ window.SplitMyBills.Routers.AppRouter = Backbone.Router.extend({
 
   index: function() {
     var indexView = new SplitMyBills.Views.BillsIndex({ collection: this.bills });
+
+    SplitMyBills.bills.fetch();
     this._swapView(indexView);
   },
 
@@ -24,8 +26,7 @@ window.SplitMyBills.Routers.AppRouter = Backbone.Router.extend({
 
     this.$rootEl.html(this.current_view.render().$el);
   }
-
-
-
-
 })
+
+SplitMyBills.bills = new SplitMyBills.Collections.Bills();
+SplitMyBills.friends = new SplitMyBills.Collections.Users();

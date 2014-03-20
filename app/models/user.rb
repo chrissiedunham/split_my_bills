@@ -30,6 +30,13 @@ class User < ActiveRecord::Base
     :primary_key => :id
   
   has_many :debit_bills, :through => :bills_debtors, :source => :bill
+
+  has_many :friendships,
+    :class_name => "Friendship",
+    :foreign_key => :friend_1_id,
+    :primary_key => :id
+
+  has_many :friends, :through => :friendships, :source => :friend_1
   
   before_validation :ensure_session_token
 
