@@ -1,9 +1,9 @@
 <h3>Bills</h3>
 <ul>
   <% bills.forEach(function(bill) { %>
-  <li> <%= bill.escape('name') %> <li>
+  <li> <%= bill.escape('name') %> </li>
   <% }) %>
 </ul>
 <div>
-  <%= JST["bills/new"]() %>
+  <%= JST["bills/form"]() %>
 </div>

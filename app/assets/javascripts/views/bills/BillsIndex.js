@@ -21,8 +21,6 @@ window.SplitMyBills.Views.BillsIndex = Backbone.View.extend({
     event.preventDefault();
 
     $(".add-bill").toggleClass("hidden");
-
-                     
   },
   addBill: function(event) {
     event.preventDefault();
