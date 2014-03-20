@@ -8,7 +8,8 @@ window.SplitMyBills.Views.BillNew = Backbone.View.extend({
 
   events: {
     "click button.add-bill": "showAddBillButton",
-    "click button.create-bill": "createBill"
+    "click button.create-bill": "createBill",
+    "click a.add-debtor": "addDebtorSelect"
   },
 
 
@@ -37,8 +38,13 @@ window.SplitMyBills.Views.BillNew = Backbone.View.extend({
       success: function(bill) {
         SplitMyBills.bills.add(bill);
       } 
-    
     })
+  },
+
+  addDebtorSelect: function(event){
+    event.preventDefault();
+    var newSelect = JST["debtor_select"]( { friends: this.collection });
+    $(".debtor-selects").append(newSelect);
   }
 
   // newAddBillButton: function(event){
