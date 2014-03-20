@@ -1,6 +1,5 @@
 class Api::BillsController < ApplicationController
   def create
-    debugger
     @bill = current_user.credit_bills.build(bill_params)
     
     if @bill.save

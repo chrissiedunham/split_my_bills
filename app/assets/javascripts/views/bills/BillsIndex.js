@@ -3,6 +3,7 @@ window.SplitMyBills.Views.BillsIndex = Backbone.View.extend({
   template: JST["bills/index"],
 
   initialize: function(){
+    this.listenTo(this.collection, "add sync remove", this.render);
   },
 
   events: {
@@ -15,6 +16,7 @@ window.SplitMyBills.Views.BillsIndex = Backbone.View.extend({
     this.$el.html(content);
     return this;
   },
+
   showAddBillButton: function(event){
     event.preventDefault();
 

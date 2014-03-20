@@ -17,6 +17,14 @@
     </ul>
     <br>
     <% end %>
+    <% if flash[:success] %>
+    <ul style="color:green;text-shadow: 1px 1px 1px black;">
+      <% flash[:success].each do |success| %>
+      <li><%= success %></li>
+      <% end %>
+    </ul>
+    <br>
+    <% end %>
 
     <% if signed_in? %>
     <ul>
