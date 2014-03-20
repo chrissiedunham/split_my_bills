@@ -20,7 +20,7 @@ window.SplitMyBills.Views.BillsIndex = Backbone.CompositeView.extend({
 
 
   addNewBillView: function(){
-    var newBillView = new SplitMyBills.Views.BillNew();
+    var newBillView = new SplitMyBills.Views.BillNew( { collection: SplitMyBills.friends });
     this.addSubview(".new", newBillView);
     newBillView.render();
                  

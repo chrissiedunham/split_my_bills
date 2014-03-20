@@ -17,7 +17,8 @@ class Api::BillsController < ApplicationController
 
   def show
     @bill = Bill.find(params[:id])
-    render json: @bill
+    @friends = current_user.friends
+    render json: [@bill, @friends]
   end
 
   def destroy

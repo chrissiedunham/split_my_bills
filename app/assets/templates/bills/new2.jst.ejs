@@ -12,7 +12,7 @@
   </label>
     
   <select name="debtors_bills[debtor_ids][]" id="">
-    <% friends.forEach(function(friend) { %>
+    <% current_user.friends.forEach(function(friend) { %>
       <option value="<%= friend.get('id') %>">
         <%= friend.escape('name')%>
       </option>

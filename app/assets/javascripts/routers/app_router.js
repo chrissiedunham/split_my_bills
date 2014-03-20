@@ -15,7 +15,6 @@ window.SplitMyBills.Routers.AppRouter = Backbone.Router.extend({
   index: function() {
     var indexView = new SplitMyBills.Views.BillsIndex({ collection: this.bills });
 
-    SplitMyBills.bills.fetch();
     this._swapView(indexView);
   },
 
@@ -28,5 +27,3 @@ window.SplitMyBills.Routers.AppRouter = Backbone.Router.extend({
   }
 })
 
-SplitMyBills.bills = new SplitMyBills.Collections.Bills();
-SplitMyBills.friends = new SplitMyBills.Collections.Users();

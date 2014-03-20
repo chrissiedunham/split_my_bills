@@ -12,7 +12,7 @@ window.SplitMyBills.Views.BillShow = Backbone.View.extend({
   },
 
   render: function(){
-    var content = this.template({ bill: this.model });
+    var content = this.template({ bill: this.model});
     this.$el.html(content);
     return this;
   },

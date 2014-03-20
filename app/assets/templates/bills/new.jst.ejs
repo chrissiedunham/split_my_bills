@@ -10,6 +10,13 @@
   <label>Bill Amount: 
     <input type="number" name="bill[amount]" id=""/>
   </label>
+  <select name="debtors_bills[debtor_ids][]" id="">
+    <% friends.forEach(function(friend) { %>
+      <option value="<%= friend.get('id') %>">
+        <%= friend.escape('name')%>
+      </option>
+    <% }) %>
+  </select>
     
   <button class="create-bill" type="submit">Create Bill</button>
 </form>

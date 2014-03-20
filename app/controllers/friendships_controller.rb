@@ -1,10 +1,10 @@
 class FriendshipsController < ApplicationController
   def create
-    @friendship = current_user.friendships.new();
-    @friendship.friend_1_id = current_user.id;
-    @friendship.friend_2_id = params[:user_id]
+    @friendship1 = current_user.friendships.new();
+    @friendship1.friend_1_id = current_user.id;
+#    @friendship.friend_2_id = params[:user_id]
 
-    if @friendship.save()
+    if @friendship1.save
       render :json => @friendship
     else
       render :json => @friendship.errors.full_messages

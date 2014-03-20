@@ -4,6 +4,13 @@ window.SplitMyBills = {
   Views: {},
   Routers: {},
   initialize: function() {
+
+    SplitMyBills.bills = new SplitMyBills.Collections.Bills();
+    SplitMyBills.friends = new SplitMyBills.Collections.Users();
+
+    SplitMyBills.bills.fetch();
+    SplitMyBills.friends.fetch();
+
     new SplitMyBills.Routers.AppRouter({
       $rootEl: $('#content'),
     })

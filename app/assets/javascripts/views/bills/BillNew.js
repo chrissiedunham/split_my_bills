@@ -3,6 +3,7 @@ window.SplitMyBills.Views.BillNew = Backbone.View.extend({
   template: JST["bills/new"],
 
   initialize: function(){
+    this.listenTo(this.collection, "add sync", this.render);
   },
 
   events: {
@@ -12,7 +13,9 @@ window.SplitMyBills.Views.BillNew = Backbone.View.extend({
 
 
   render: function(){
-    var content = this.template();
+
+    var content = this.template( { friends: this.collection });
+
     this.$el.html(content);
     return this;
   },

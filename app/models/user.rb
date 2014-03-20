@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
     :foreign_key => :friend_1_id,
     :primary_key => :id
 
-  has_many :friends, :through => :friendships, :source => :friend_1
+  has_many :friends, :through => :friendships, :source => :friend_2
   
   before_validation :ensure_session_token
 
