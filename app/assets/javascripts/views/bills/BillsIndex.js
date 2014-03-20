@@ -38,7 +38,6 @@ window.SplitMyBills.Views.BillsIndex = Backbone.View.extend({
     newBill.save({}, {
       success: function(bill) {
         SplitMyBills.bills.add(bill);
-
       } 
     
     })

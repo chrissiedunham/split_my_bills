@@ -1,7 +1,7 @@
 <h3>Bills</h3>
 <ul>
   <% bills.forEach(function(bill) { %>
-  <li> <%= bill.escape('name') %> </li>
+  <li><%= JST["bills/show"]({ bill: bill }) %></li>
   <% }) %>
 </ul>
 <div>
