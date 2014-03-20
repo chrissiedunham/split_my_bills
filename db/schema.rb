@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140319213411) do
+ActiveRecord::Schema.define(version: 20140320153100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "bills", force: true do |t|
     t.string   "name"
-    t.date     "published"
+    t.date     "date"
     t.string   "amount"
     t.integer  "creditor_id"
     t.string   "paid"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20140319213411) do
     t.integer  "amount_owed"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "paid"
   end
 
   create_table "users", force: true do |t|

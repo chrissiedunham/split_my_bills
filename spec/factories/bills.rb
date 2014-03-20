@@ -4,7 +4,7 @@
 #
 #  id          :integer          not null, primary key
 #  name        :string(255)
-#  published   :date
+#  date        :date
 #  amount      :string(255)
 #  creditor_id :integer
 #  paid        :string(255)

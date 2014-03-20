@@ -8,10 +8,11 @@ window.SplitMyBills.Views.BillShow = Backbone.View.extend({
 
   events: {
     "click .bill-link": "showFull",
+    "click button.delete-bill": "deleteBill",
   },
 
   render: function(){
-    var content = this.template({ bills: this.model });
+    var content = this.template({ bill: this.model });
     this.$el.html(content);
     return this;
   },
@@ -19,9 +20,16 @@ window.SplitMyBills.Views.BillShow = Backbone.View.extend({
   showFull: function(event){
     event.preventDefault();                     
     $("bill-show bill-link").toggleClass("hidden");
+  },
 
+  deleteBill: function(event){
+    event.preventDefault();
+    this.model.destroy();
+    this.remove();
+  },
 
-  }
+  
+  
   // showAddBillButton: function(event){
   //   event.preventDefault();
   //
