@@ -1,6 +1,8 @@
 class Api::BillsController < ApplicationController
   def create
-    @bill = current_user.bills.build(bill_params)
+    debugger
+    @bill = current_user.credit_bills.build(bill_params)
+    
     if @bill.save
       flash.now[:success] = ["successfully saved bill"]
       render json: @bill

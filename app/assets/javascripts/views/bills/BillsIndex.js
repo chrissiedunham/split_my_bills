@@ -26,6 +26,14 @@ window.SplitMyBills.Views.BillsIndex = Backbone.View.extend({
     event.preventDefault();
 
     $(".add-bill").toggleClass("hidden");
+    var billData = $('form.add-bill').serializeJSON()['bill'];
+    var newBill = new SplitMyBills.Models.Bill( billData );
+    newBill.save({}, {
+      success: function(bill) {
+        SplitMyBills.bills.add(bill);
+      } 
+    
+    })
   }
 
   
