@@ -18,13 +18,12 @@ class Api::BillsController < ApplicationController
 
   def index
     @bills = current_user.credit_bills
-    render json: @bills
+    render json: @bills.to_json(include: [:debtors])
   end
 
   def show
     @bill = Bill.find(params[:id])
-    @debtors = current_user.friends
-    render json: [@bill, @debtors]
+    render json: @bill.to_json(include: [:debtors])
   end
 
   def destroy
