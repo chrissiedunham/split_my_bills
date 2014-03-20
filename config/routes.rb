@@ -4,7 +4,7 @@ SplitMyBills::Application.routes.draw do
   resource :session, only: [:new, :create, :destroy]
   resources :users, only: [:new, :create, :destroy]
   namespace :api, defaults: { format: :json } do
-    resources :bills
+    resources :bills, only: [:index, :show, :new, :create, :update]
   end
   
   # The priority is based upon order of creation: first created -> highest priority.

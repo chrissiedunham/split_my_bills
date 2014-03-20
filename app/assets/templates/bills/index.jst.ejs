@@ -1,0 +1,15 @@
+<h3>Bills</h3>
+<ul>
+  <% bills.forEach(function(bill) { %>
+  <li> <%= bill.name %> <li>
+  <% }) %>
+</ul>
+<form>
+  <label>Bill Name: 
+    <input type="text" name="bill[name]" id="" value="" />
+  </label>
+
+  <label>Bill Amount: 
+    <input type="number" name="bill[amount]" id="" value="" />
+  </label>
+</form>
