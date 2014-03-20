@@ -10,7 +10,7 @@
 #  updated_at  :datetime
 #
 
-class BillsDebtors < ActiveRecord::Base
+class DebtorsBills < ActiveRecord::Base
   
   
   belongs_to :bill

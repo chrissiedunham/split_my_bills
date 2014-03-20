@@ -1,6 +1,12 @@
 class Api::BillsController < ApplicationController
+  wrap_parameters :bill, :include => [:name, :date, :amount, :debtor_ids]
+
   def create
-    @bill = current_user.credit_bills.build(bill_params)
+    @bill = current_user.credit_bills.new(bill_params)
+
+    debtor_params[:debtor_ids].each do |id|
+      @bill.debtors_bills.new(:debtor_id => id)
+    end
     
     if @bill.save
       flash.now[:success] = ["successfully saved bill"]
@@ -17,8 +23,8 @@ class Api::BillsController < ApplicationController
 
   def show
     @bill = Bill.find(params[:id])
-    @friends = current_user.friends
-    render json: [@bill, @friends]
+    @debtors = current_user.friends
+    render json: [@bill, @debtors]
   end
 
   def destroy
@@ -29,7 +35,11 @@ class Api::BillsController < ApplicationController
   end
 
   def bill_params
-    params.require(:bill).permit(:name, :amount)
+    params.require(:bill).permit(:name, :amount, :date)
+  end
+
+  def debtor_params
+    params.require(:bill).permit(:debtor_ids => [])
   end
 end
   

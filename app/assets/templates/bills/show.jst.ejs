@@ -3,6 +3,13 @@
 <div class="bill-show hidden">
   <h3><%= bill.get('name') %></h3>
   <p><%= bill.escape('amount') %></p>
+
+  <% if (bill.debtors) { %>
+  <% bill.debtors.forEach(function(debtor){ %>
+    <p> <%= debtor.get('name') %> </p>
+  <% }) %>
+  <% } %>
+
   <button class="edit-bill" type="submit">Edit bill</button>
   <button class="delete-bill" type="submit">Delete bill</button>
 </div>
