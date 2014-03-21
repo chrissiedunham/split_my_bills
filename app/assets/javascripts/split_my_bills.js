@@ -6,12 +6,7 @@ window.SplitMyBills = {
   initialize: function() {
 
     SplitMyBills.users = new SplitMyBills.Collections.Users();
-
     SplitMyBills.bills = new SplitMyBills.Collections.Bills();
-      var bootstrappedBills = JSON.parse($('#bootstrapped_bills_json').html());
-      _(bootstrappedBills).each(function(billObject) {
-        SplitMyBills.bills.add(billObject);
-      })
 
     new SplitMyBills.Routers.AppRouter({
       $rootEl: $('#content'),

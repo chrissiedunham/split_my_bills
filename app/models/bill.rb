@@ -23,7 +23,7 @@ class Bill < ActiveRecord::Base
   has_many :debtors_bills,
     :class_name => "DebtorsBills",
     :foreign_key => :bill_id,
-    :primary_key => :id
+    :primary_key => :id, :dependent => :destroy
 
   has_many :debtors, :through => :debtors_bills, :source => :debtor
 end 

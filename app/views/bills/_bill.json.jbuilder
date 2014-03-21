@@ -3,7 +3,7 @@ json.(bill, :id, :name, :date, :amount, :creditor_id)
 json.creditor_email bill.creditor.email
 
 json.debtors bill.debtors do |debtor|
-  json.id debtor.id
+  json.debtor_id debtor.id
   json.name debtor.name
 
 

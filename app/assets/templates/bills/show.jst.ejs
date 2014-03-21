@@ -3,12 +3,17 @@
 <span class="delete-bill-link" >X</span>
 <div class="bill-show hidden">
   <h3><%= bill.escape('name') %></h3>
-  <p><%= bill.escape('amount') %></p>
+  <p>Amount: <%= bill.escape('amount') %></p>
 
   <% debtors.forEach(function(debtor){ %>
-    <%= debtor.escape('name') %><%= debtor.escape('amount_owed') %>
+    <%= debtor.escape('name') %> owes <%= debtor.escape('amount_owed') %>
   <% }) %>
 
-  <button class="edit-bill" type="submit">Edit bill</button>
-  <button class="delete-bill" type="submit">Delete bill</button>
+  <div>
+    <button class="edit-bill" type="submit">Edit bill</button>
+  </div>
+  <div>
+    <button class="delete-bill" type="submit">Delete bill</button>
+  </div>
+
 </div>
