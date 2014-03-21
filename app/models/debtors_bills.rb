@@ -20,4 +20,9 @@ class DebtorsBills < ActiveRecord::Base
     :primary_key => :id
   
   
+  def self.get_amount_from_pct(amount, pct)
+    (amount.to_f * pct.to_f).round
+  end
+
+  
 end

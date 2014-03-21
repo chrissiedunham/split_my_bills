@@ -37,14 +37,21 @@ window.SplitMyBills.Views.BillNew = Backbone.View.extend({
     newBill.save({}, {
       success: function(bill) {
         SplitMyBills.bills.add(bill);
+
       } 
     })
   },
 
   addDebtorSelect: function(event){
     event.preventDefault();
+
     var newSelect = JST["debtor_select"]( { friends: this.collection });
     $(".debtor-selects").append(newSelect);
+
+    var numDebtors = $(".debtor-selects select").length;
+    var defaultPct = (100 / (numDebtors + 1));
+
+    $(".debtor-selects input").val(defaultPct);
   }
 
   // newAddBillButton: function(event){
