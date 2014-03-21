@@ -3,15 +3,15 @@ window.SplitMyBills.Views.BillsIndex = Backbone.CompositeView.extend({
   template: JST["bills/index"],
 
   initialize: function(){
-    this.listenTo(this.collection, "add sync remove", this.render);
+    this.listenTo(this.collection, "sync", this.render);
     this.listenTo(this.collection, "add", this.addBill)
+    this.listenTo(this.collection, "remove", this.removeBill)
+    
     this.collection.each(this.addBill.bind(this));
     this.addNewBillView();
   },
 
   events: {
-          
-    //"click button.delete-bill": "removeBill"
           
   },
 
@@ -36,5 +36,20 @@ window.SplitMyBills.Views.BillsIndex = Backbone.CompositeView.extend({
     this.addSubview(".bills", billShowView);
     billShowView.render();
   },
+
+
+  deleteBill: function(event){
+    event.preventDefault();
+    this.model.destroy();
+    this.remove();
+  },
+
+  removeBill: function(bill){
+
+    var billShowView = _(this.subviews()[".bills"]).find(function(subview){
+      return subview.model == bill
+    });
+    this.removeSubview('.bills', billShowView);
+  }
 
 })
