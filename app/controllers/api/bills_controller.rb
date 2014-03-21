@@ -33,7 +33,6 @@ class Api::BillsController < ApplicationController
   end
 
   def destroy
-    debugger
     @bill = Bill.find(params[:id])
     @bill.destroy
     render json: @bill
