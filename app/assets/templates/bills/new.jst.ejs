@@ -1,25 +1,33 @@
-<form class="add-bill hidden" >
-  <label>Date: 
-    <input type="date" name="bill[date]" id="" value="" />
-  </label>
+<form class="add-bill hidden form-inline" role="form">
+  <div form-group>
+    <label>Date: 
+      <input type="date" class="form-control"name="bill[date]" id="" value="" />
+    </label>
+    
+  </div>
 
-  <label>Bill Name: 
-    <input type="text" name="bill[name]" id="" />
-  </label>
+  <div form-group>
+    <label>Bill Name: 
+      <input type="text" class="form-control" name="bill[name]" id="" />
+    </label>
+  </div>
 
   <label>Bill Amount: 
-    <input type="number" name="bill[amount]" id=""/>
+    <input type="number" class="form-control" name="bill[amount]" id=""/>
   </label>
 
-  <label>With: 
-    <div class="debtor-selects"></div>
-  </label>
+  <div form-group>
+    <label>With: 
+      <div class="debtor-selects"></div>
+    </label>
+  </div>
     
-  <a href="#" class="add-debtor">Add Payee</a>
     
-  <button class="create-bill btn btn-default" type="submit">Create Bill</button>
+  <a class="add-debtor btn btn-primary btn-sm" type="submit">Add
+    Payee</a>
+  <button class="create-bill btn btn-primary btn-sm" type="submit">Create Bill</button>
 </form>
-<button class="add-bill btn btn-default" type="submit">Add Bill</button>
+<button class="add-bill btn btn-primary btn-sm" type="submit">Add Bill</button>
 
 
 

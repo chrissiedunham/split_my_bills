@@ -13,7 +13,7 @@ window.SplitMyBills.Views.BillShow = Backbone.View.extend({
   events: {
     "click .bill-link": "showFull",
     "click .delete-bill": "deleteBill",
-    "click .delete-bill-link": "deleteBill"
+    "click .edit-bill": "editBill"
   },
 
   render: function(){

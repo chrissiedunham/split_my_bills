@@ -9,33 +9,8 @@ window.SplitMyBills.Views.BillNew = Backbone.View.extend({
   events: {
     "click button.add-bill": "showAddBillButton",
     "click button.create-bill": "createBill",
-    "click a.add-debtor": "addDebtorSelect"
-  },
-
-  render: function(){
-
-    var user = this.model;
-    var friends = user.friends();
-    var content = this.template({ friends: friends }); //current users friends
-
-    this.$el.html(content);
-    return this;
-  },
-  
-  showAddBillButton: function(event){
-    event.preventDefault();
-
-    $(".add-bill").toggleClass("hidden");
-  },
-
-  createBill: function(event) {
-    event.preventDefault();
-    var that = this;
-
-    $(".add-bill").toggleClass("hidden");
-    var billData = $('form.add-bill').serializeJSON()['bill'];
-    SplitMyBills.bills.create(billData);
-    SplitMyBills.bills.fetch();
+    "click a.add-debtor": "addDebtorSelect",
+    "click .close": "removeDebtorSelect"
   },
 
   addDebtorSelect: function(event){
@@ -48,28 +23,39 @@ window.SplitMyBills.Views.BillNew = Backbone.View.extend({
     var defaultPct = (100 / (numDebtors + 1));
 
     $(".debtor-selects input").val(defaultPct);
-  }
+  },
 
-  // newAddBillButton: function(event){
-  //   event.preventDefault();
-  //
-  //   $(".add-bill").toggleClass("hidden");
-  // },
-  // addBill: function(event) {
-  //   event.preventDefault();
-  //
-  //   $(".add-bill").toggleClass("hidden");
-  //   var billData = $('form.add-bill').serializeJSON()['bill'];
-  //   var newBill = new SplitMyBills.Models.Bill( billData );
-  //   newBill.save({}, {
-  //     success: function(bill) {
-  //       SplitMyBills.bills.add(bill);
-  //     } 
-  //   
-  //   })
-  // }
+  createBill: function(event) {
+    event.preventDefault();
+    var that = this;
 
+    $(".add-bill").toggleClass("hidden");
+    var billData = $('form.add-bill').serializeJSON()['bill'];
+    SplitMyBills.bills.create(billData);
+    SplitMyBills.bills.fetch();
+  },
+
+  removeDebtorSelect: function(){
+                      
+  },
+
+  render: function(){
+
+    var user = this.model;
+    var friends = user.friends();
+    var newBill = new SplitMyBills.Models.Bill();
+    var content = this.template({ friends: friends, bill: newBill }); //current users friends
+
+    this.$el.html(content);
+    return this;
+  },
   
+  showAddBillButton: function(event){
+    event.preventDefault();
+
+    $(".add-bill").toggleClass("hidden");
+  },
+
 
 })
 

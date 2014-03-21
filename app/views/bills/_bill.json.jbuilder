@@ -8,9 +8,10 @@ json.debtors bill.debtors do |debtor|
 
 
   debtor.debtors_bills.each do |db|
-    if db.id == bill.id 
+    if db.bill_id == bill.id 
+      json.db_id db.id
       json.amount_owed db.amount_owed
-      json.bill_id db.bill_id
+      json.db_bill_id db.bill_id
     end
   end
 end
