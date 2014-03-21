@@ -1,6 +1,7 @@
 
 window.SplitMyBills.Views.BillShow = Backbone.View.extend({
 
+  tagName: 'tr',
   template: JST["bills/show"],
 
   initialize: function(){

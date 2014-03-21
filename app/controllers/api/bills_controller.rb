@@ -21,7 +21,7 @@ class Api::BillsController < ApplicationController
   end
 
   def index
-    @bills = current_user.credit_bills
+    @bills = Bill.all
 #    render json: @bills.to_json(include: [:debtors])
     render "bills/index"
   end
