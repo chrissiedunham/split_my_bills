@@ -4,7 +4,9 @@ window.SplitMyBills.Views.BillShow = Backbone.View.extend({
   template: JST["bills/show"],
 
   initialize: function(){
-    this.listenTo(this.model.debtors(), "add sync", this.render)
+    this.listenTo(this.model.debtors(), "all", this.render),
+    this.listenTo(this.model, "sync", this.render)
+
   },
 
   events: {
@@ -15,6 +17,7 @@ window.SplitMyBills.Views.BillShow = Backbone.View.extend({
   render: function(){
     var content = this.template({ bill: this.model, debtors: this.model.debtors() });
     this.$el.html(content);
+
     return this;
   },
 

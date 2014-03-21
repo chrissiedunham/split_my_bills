@@ -13,7 +13,8 @@ class Api::BillsController < ApplicationController
     
     if @bill.save
       flash.now[:success] = ["successfully saved bill"]
-      render json: @bill
+     # render json: @bill
+      render json: "bills/show"
     else
       render json: { errors: @bill.errors.full_messages }, status: 422
     end
@@ -21,18 +22,20 @@ class Api::BillsController < ApplicationController
 
   def index
     @bills = current_user.credit_bills
-    render json: @bills.to_json(include: [:debtors])
+#    render json: @bills.to_json(include: [:debtors])
+    render "bills/index"
   end
 
   def show
     @bill = Bill.find(params[:id])
-    render json: @bill.to_json(include: [:debtors])
+#    render json: @bill.to_json(include: [:debtors])
+     render json: "bills/show"
   end
 
   def destroy
     @bill = Bill.find(params[:id])
     @bill.destroy
-    render json: @bill
+    render json: "bills/show"
     
   end
 

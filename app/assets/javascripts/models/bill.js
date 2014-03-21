@@ -10,8 +10,8 @@ window.SplitMyBills.Models.Bill = Backbone.Model.extend({
       });
     }
     return this._debtors;
-  
   },
+ 
   parse: function(data){
     var debtors = data.debtors;
     this.debtors().set(debtors);
