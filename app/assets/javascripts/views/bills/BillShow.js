@@ -4,14 +4,14 @@ window.SplitMyBills.Views.BillShow = Backbone.View.extend({
   template: JST["bills/show"],
 
   initialize: function(){
-    this.listenTo(this.model.debtors(), "all", this.render),
-    this.listenTo(this.model, "sync", this.render)
+    this.listenTo(this.model, "remove", this.render)
 
   },
 
   events: {
     "click .bill-link": "showFull",
     "click button.delete-bill": "deleteBill",
+    "click button.delete-bill-link": "deleteBill"
   },
 
   render: function(){

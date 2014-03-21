@@ -7,7 +7,12 @@ window.SplitMyBills.Views.BillsIndex = Backbone.CompositeView.extend({
     this.listenTo(this.collection, "add", this.addBill)
     this.collection.each(this.addBill.bind(this));
     this.addNewBillView();
-    
+  },
+
+  events: {
+          
+    //"click button.delete-bill": "removeBill"
+          
   },
 
   render: function(){
