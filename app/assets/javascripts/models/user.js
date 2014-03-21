@@ -12,11 +12,25 @@ window.SplitMyBills.Models.User = Backbone.Model.extend({
     }
     return this._bills;
   },
+
+  friends: function(){
+    if(!this._friends){
+    
+      this._friends = new SplitMyBills.Collections.Users([], {
+        user: this
+      });
+    }          
+    return this._friends;
+  },
+
  
   parse: function(data){
     var bills = data.bills;
+    var friends = data.friends;
+    //TODO add ifs
+    
     this.bills().set(bills);
-
+    this.friends().set(friends);
     return data;
          
   }

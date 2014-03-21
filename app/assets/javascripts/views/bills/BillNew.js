@@ -3,6 +3,7 @@ window.SplitMyBills.Views.BillNew = Backbone.View.extend({
   template: JST["bills/new"],
 
   initialize: function(){
+    this.listenTo(this.model.friends(), "add", this.render);
   },
 
   events: {
@@ -13,7 +14,9 @@ window.SplitMyBills.Views.BillNew = Backbone.View.extend({
 
   render: function(){
 
-    var content = this.template( { friends: this.user.friends() }); //current users friends
+    var user = this.model;
+    var friends = user.friends();
+    var content = this.template({ friends: friends }); //current users friends
 
     this.$el.html(content);
     return this;
@@ -38,7 +41,7 @@ window.SplitMyBills.Views.BillNew = Backbone.View.extend({
   addDebtorSelect: function(event){
     event.preventDefault();
 
-    var newSelect = JST["debtor_select"]( { friends: this.collection });
+    var newSelect = JST["debtor_select"]( { friends: this.model.friends() });
     $(".debtor-selects").append(newSelect);
 
     var numDebtors = $(".debtor-selects select").length;

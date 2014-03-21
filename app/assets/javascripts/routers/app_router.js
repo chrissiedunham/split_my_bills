@@ -2,20 +2,32 @@ window.SplitMyBills.Routers.AppRouter = Backbone.Router.extend({
 
   initialize: function(options){
               
-    this.$rootEl = options.$rootEl,
-    this.bills = SplitMyBills.bills
+    this.$rootEl = options.$rootEl
               
   },
 
   routes: {
-    "": "index",
+    "": "userShow"
   
   },
 
   index: function() {
-    var userShow = new SplitMyBills.Views.UserShow ({ collection: this.bills });
+    var indexView = new SplitMyBills.Views.indexView ({ collection: this.bills });
 
     this._swapView(indexView);
+  },
+
+  userShow: function(){
+   
+    var user = SplitMyBills.users.getOrFetch(currentUserID)
+    
+    var userShow = new SplitMyBills.Views.UserShow({
+      model: user,
+      collection: this.bills
+    });
+
+    this._swapView(userShow);
+    
   },
 
   

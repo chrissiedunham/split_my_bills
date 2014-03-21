@@ -38,5 +38,17 @@
 
     <%= yield %>
 
+    <script>
+      var currentUserID = <%= signed_in? ? current_user.id : 0 %>
+    </script>
+    <script type="application/json" id="bootstrapped_bills_json" >
+      { "bills" : <%= current_user.credit_bills.to_json.html_safe %> }
+    </script>
+    <script type="application/json" id="bootstrapped_friends_json" >
+      { "friends" : <%= current_user.friends.to_json.html_safe %> }
+    </script>
+
+
+
   </body>
 </html>

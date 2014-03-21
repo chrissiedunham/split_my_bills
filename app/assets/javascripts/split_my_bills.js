@@ -5,11 +5,13 @@ window.SplitMyBills = {
   Routers: {},
   initialize: function() {
 
-    SplitMyBills.bills = new SplitMyBills.Collections.Bills();
-    SplitMyBills.friends = new SplitMyBills.Collections.Users();
+    SplitMyBills.users = new SplitMyBills.Collections.Users();
 
-    SplitMyBills.bills.fetch();
-    SplitMyBills.friends.fetch();
+    SplitMyBills.bills = new SplitMyBills.Collections.Bills();
+      var bootstrappedBills = JSON.parse($('#bootstrapped_bills_json').html());
+      _(bootstrappedBills).each(function(billObject) {
+        SplitMyBills.bills.add(billObject);
+      })
 
     new SplitMyBills.Routers.AppRouter({
       $rootEl: $('#content'),
