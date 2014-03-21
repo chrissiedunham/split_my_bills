@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
     :foreign_key => :creditor_id,
     :primary_key => :id
   
-  has_many :debit_bills, :through => :bills_debtors, :source => :bill
+  has_many :debit_bills, :through => :debtors_bills, :source => :bill
 
   has_many :friendships,
     :class_name => "Friendship",
