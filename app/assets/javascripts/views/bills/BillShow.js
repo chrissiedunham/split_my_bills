@@ -27,9 +27,7 @@ window.SplitMyBills.Views.BillShow = Backbone.View.extend({
   },
 
   deleteBill: function(event){
-    event.preventDefault();
     this.model.destroy();
-    this.remove();
   },
 
   

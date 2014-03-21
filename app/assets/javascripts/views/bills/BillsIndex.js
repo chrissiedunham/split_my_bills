@@ -3,6 +3,7 @@ window.SplitMyBills.Views.BillsIndex = Backbone.CompositeView.extend({
   template: JST["bills/index"],
 
   initialize: function(){
+    //should be this.model, this.model.bills, etc
     this.listenTo(this.collection, "sync", this.render);
     this.listenTo(this.collection, "add", this.addBill)
     this.listenTo(this.collection, "remove", this.removeBill)

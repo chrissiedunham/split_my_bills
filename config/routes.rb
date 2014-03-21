@@ -2,9 +2,11 @@ SplitMyBills::Application.routes.draw do
   root :to => "static_pages#root"
   
   resource :session, only: [:new, :create, :destroy]
-  resources :users, only: [:new, :create, :destroy, :index] do
+  resources :users, only: [:new, :create, :destroy] do
     resources :friendships, only: [:create, :destroy ]
   end
+  
+  resources :users, defaults: { format: :json }, only: [ :index, :show ] 
   resources :friendships, only: [:index]
   namespace :api, defaults: { format: :json } do
     resources :bills

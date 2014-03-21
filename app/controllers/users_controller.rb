@@ -7,7 +7,8 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-    render json: @users
+    #render json: @users
+    render "users/index"
   end
 
   def create
@@ -25,6 +26,7 @@ class UsersController < ApplicationController
   def show
     if params.include?(:id)
       @user = User.find(params[:id])
+      render "users/show"
     else
       redirect_to user_url(current_user)
     end

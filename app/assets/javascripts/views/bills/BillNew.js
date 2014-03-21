@@ -13,7 +13,7 @@ window.SplitMyBills.Views.BillNew = Backbone.View.extend({
 
   render: function(){
 
-    var content = this.template( { friends: this.collection });
+    var content = this.template( { friends: this.user.friends() }); //current users friends
 
     this.$el.html(content);
     return this;

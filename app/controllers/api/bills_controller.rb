@@ -29,7 +29,7 @@ class Api::BillsController < ApplicationController
   def show
     @bill = Bill.find(params[:id])
 #    render json: @bill.to_json(include: [:debtors])
-     render json: "bills/show"
+     render "bills/show"
   end
 
   def destroy
