@@ -3,7 +3,7 @@
 
 <div>
   
-  <form class="add-bill hidden form-inline" role="form">
+  <form class="<%= bill.id ? "" : "add-bill"  %> hidden form-inline" role="form">
     <div form-group>
       <label>Date: 
         <input type="date" class="form-control"name="bill[date]" id=""
