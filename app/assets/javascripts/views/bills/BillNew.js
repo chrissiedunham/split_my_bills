@@ -1,13 +1,12 @@
 window.SplitMyBills.Views.BillNew = Backbone.View.extend({
 
-  template: JST["bills/new"],
+  template: JST["bills/form"],
 
   initialize: function(){
     this.listenTo(this.model.friends(), "add", this.render);
   },
 
   events: {
-    "click button.add-bill": "showAddBillButton",
     "click button.create-bill": "createBill",
     "click a.add-debtor": "addDebtorSelect",
     "click .close": "removeDebtorSelect"
@@ -49,13 +48,6 @@ window.SplitMyBills.Views.BillNew = Backbone.View.extend({
     this.$el.html(content);
     return this;
   },
-  
-  showAddBillButton: function(event){
-    event.preventDefault();
-
-    $(".add-bill").toggleClass("hidden");
-  },
-
 
 })
 

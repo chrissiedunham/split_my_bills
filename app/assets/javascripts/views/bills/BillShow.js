@@ -11,9 +11,14 @@ window.SplitMyBills.Views.BillShow = Backbone.View.extend({
   },
 
   events: {
-    "click .bill-link": "showFull",
+    "click .bill-link": "toggleFull",
     "click .delete-bill": "deleteBill",
-    "click .edit-bill": "editBill"
+    "click .edit-bill": "editBill",
+    "click .cancel-bill": "toggleFull"
+  },
+
+  deleteBill: function(event){
+    this.model.destroy();
   },
 
   render: function(){
@@ -23,13 +28,10 @@ window.SplitMyBills.Views.BillShow = Backbone.View.extend({
     return this;
   },
 
-  showFull: function(event){
+  toggleFull: function(event){
     event.preventDefault();                     
     $(event.target).parent().find('.bill-show').toggleClass("hidden");
-  },
-
-  deleteBill: function(event){
-    this.model.destroy();
+    //$('.bill-show').toggleclass("hidden");
   },
 
   

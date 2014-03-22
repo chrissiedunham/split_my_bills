@@ -10,6 +10,12 @@ window.SplitMyBills.Views.UserShow = Backbone.CompositeView.extend({
     this.collection.each(this.addBill.bind(this));
     this.addNewBillView();
   },
+  events: {
+          
+    "click button.add-bill": "toggleBillForm",
+    "click button.cancel-bill": "toggleBillForm" 
+
+  },
 
 
   addNewBillView: function(){
@@ -39,6 +45,12 @@ window.SplitMyBills.Views.UserShow = Backbone.CompositeView.extend({
 
     this.renderSubviews();
     return this;
+  },
+
+  toggleBillForm: function(event){
+    event.preventDefault();
+
+    $(".add-bill").toggleClass("hidden");
   },
 
 })

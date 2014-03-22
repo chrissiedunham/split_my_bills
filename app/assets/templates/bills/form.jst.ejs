@@ -1,41 +1,49 @@
 <% var button_text = bill.id ? "Update Bill" : "Create Bill" %>
 
 
-<form class="add-bill hidden form-inline" role="form">
-  <div form-group>
-    <label>Date: 
-      <input type="date" class="form-control"name="bill[date]" id=""
-      value="<%= bill.escape('date')%>" />
-    </label>
-    
-  </div>
+<div>
+  
+  <form class="add-bill hidden form-inline" role="form">
+    <div form-group>
+      <label>Date: 
+        <input type="date" class="form-control"name="bill[date]" id=""
+        value="<%= bill.escape('date')%>" />
+      </label>
+      
+    </div>
 
-  <div form-group>
-    <label>Bill Name: 
-      <input type="text" class="form-control" name="bill[name]" id=""
-      value="<%= bill.escape('date') %>"/>
-    </label>
-  </div>
+    <div form-group>
+      <label>Bill Name: 
+        <input type="text" class="form-control" name="bill[name]" id=""
+        value="<%= bill.escape('date') %>"/>
+      </label>
+    </div>
 
-  <label>Bill Amount: 
-    <input type="number" class="form-control" name="bill[amount]" id=""
-   value="<%=bill.escape('date') %>"/>
-  </label>
-
-  <div form-group>
-    <label>With: 
-      <div class="debtor-selects"></div>
+    <label>Bill Amount: 
+      <input type="number" class="form-control" name="bill[amount]" id=""
+     value="<%=bill.escape('date') %>"/>
     </label>
-  </div>
-    
-    
-  <a class="add-debtor btn btn-primary btn-sm" type="submit">Add
-    Payee</a>
-  <button class="create-bill btn btn-primary btn-sm" type="submit">
-    <%=button_text %>
-  </button>
-</form>
-<button class="add-bill btn btn-primary btn-sm" type="submit">Add Bill</button>
+
+    <div form-group>
+      <label>With: 
+        <div class="debtor-selects"></div>
+      </label>
+    </div>
+      
+      
+    <a class="add-debtor btn btn-primary btn-sm" type="submit">Add
+      Payee</a>
+    <button class="create-bill submit-bill btn btn-primary btn-sm" type="submit">
+      <%=button_text %>
+    </button>
+
+    <button class="cancel-bill btn btn-danger btn-sm" type="submit">
+      Cancel
+    </button>
+  </form>
+</div>
+
+
 
 
 
