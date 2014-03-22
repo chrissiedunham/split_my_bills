@@ -35,10 +35,6 @@ window.SplitMyBills.Views.BillNew = Backbone.View.extend({
     SplitMyBills.bills.fetch();
   },
 
-  removeDebtorSelect: function(){
-                      
-  },
-
   render: function(){
 
     var user = this.model;

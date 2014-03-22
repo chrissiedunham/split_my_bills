@@ -1,5 +1,4 @@
-
-window.SplitMyBills.Views.BillShow = Backbone.View.extend({
+window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
 
   tagName: 'tr',
   template: JST["bills/show"],
@@ -11,10 +10,10 @@ window.SplitMyBills.Views.BillShow = Backbone.View.extend({
   },
 
   events: {
-    "click .bill-link": "toggleFull",
+    "click .bill-link": "toggleBillShow",
+    "click .cancel-bill": "toggleBillShow",
     "click .delete-bill": "deleteBill",
     "click .edit-bill": "editBill",
-    "click .cancel-bill": "toggleFull"
   },
 
   deleteBill: function(event){
@@ -28,11 +27,17 @@ window.SplitMyBills.Views.BillShow = Backbone.View.extend({
     return this;
   },
 
-  toggleFull: function(event){
+  toggleBillShow: function(event){
     event.preventDefault();                     
     $(event.target).parent().find('.bill-show').toggleClass("hidden");
     //$('.bill-show').toggleclass("hidden");
   },
+  
+  editBill: function(event){
+    event.preventDefault();                     
+    $(event.target).parent().find('.bill-show').toggleClass("hidden");
+
+  }
 
   
   
