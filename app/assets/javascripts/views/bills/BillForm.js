@@ -14,13 +14,21 @@ window.SplitMyBills.Views.BillForm = Backbone.View.extend({
     "click .cancel-bill": "removeBillForm"
   },
 
+  addDebtorSelectView: function(){
+    var newBill = new SplitMyBills.Models.Bill();
+    var newBillView = new SplitMyBills.Views.BillForm( { model: newBill, user: this.model } );
+    this.addSubview(".new", newBillView);
+    newBillView.render();
+                 
+  },
+
   addDebtorSelect: function(event){
     event.preventDefault();
 
     var newSelect = JST["debtor_select"]( { friends: this.user.friends() });
     $(".debtor-selects").append(newSelect);
 
-    var numDebtors = $(".debtor-selects select").length;
+    var numDebtors = $(event.target).parent().find('.debtor-selects select').length;
     var defaultPct = (100 / (numDebtors + 1));
 
     $(".debtor-selects input").val(defaultPct);
@@ -36,6 +44,7 @@ window.SplitMyBills.Views.BillForm = Backbone.View.extend({
     SplitMyBills.bills.create(billData);
     SplitMyBills.bills.fetch();
   },
+
   render: function(){
 
     var user = this.user;
@@ -45,6 +54,15 @@ window.SplitMyBills.Views.BillForm = Backbone.View.extend({
 
     this.$el.html(content);
     return this;
+  },
+
+  removeDebtorSelect: function() {
+    var numDebtors = $(event.target).parent().find('.debtor-selects select').length;
+    var defaultPct = (100 / (numDebtors + 1));
+
+    $(".debtor-selects input").val(defaultPct);
+
+                         
   },
   removeBillForm: function(){
     $(event.target).parents().closest('form').addClass('hidden');

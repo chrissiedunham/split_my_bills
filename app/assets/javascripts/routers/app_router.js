@@ -7,14 +7,15 @@ window.SplitMyBills.Routers.AppRouter = Backbone.Router.extend({
   },
 
   routes: {
-    "": "index",
-    "/debts": "debts"
+    "": "billsIndex",
+    "friends" : "friendsIndex",
+    "friends/:id/" : "friendShow"
   
   },
 
-  index: function(){
+  billsIndex: function(){
    
-    var user = SplitMyBills.users.getOrFetch(currentUserID)
+    var user = SplitMyBills.users.getOrFetch(currentUserID);
     
     var userShow = new SplitMyBills.Views.UserShow({
       model: user,
@@ -26,11 +27,11 @@ window.SplitMyBills.Routers.AppRouter = Backbone.Router.extend({
     
   },
 
-  friends: function(){
+  friendShow: function(id){
    
-    var user = SplitMyBills.users.getOrFetch(currentUserID)
+    var user = SplitMyBills.users.getOrFetch(id);
     
-    var userDebts = new SplitMyBills.Views.UserShow({
+    var friendsView = new SplitMyBills.Views.FriendsIndex({
       model: user,
       collection: SplitMyBills.bills
     });

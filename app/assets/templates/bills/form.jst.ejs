@@ -34,7 +34,7 @@
       
     <a class="add-debtor btn btn-primary btn-sm" type="submit">Add
       Payee</a>
-    <button class="create-bill submit-bill btn btn-primary btn-sm" type="submit">
+    <button class="<%= bill.id ? "update-bill" : "create-bill"  %> submit-bill btn btn-primary btn-sm" type="submit">
       <%=button_text %>
     </button>
 

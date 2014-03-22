@@ -12,10 +12,6 @@ window.SplitMyBills.Views.BillsIndex = Backbone.CompositeView.extend({
     this.addNewBillView();
   },
 
-  events: {
-          
-  },
-
   render: function(){
     var content = this.template({ bills: this.collection });
     this.$el.html(content);
