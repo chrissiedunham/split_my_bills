@@ -16,13 +16,13 @@
     <div form-group>
       <label>Bill Name: 
         <input type="text" class="form-control" name="bill[name]" id=""
-        value="<%= bill.escape('date') %>"/>
+        value="<%= bill.escape('name') %>"/>
       </label>
     </div>
 
     <label>Bill Amount: 
       <input type="number" class="form-control" name="bill[amount_cents]" id=""
-     value="<%=bill.escape('date') %>"/>
+     value="<%=bill.escape('amount_cents') %>"/>
     </label>
 
     <div form-group>
@@ -32,7 +32,7 @@
     </div>
       
       
-    <a class="add-debtor btn btn-primary btn-sm" type="submit">Add
+      <a class="add-debtor btn btn-primary btn-sm" type="submit">Add
       Payee</a>
     <button class="<%= bill.id ? "update-bill" : "create-bill"  %> submit-bill btn btn-primary btn-sm" type="submit">
       <%=button_text %>

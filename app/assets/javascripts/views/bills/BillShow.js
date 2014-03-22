@@ -7,9 +7,9 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
     this.listenTo(this.model, "sync", this.render);
     this.listenTo(this.model.debtors(), "add", this.render);
     this.listenTo(this.model.creditor(), "add", this.render);
-    
-    this.addEditSubview();
+    this.listenTo(this.model.creditor(), "sync", this.render);
 
+    this.addEditSubview();
   },
 
   events: {
@@ -20,7 +20,10 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
 
   addEditSubview: function(){
 
-    var editView = new SplitMyBills.Views.BillForm({ user: this.model.creditor(), model: this.model });
+    var editView = new SplitMyBills.Views.BillForm({ 
+      model: this.model,
+      user: this.model.creditor()
+    });
     this.addSubview(".edit-bill", editView);
     editView.render();
   
