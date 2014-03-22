@@ -1,17 +1,26 @@
 # == Schema Information
 #
-# Table name: bills_debtors
+# Table name: debtors_bills
 #
-#  id          :integer          not null, primary key
-#  bill_id     :integer
-#  debtor_id   :integer
-#  amount_owed :integer
-#  created_at  :datetime
-#  updated_at  :datetime
+#  id                :integer          not null, primary key
+#  bill_id           :integer
+#  debtor_id         :integer
+#  created_at        :datetime
+#  updated_at        :datetime
+#  paid              :string(255)
+#  amount_owed_cents :integer
 #
 
+require 'money_column'
+require 'monetize/core_extensions'
+require 'money'
+
 class DebtorsBills < ActiveRecord::Base
+  include MoneyColumn::StoresMoney
+
   
+  monetize :amount_owed_cents
+
   belongs_to :bill
 
   belongs_to :debtor,

@@ -1,4 +1,4 @@
-json.(bill, :id, :name, :date, :amount, :creditor_id)
+json.(bill, :id, :name, :date, :amount_cents, :creditor_id)
 json.creditor bill.creditor
 
 json.creditor_email bill.creditor.email
@@ -11,7 +11,7 @@ json.debtors bill.debtors do |debtor|
   debtor.debtors_bills.each do |db|
     if db.bill_id == bill.id 
       json.db_id db.id
-      json.amount_owed db.amount_owed
+      json.amount_owed db.amount_owed_cents
       json.db_bill_id db.bill_id
     end
   end

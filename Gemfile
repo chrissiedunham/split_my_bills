@@ -6,6 +6,10 @@ gem 'annotate'
 gem 'backbone-on-rails'
 gem 'jquery-ui-rails'
 
+gem 'money_column'
+gem 'monetize'
+gem 'money'
+gem 'money-rails'
 # Use postgresql as the database for Active Record
 gem 'pg'
 
