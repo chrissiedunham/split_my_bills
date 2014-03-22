@@ -15,7 +15,7 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
   events: {
     "click .bill-link": "toggleBillShow",
     "click .delete-bill": "deleteBill",
-    "click .edit-bill-btn": "editBill",
+    "click .edit-bill-btn": "showEditForm",
   },
 
   addEditSubview: function(){
@@ -28,6 +28,12 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
 
   deleteBill: function(event){
     this.model.destroy();
+  },
+
+  showEditForm: function(event){
+    event.preventDefault();                     
+    $(event.target).parents().closest('td').find('.bill-form').removeClass('hidden');
+
   },
 
   render: function(){
@@ -44,14 +50,6 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
     //$('.bill-show').toggleclass("hidden");
   },
   
-  editBill: function(event){
-    event.preventDefault();                     
-    $(event.target).parents().closest("td").find(".edit-bill form").toggleClass("hidden");
-
-
-
-
-  }
   
 
 })

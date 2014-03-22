@@ -1,9 +1,10 @@
 <% var button_text = bill.id ? "Update Bill" : "Create Bill" %>
 
 
-<div>
-  
-  <form class="<%= bill.id ? "" : "add-bill"  %> hidden form-inline" role="form">
+  <form 
+        class="<%= bill.id ? "" : "add-bill"  %> hidden bill-form form-inline" 
+        data-id="<%= bill.id ? bill.id : "0" %>" role="form">
+
     <div form-group>
       <label>Date: 
         <input type="date" class="form-control"name="bill[date]" id=""
@@ -41,7 +42,6 @@
       Cancel
     </button>
   </form>
-</div>
 
 
 

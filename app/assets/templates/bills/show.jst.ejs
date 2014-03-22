@@ -1,8 +1,8 @@
 <td>
 
-  <a class="bill-link" data-toggle="modal" data-target="#myModal" href="#"><%= bill.escape('name') %></a>
+  <a class="bill-link" data-target="#myModal" href="#"><%= bill.escape('name') %></a>
 
-  <div class="bill-show hidden" data-id="<%= bill.get('id') %>" class"is-active" >
+  <div class="bill-show" data-id="<%= bill.get('id') %>" class"is-active" >
     <div>Amount: <%= bill.escape('amount') %></div>
 
     <% debtors.forEach(function(debtor){ %>

@@ -12,8 +12,9 @@ window.SplitMyBills.Views.UserShow = Backbone.CompositeView.extend({
   },
   events: {
           
-    "click button.add-bill": "toggleBillForm",
-    "click button.cancel-bill": "toggleBillForm" 
+    "click button.add-bill": "showNewBillForm",
+    "click button.cancel-bill": "hideNewBillForm" 
+
 
   },
 
@@ -32,6 +33,12 @@ window.SplitMyBills.Views.UserShow = Backbone.CompositeView.extend({
     billShowView.render();
   },
 
+  hideNewBillForm: function(event){
+    event.preventDefault();
+    $('form.add-bill').addClass('hidden');
+    $('button.add-bill').removeClass('hidden');
+  },
+
   removeBill: function(bill){
 
     var billShowView = _(this.subviews()[".bills"]).find(function(subview){
@@ -48,10 +55,10 @@ window.SplitMyBills.Views.UserShow = Backbone.CompositeView.extend({
     return this;
   },
 
-  toggleBillForm: function(event){
+  showNewBillForm: function(event){
     event.preventDefault();
-
-    $(event.target).parents().closest("td").find(".edit-bill").toggleClass("hidden")
+    $('form.add-bill').removeClass('hidden');
+    $('button.add-bill').addClass('hidden');
   },
 
 })
