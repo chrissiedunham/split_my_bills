@@ -1,4 +1,5 @@
 json.(bill, :id, :name, :date, :amount, :creditor_id)
+json.creditor bill.creditor
 
 json.creditor_email bill.creditor.email
 

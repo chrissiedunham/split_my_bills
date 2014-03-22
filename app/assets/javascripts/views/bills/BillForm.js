@@ -1,4 +1,4 @@
-window.SplitMyBills.Views.BillNew = Backbone.View.extend({
+window.SplitMyBills.Views.BillForm = Backbone.View.extend({
 
   template: JST["bills/form"],
 

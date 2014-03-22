@@ -2,7 +2,7 @@
 
   <a class="bill-link" data-toggle="modal" data-target="#myModal" href="#"><%= bill.escape('name') %></a>
 
-  <div class="bill-show hidden" class"is-active" >
+  <div class="bill-show hidden" data-id="<%= bill.get('id') %>" class"is-active" >
     <div>Amount: <%= bill.escape('amount') %></div>
 
     <% debtors.forEach(function(debtor){ %>
@@ -10,7 +10,7 @@
     <% }) %>
 
     <div>
-      <button class="edit-bill btn btn-sm btn-primary" type="submit">Edit bill</button>
+      <button class="edit-bill-btn btn btn-sm btn-primary" type="submit">Edit bill</button>
       <button class="delete-bill btn btn-sm btn-primary" type="submit">Delete bill</button>
     </div>
     <div>
@@ -18,4 +18,5 @@
 
   </div>
 
+  <div class="edit-bill"></div>
 </td>

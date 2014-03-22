@@ -5,7 +5,10 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
 
   initialize: function(){
     this.listenTo(this.model, "sync", this.render);
-    this.listenTo(this.model.debtors(), "add", this.render)
+    this.listenTo(this.model.debtors(), "add", this.render);
+    this.listenTo(this.model.creditor(), "add", this.render);
+    
+    this.addEditSubview();
 
   },
 
@@ -16,6 +19,14 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
     "click .edit-bill": "editBill",
   },
 
+  addEditSubview: function(){
+
+    var editView = new SplitMyBills.Views.BillForm({ model: this.model.creditor() });
+    this.addSubview(".edit-bill", editView);
+    editView.render();
+  
+  },
+
   deleteBill: function(event){
     this.model.destroy();
   },
@@ -23,6 +34,7 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
   render: function(){
     var content = this.template({ bill: this.model, debtors: this.model.debtors() });
     this.$el.html(content);
+    this.renderSubviews();
 
     return this;
   },
@@ -35,31 +47,13 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
   
   editBill: function(event){
     event.preventDefault();                     
-    $(event.target).parent().find('.bill-show').toggleClass("hidden");
+    
+    $(event.target).closest(".edit-bill").toggleClass("hidden");
+
+
+
 
   }
-
-  
-  
-  // showAddBillButton: function(event){
-  //   event.preventDefault();
-  //
-  //   $(".add-bill").toggleClass("hidden");
-  // },
-  // addBill: function(event) {
-  //   event.preventDefault();
-  //
-  //   $(".add-bill").toggleClass("hidden");
-  //   var billData = $('form.add-bill').serializeJSON()['bill'];
-  //   var newBill = new SplitMyBills.Models.Bill( billData );
-  //   newBill.save({}, {
-  //     success: function(bill) {
-  //       SplitMyBills.bills.add(bill);
-  //     } 
-  //   
-  //   })
-  // }
-
   
 
 })

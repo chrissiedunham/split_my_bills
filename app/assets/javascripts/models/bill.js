@@ -11,10 +11,17 @@ window.SplitMyBills.Models.Bill = Backbone.Model.extend({
     }
     return this._debtors;
   },
+
+  creditor: function(){
+    if(!this._creditor){
+      this._creditor = new SplitMyBills.Models.User();
+    }
+    return this._creditor;
+  },
  
   parse: function(data){
-    var debtors = data.debtors;
-    this.debtors().set(debtors);
+    this.debtors().set(data.debtors);
+    this.creditor().set(data.creditor);
 
     return data;
          
