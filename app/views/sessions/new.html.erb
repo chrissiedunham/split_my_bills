@@ -1,24 +1,31 @@
-<h1>Sign In</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h1>Sign In</h1>
 
-<form action="<%= session_url %>" method="post">
-  <input
-     name="authenticity_token"
-     type="hidden"
-     value="<%= form_authenticity_token %>">
+    <form action="<%= session_url %>" method="post">
 
-  <label for="user_username">Username</label>
-  <input
-     id="user_username"
-     name="user[email]"
-     type="text">
-  <br>
+      <input
+         name="authenticity_token"
+         type="hidden"
+         value="<%= form_authenticity_token %>">
 
-  <label for="user_password">Password</label>
-  <input
-     id="user_password"
-     name="user[password]"
-     type="password">
-  <br>
+      <label for="user_username">Username</label>
+      <input
+         id="user_username"
+         name="user[email]"
+         type="text">
+      <br>
 
-  <input type="submit" value="Log in">
-</form>
+      <label for="user_password">Password</label>
+      <input
+         id="user_password"
+         name="user[password]"
+         type="password">
+      <br>
+
+      <input type="submit" value="Log in">
+    </form>
+      
+  </div>
+    
+</div>

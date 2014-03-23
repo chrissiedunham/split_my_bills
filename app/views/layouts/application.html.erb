@@ -9,6 +9,13 @@
   </head>
   <body>
 
+
+  <%= render "partials/header" %>
+
+
+
+
+
     <% if flash[:errors] %>
     <ul style="color:red;text-shadow: 1px 1px 1px black;">
       <% flash[:errors].each do |error| %>
@@ -26,17 +33,10 @@
     <br>
     <% end %>
 
-    <% if signed_in? %>
-    <ul>
-      <li>Signed in as: <%= current_user.email %></li>
-      <li><%= button_to "Sign Out", session_url, class: "btn btn-default", :method => :delete %></li>
-    </ul>
-    <% else %>
-    <%= link_to "Sign In", new_session_url, class: "btn btn-default" %> or
-    <%= link_to "Sign up", new_user_url, class: "btn btn-default" %>
-    <% end %>
 
-    <%= yield %>
+    <div >
+      <%= yield %>
+    </div>
 
     <script>
       var currentUserID = <%= signed_in? ? current_user.id : 0 %>
