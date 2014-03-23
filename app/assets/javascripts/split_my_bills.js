@@ -8,8 +8,12 @@ window.SplitMyBills = {
     SplitMyBills.users = new SplitMyBills.Collections.Users();
     SplitMyBills.bills = new SplitMyBills.Collections.Bills();
 
+
     new SplitMyBills.Routers.AppRouter({
       $rootEl: $('#content'),
+      users: SplitMyBills.users,
+      bills: SplitMyBills.bills
+
     })
     Backbone.history.start();
   }

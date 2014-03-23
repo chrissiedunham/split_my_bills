@@ -19,14 +19,12 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
   },
 
   addEditSubview: function(){
-
     var editView = new SplitMyBills.Views.BillForm({ 
       model: this.model,
-      user: this.model.creditor()
+  //    user: this.model.creditor()
     });
     this.addSubview(".bill-edit", editView);
     editView.render();
-  
   },
 
   deleteBill: function(event){

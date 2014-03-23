@@ -1,32 +1,29 @@
-window.SplitMyBills.Views.BillForm = Backbone.View.extend({
+window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
 
   template: JST["bills/form"],
 
   initialize: function(options){
-    this.user = options.user
-    this.listenTo(this.user.friends(), "add", this.render);
+    //this.user = options.user
+    this.listenTo(this.model, "sync", this.render);
+//    this.listenTo(this.user.friends(), "add", this.render);
   },
 
   events: {
     "click button.create-bill": "createBill",
-    "click a.add-debtor": "addDebtorSelect",
+    "click a.add-debtor": "addDebtorSelectSubview",
     "click .close": "removeDebtorSelect",
     "click .cancel-bill": "removeBillForm"
   },
 
-  addDebtorSelectView: function(){
-    var newBill = new SplitMyBills.Models.Bill();
-    var newBillView = new SplitMyBills.Views.BillForm( { model: newBill, user: this.model } );
-    this.addSubview(".new", newBillView);
-    newBillView.render();
-                 
-  },
-
-  addDebtorSelect: function(event){
+  addDebtorSelectSubview: function(event){
     event.preventDefault();
 
-    var newSelect = JST["debtor_select"]( { friends: this.user.friends() });
-    $(".debtor-selects").append(newSelect);
+    var debtorSelectView = new SplitMyBills.Views.DebtorSelect({ 
+      collection: SplitMyBills.users
+    });
+
+    this.addSubview(".debtor-selects", debtorSelectView);
+    debtorSelectView.render();
 
     var numDebtors = $(event.target).parent().find('.debtor-selects select').length;
     var defaultPct = (100 / (numDebtors + 1));
@@ -47,12 +44,14 @@ window.SplitMyBills.Views.BillForm = Backbone.View.extend({
 
   render: function(){
 
-    var user = this.user;
-    var friends = user.friends();
+    //var user = this.user;
+    //var friends = user.friends();
 
-    var content = this.template({ friends: friends, bill: this.model}); //current users friends
+    //var content = this.template({ friends: friends, bill: this.model}); //current users friends
+    var content = this.template({ bill: this.model}); //current users friends
 
     this.$el.html(content);
+    this.renderSubviews();
     return this;
   },
 
