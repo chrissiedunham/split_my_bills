@@ -5,6 +5,7 @@ gem 'rails', '4.0.3'
 gem 'annotate'
 gem 'backbone-on-rails'
 gem 'jquery-ui-rails'
+gem 'accountingjs-rails'
 
 gem 'money_column'
 gem 'monetize'

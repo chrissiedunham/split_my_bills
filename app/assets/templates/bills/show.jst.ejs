@@ -1,13 +1,19 @@
 <td>
 
-  <a class="bill-link" data-target="#myModal" href="#"><%= bill.escape('name') %></a>
+  <a class="bill-link" href="#"><%= bill.escape('name') %>, paid for by
+    <%= bill.escape('creditor') %></a>
 
   <div class="bill-show hidden" data-id="<%= bill.get('id') %>" class"is-active" >
-    <div>Amount: <%= bill.escape('amount') %></div>
+    <div>Amount: <%= accounting.formatMoney( bill.escape('amount') )%></div>
 
-    <% debtors.forEach(function(debtor){ %>
-      <%= debtor.escape('name') %> owes <%= debtor.escape('amount_owed') %>
-    <% }) %>
+    <ul>
+      <% debtors.forEach(function(debtor){ %>
+      <li>
+        <%= debtor.escape('name') %> owes <%=
+        accounting.formatMoney(debtor.escape('amount_owed') )%>
+      </li>
+      <% }) %>
+    </ul>
 
     <div>
       <button class="edit-bill-btn btn btn-sm btn-primary" type="submit">Edit bill</button>

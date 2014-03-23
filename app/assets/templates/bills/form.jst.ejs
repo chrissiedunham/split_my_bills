@@ -2,33 +2,38 @@
 
 
   <form 
-        class="<%= bill.id ? "" : "add-bill"  %> hidden bill-form form-inline" 
+        class="<%= bill.id ? "" : "add-bill"  %> hidden bill-form
+        form-horizontal" 
         data-id="<%= bill.id ? bill.id : "0" %>" role="form">
 
-    <div form-group>
-      <label>Date: 
+    <div class="form-group">
+      <label class="col-md-2 control-label">Date:</label>
+      <div class="col-md-6">
         <input type="date" class="form-control"name="bill[date]" id=""
         value="<%= bill.escape('date')%>" />
-      </label>
+      </div>
       
     </div>
 
-    <div form-group>
-      <label>Bill Name: 
-        <input type="text" class="form-control" name="bill[name]" id=""
-        value="<%= bill.escape('name') %>"/>
-      </label>
+    <div class="form-group">
+      <label class="col-md-2 control-label">Bill Name:</label>
+        <div class="col-md-6">
+          <input type="text" class="form-control" name="bill[name]" id=""
+          value="<%= bill.escape('name') %>"/>
+        </div>
     </div>
 
-    <label>Bill Amount: 
-      <input type="number" class="form-control" name="bill[amount_cents]" id=""
-     value="<%=bill.escape('amount_cents') %>"/>
-    </label>
+    <div class="form-group">
+      <label class="col-md-2 control-label">Bill Amount:</label>
+      <div class="col-md-6">
+        <input type="number" class="form-control" name="bill[amount]" id=""
+       value="<%=bill.escape('amount') %>"/>
+     </div>
+    </div>
 
-    <div form-group>
-      <label>With: 
-        <div class="debtor-selects"></div>
-      </label>
+    <div class="form-group">
+      <label class="col-md-2 control-label">With:</label>
+      <div class="debtor-selects"></div>
     </div>
       
       

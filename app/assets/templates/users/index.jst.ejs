@@ -1,0 +1,18 @@
+<h2>
+  Friends
+
+  <button class="add-friend btn btn-primary btn-sm pull-right"
+    type="submit">Add Friend</button>
+</h2>
+<div class="new"></div>  
+<table class="table"> 
+  <tbody class="friends">
+  
+    <% friends.each(function(friend) { %>
+    <tr><td><%= friend.escape('name') %></td></tr>
+    <% }) %>
+  
+  </tbody> 
+</table>
+
+

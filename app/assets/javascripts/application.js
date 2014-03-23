@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require accountingjs
 //= require jquery.ui.all
 //= require underscore
 //= require bootstrap

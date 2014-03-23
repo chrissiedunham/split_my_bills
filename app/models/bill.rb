@@ -36,4 +36,5 @@ class Bill < ActiveRecord::Base
   def currency
     "USD"
   end
+
 end 
