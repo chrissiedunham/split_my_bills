@@ -2,8 +2,6 @@
     <% SplitMyBills.users.forEach(function(friend) { %>
       <option 
         value="<%= friend.get('id') %>" 
-        selected="<%= (friend.escape('name') == selected_debtor ) ?
-        'selected' : '' %>"
         >
         <%= friend.escape('name') %>
       </option>

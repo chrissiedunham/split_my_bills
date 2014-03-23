@@ -31,6 +31,7 @@ class Bill < ActiveRecord::Base
   has_many :debtors, :through => :debtors_bills, :source => :debtor
 
   def amount=(dollar_amount)
-    self.amount_cents = dollar_amount * 100
+    @amount = dollar_amount
+    self.amount_cents = (dollar_amount.to_f * 100)
   end
 end 
