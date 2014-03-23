@@ -19,9 +19,9 @@ window.SplitMyBills.Routers.AppRouter = Backbone.Router.extend({
 
     var userShow = new SplitMyBills.Views.UserShow({
       model: user,
-      collection: user.bills()
+      collection: SplitMyBills.bills
     });
-    user.bills().fetch();
+    SplitMyBills.bills.fetch();
 
     this._swapView(userShow);
     
