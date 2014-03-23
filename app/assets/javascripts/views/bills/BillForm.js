@@ -26,7 +26,7 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
     debtorSelectView.render();
 
     var numDebtors = $(event.target).parent().find('.debtor-selects select').length;
-    var defaultPct = (100 / (numDebtors + 1));
+    var defaultPct = accounting.toFixed((100 / (numDebtors + 1)), 2);
 
     $(".debtor-selects input").val(defaultPct);
   },
