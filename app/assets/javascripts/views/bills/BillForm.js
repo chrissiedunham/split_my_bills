@@ -3,9 +3,9 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
   template: JST["bills/form"],
 
   initialize: function(options){
-    //this.user = options.user
     this.listenTo(this.model, "sync", this.render);
-//    this.listenTo(this.user.friends(), "add", this.render);
+
+    this.model.debtors().each(this.addExistingDebtorSelectSubview.bind(this));
   },
 
   events: {
@@ -13,14 +13,14 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
     "click button.update-bill": "updateBill",
     "click a.add-debtor": "addDebtorSelectSubview",
     "click .close": "removeDebtorSelect",
-    "click .cancel-bill": "removeBillForm"
+    "click .cancel-bill": "removeBillForm",
+    "addSelect": "addDebtorSelect"
   },
 
-  addDebtorSelectSubview: function(event){
-    event.preventDefault();
+  addDebtorSelectSubview: function(selected) {
 
-    var debtorSelectView = new SplitMyBills.Views.DebtorSelect({ 
-      collection: SplitMyBills.users
+    var debtorSelectView = new SplitMyBills.Views.DebtorSelect({
+      selected_debtor: selected
     });
 
     this.addSubview(".debtor-selects", debtorSelectView);
@@ -28,6 +28,17 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
 
     this.updateDebtorSelects(remove = false);
   },
+
+  addExistingDebtorSelectSubview: function(selected_debtor){
+    this.addDebtorSelectSubview(selected_debtor.escape('name'));
+  },
+
+  addNewDebtorSelectSubview: function(event){
+    event.preventDefault();
+    this.addDebtorSelectSubview("");
+
+  },
+  
   createBill: function(event) {
     event.preventDefault();
 
@@ -36,6 +47,7 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
     var billData = $('form.add-bill').serializeJSON()['bill'];
     SplitMyBills.bills.create(billData);
     SplitMyBills.bills.fetch();
+
   },
 
   render: function(){

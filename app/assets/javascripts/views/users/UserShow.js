@@ -17,13 +17,11 @@ window.SplitMyBills.Views.UserShow = Backbone.CompositeView.extend({
 
   },
 
-
   addNewBillView: function(){
     var newBill = new SplitMyBills.Models.Bill();
     var newBillView = new SplitMyBills.Views.BillForm( { model: newBill } );
     this.addSubview(".new", newBillView);
     newBillView.render();
-                 
   },
 
   addBill: function(bill){

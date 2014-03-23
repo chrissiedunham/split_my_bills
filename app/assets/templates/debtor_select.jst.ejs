@@ -1,7 +1,11 @@
-  <select class="form-control" name="bill[debtor_ids][]" id="">
-    <% friends.forEach(function(friend) { %>
-      <option value="<%= friend.get('id') %>">
-        <%= friend.escape('name')%>
+  <select class="form-control" name="bill[debtor_ids][]" >
+    <% SplitMyBills.users.forEach(function(friend) { %>
+      <option 
+        value="<%= friend.get('id') %>" 
+        selected="<%= (friend.escape('name') == selected_debtor ) ?
+        'selected' : '' %>"
+        >
+        <%= friend.escape('name') %>
       </option>
     <% }) %>
   </select>
