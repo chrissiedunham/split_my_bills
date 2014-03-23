@@ -10,6 +10,7 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
 
   events: {
     "click button.create-bill": "createBill",
+    "click button.update-bill": "updateBill",
     "click a.add-debtor": "addDebtorSelectSubview",
     "click .close": "removeDebtorSelect",
     "click .cancel-bill": "removeBillForm"
@@ -33,7 +34,6 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
 
   createBill: function(event) {
     event.preventDefault();
-    var that = this;
 
     $(event.target).parents('form').addClass('hidden');
     $('button.add-bill').removeClass('hidden');
@@ -66,6 +66,24 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
   removeBillForm: function(){
     $(event.target).parents().closest('form').addClass('hidden');
   },
+  
+  updateBill: function(event) {
+              
+    event.preventDefault();
+
+    $(event.target).parents('form').addClass('hidden');
+    $('button.add-bill').removeClass('hidden');
+
+    var billData = $('form.add-bill').serializeJSON()['bill'];
+    this.model.set(billData);
+
+    this.model.save({
+      success: function(){
+        alert("success!");          
+      }       
+    });
+              
+  }
 
 
 })

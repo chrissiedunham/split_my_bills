@@ -12,14 +12,11 @@
 #  amount_cents :integer
 #
 
-require 'money_column'
-require 'money'
-require 'monetize/core_extensions'
-
 class Bill < ActiveRecord::Base
 
+  attr_reader :amount
+
   validates :name, :amount_cents, :creditor_id, :presence => true
-  monetize :amount_cents
 
   belongs_to :creditor, 
     :class_name => "User",
@@ -33,8 +30,7 @@ class Bill < ActiveRecord::Base
 
   has_many :debtors, :through => :debtors_bills, :source => :debtor
 
-  def currency
-    "USD"
+  def amount=(dollar_amount)
+    self.amount_cents = dollar_amount * 100
   end
-
 end 

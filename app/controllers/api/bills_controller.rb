@@ -3,8 +3,6 @@ class Api::BillsController < ApplicationController
   wrap_parameters :bill, :include => [:name, :date, :amount, :debtor_ids, :debtor_pcts]
 
   def create
-    amount_cents = bill_params[:amount] * 100
-    bill_params[:amount] = amount_cents
     @bill = current_user.credit_bills.new(bill_params)
 
     debtor_params[:debtor_ids].each_with_index do | id, i |
@@ -29,6 +27,16 @@ class Api::BillsController < ApplicationController
     @bills = @credit_bills + @debit_bills
 #    render json: @bills.to_json(include: [:debtors])
     render "bills/index"
+  end
+
+  def update
+    @bill = Bill.find(params[:id])
+
+    if @bill.update_attributes(bill_params)
+      render json: "bills/show"
+    else
+      render json: { errors: @bill.errors.full_messages }, status: 422
+    end
   end
 
   def show

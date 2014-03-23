@@ -11,16 +11,9 @@
 #  amount_owed_cents :integer
 #
 
-require 'money_column'
-require 'monetize/core_extensions'
-require 'money'
-
 class DebtorsBills < ActiveRecord::Base
-  include MoneyColumn::StoresMoney
-
+  attr_reader :amount_owed
   
-  monetize :amount_owed_cents
-
   belongs_to :bill
 
   belongs_to :debtor,
@@ -31,5 +24,6 @@ class DebtorsBills < ActiveRecord::Base
   def self.get_amount_from_pct(amount, pct)
     (amount.to_f * pct.to_f).round
   end
+
   
 end
