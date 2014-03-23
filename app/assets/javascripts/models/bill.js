@@ -1,5 +1,10 @@
 window.SplitMyBills.Models.Bill = Backbone.Model.extend({
 
+  validates: function(attributes){
+    if(!attributes || !attributes.name || attributes.name == ""){
+       
+    }            
+  },
   urlRoot: '/api/bills',
 
   debtors: function(){

@@ -26,12 +26,8 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
     this.addSubview(".debtor-selects", debtorSelectView);
     debtorSelectView.render();
 
-    var numDebtors = $(event.target).parent().find('.debtor-selects select').length;
-    var defaultPct = accounting.toFixed((100 / (numDebtors + 1)), 2);
-
-    $(".debtor-selects input").val(defaultPct);
+    this.updateDebtorSelects(remove = false);
   },
-
   createBill: function(event) {
     event.preventDefault();
 
@@ -44,11 +40,7 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
 
   render: function(){
 
-    //var user = this.user;
-    //var friends = user.friends();
-
-    //var content = this.template({ friends: friends, bill: this.model}); //current users friends
-    var content = this.template({ bill: this.model}); //current users friends
+    var content = this.template({ bill: this.model}); 
 
     this.$el.html(content);
     this.renderSubviews();
@@ -56,13 +48,10 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
   },
 
   removeDebtorSelect: function() {
-    var numDebtors = $(event.target).parent().find('.debtor-selects select').length;
-    var defaultPct = (100 / (numDebtors + 1));
 
-    $(".debtor-selects input").val(defaultPct);
-
-                         
+    this.updateDebtorSelects(remove = true);
   },
+
   removeBillForm: function(){
     $(event.target).parents().closest('form').addClass('hidden');
   },
@@ -83,7 +72,17 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
       }       
     });
               
-  }
+  },
+
+  updateDebtorSelects: function(remove){
+
+    var numDebtors = $(this.$el).find('.debtor-selects input').length
+    if (remove) { numDebtors -= 1 };
+    var defaultPct = accounting.toFixed((100 / (numDebtors + 1)), 2);
+
+    $(".debtor-selects input").val(defaultPct);
+                          
+  },
 
 
 })
