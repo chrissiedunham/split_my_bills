@@ -18,6 +18,7 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
     "click .bill-link": "toggleBillShow",
     "click .delete-bill": "deleteBill",
     "click .bill-edit-btn": "showEditForm",
+    "click .send-reminder-email": "sendReminderEmail",
   },
 
   addEditSubview: function(){
@@ -53,6 +54,18 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
     event.preventDefault();                     
     $(this.$el).find('.bill-show').toggleClass("hidden");
   },
+
+  sendReminderEmail: function(event){
+    $.ajax({
+      url: "/reminder_emails",
+      type: "POST",
+      data: { "bill_id": this.model.get('id') },
+      success: function() {
+        alert("You sent an email!") 
+      }
+    })                    
+  }
+  
   
   
 

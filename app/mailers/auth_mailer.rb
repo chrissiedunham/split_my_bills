@@ -1,11 +1,17 @@
 class AuthMailer < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "admin@splitmybills.com"
 
-  def signup_email(user)
+  def send_signup_email(user)
     mail(
       :to => user.email,
       :subject => 'Thanks for signing up!'
     )
-    
+  end
+
+  def send_reminder_email(debtor)
+    mail(
+      :to => debtor.email,
+      :subject => "Pay your bill!"
+    )
   end
 end

@@ -8,6 +8,7 @@ gem 'jquery-ui-rails'
 gem 'accountingjs-rails'
 gem 'figaro'
 
+gem 'letter_opener'
 gem 'money_column'
 gem 'monetize'
 gem 'money'
