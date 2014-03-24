@@ -1,7 +1,7 @@
 <td>
 
-  <% debugger %>
   <a class="bill-link" href="#"><%= bill.escape('date') %>: <%= bill.escape('name') %></a>
+  <button type='button' class='close delete-bill' data-dismiss='alert'>×</button>
 
   <div class="bill-show hidden" data-id="<%= bill.get('id') %>" class"is-active" >
     <div>Paid by <%= bill.escape('creditor') %></div>

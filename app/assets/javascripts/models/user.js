@@ -23,7 +23,13 @@ window.SplitMyBills.Models.User = Backbone.Model.extend({
   },
 
   bills: function() {
-    return this.credit_bills();           
+    if(!this._bills){
+    
+      this._bills = new SplitMyBills.Collections.Bills([], {
+        user: this 
+      });
+    }
+    return this._bills;
     
   },
 
@@ -41,7 +47,12 @@ window.SplitMyBills.Models.User = Backbone.Model.extend({
   parse: function(data){
     this.credit_bills().set(data.credit_bills);
     this.debit_bills().set(data.debit_bills);
+
+    var all_bills = data.credit_bills.concat(data.debit_bills);
+    this.bills().set(all_bills);
+
     this.friends().set(data.friends);
+
     return data;
          
   }
