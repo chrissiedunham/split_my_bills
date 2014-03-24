@@ -12,6 +12,7 @@ window.SplitMyBills.Models.User = Backbone.Model.extend({
     }
     return this._credit_bills;
   },
+
   debit_bills: function(){
     if(!this._debit_bills){
     
