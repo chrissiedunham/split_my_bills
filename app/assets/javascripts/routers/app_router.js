@@ -42,7 +42,7 @@ window.SplitMyBills.Routers.AppRouter = Backbone.Router.extend({
    
     var user = SplitMyBills.users.getOrFetch(id);
     
-    var friendShow = new SplitMyBills.Views.UserShow({
+    var friendShow = new SplitMyBills.Views.FriendShow({
       model: user,
       collection: user.bills()
     });

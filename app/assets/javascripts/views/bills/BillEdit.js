@@ -12,7 +12,7 @@ window.SplitMyBills.Views.BillEdit = Backbone.CompositeView.extend({
 
   events: {
     "click button.update-bill": "updateBill",
-    "click .cancel-bill": "removeBillForm",
+    "click .cancel-bill-edit": "removeEditBillForm",
   },
 
   addBillForm: function() {
@@ -36,7 +36,7 @@ window.SplitMyBills.Views.BillEdit = Backbone.CompositeView.extend({
     return this;
   },
 
-  removeBillForm: function(){
+  removeEditBillForm: function(){
     $(event.target).parents().closest('form').addClass('hidden');
   },
   

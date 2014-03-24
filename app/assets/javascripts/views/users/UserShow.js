@@ -11,7 +11,7 @@ window.SplitMyBills.Views.UserShow = Backbone.CompositeView.extend({
   events: {
           
     "click button.add-bill": "showNewBillForm",
-    "click button.cancel-bill": "hideNewBillForm" 
+    "click button.cancel-new-bill": "hideNewBillForm" 
 
   },
 
