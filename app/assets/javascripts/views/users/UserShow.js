@@ -17,7 +17,7 @@ window.SplitMyBills.Views.UserShow = Backbone.CompositeView.extend({
 
   addNewBillView: function(){
     var newBill = new SplitMyBills.Models.Bill();
-    var newBillView = new SplitMyBills.Views.BillForm( { 
+    var newBillView = new SplitMyBills.Views.BillNew( { 
       model: newBill, 
       user: this.model 
     });
