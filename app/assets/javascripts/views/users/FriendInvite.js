@@ -9,7 +9,13 @@ window.SplitMyBills.Views.FriendInvite = Backbone.View.extend({
     return this;
   
   },
-  events: {},
+  events: {
+    "click .friend-invite": "sendInviteEmail"
+  },
+
+  sendInviteEmail: function() {
+                   
+  }
   
 
 })

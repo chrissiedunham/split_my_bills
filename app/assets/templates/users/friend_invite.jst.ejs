@@ -7,16 +7,17 @@
           join SplitMyBills!</h4>
       </div>
       <div class="modal-body">
-
+        <%= JST["users/form"]() %>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-default"
+          data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary">Send Email</button>
       </div>
     </div>
   </div>
 </div>
 
-<button class="add-friend btn btn-primary btn-sm pull-right"
+<button class="friend-invite btn btn-primary btn-sm pull-right"
   data-toggle="modal" data-target="#inviteFriendModal"
     type="submit">Invite Friends!</button>
