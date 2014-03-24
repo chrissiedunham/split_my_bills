@@ -6,6 +6,7 @@ gem 'annotate'
 gem 'backbone-on-rails'
 gem 'jquery-ui-rails'
 gem 'accountingjs-rails'
+gem 'figaro'
 
 gem 'money_column'
 gem 'monetize'

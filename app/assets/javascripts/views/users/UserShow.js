@@ -56,6 +56,7 @@ window.SplitMyBills.Views.UserShow = Backbone.CompositeView.extend({
     event.preventDefault();
     $('form.add-bill').removeClass('hidden');
     $('button.add-bill').addClass('hidden');
+    $('form.add-bill input').val("");
   },
 
 })

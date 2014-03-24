@@ -35,6 +35,7 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
     event.preventDefault();                     
     $(event.target).parents().closest('td').find('.bill-form').removeClass('hidden');
     $(event.target).parents().closest('td').find('.bill-show').addClass('hidden');
+    
   },
 
   render: function(){
