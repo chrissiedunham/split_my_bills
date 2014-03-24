@@ -3,6 +3,9 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
   template: JST["bills/form"],
 
   initialize: function(options){
+    this.user = options.user;
+
+
     this.listenTo(this.model, "sync", this.render);
     this.model.debtors().each(this.addExistingDebtorSelectSubview.bind(this));
 
@@ -20,8 +23,10 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
   addDebtorSelectSubview: function(selected) {
 
     var debtorSelectView = new SplitMyBills.Views.DebtorSelect({
-      selected_debtor: selected
+      selected_debtor: selected,
+      friends: this.user.friends()
     });
+    
 
     this.addSubview(".debtor-selects", debtorSelectView);
     debtorSelectView.render();

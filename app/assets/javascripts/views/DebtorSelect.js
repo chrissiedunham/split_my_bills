@@ -1,6 +1,7 @@
 window.SplitMyBills.Views.DebtorSelect = Backbone.View.extend({
 
   initialize: function(options){
+    this.friends = options.friends;
     this.selected_debtor = options.selected_debtor             
   },
   template: JST["debtor_select"],
@@ -8,7 +9,7 @@ window.SplitMyBills.Views.DebtorSelect = Backbone.View.extend({
   render: function(){
 
     var content = this.template({ 
-      friends: this.collection,
+      friends: this.friends,
       selected_debtor: this.selected_debtor
 
     }); //current users friends
