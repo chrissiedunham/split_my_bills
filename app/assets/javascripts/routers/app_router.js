@@ -17,14 +17,11 @@ window.SplitMyBills.Routers.AppRouter = Backbone.Router.extend({
 
   currentUserShow: function(){
    
-    this.users.fetch();
     var user = this.users.getOrFetch(currentUserID);
 
     var userShow = new SplitMyBills.Views.UserShow({
-      model: user,
-      collection: SplitMyBills.bills
+      model: user
     });
-    SplitMyBills.bills.fetch();
 
     this._swapView(userShow);
     
@@ -49,7 +46,7 @@ window.SplitMyBills.Routers.AppRouter = Backbone.Router.extend({
       model: user,
       collection: user.bills()
     });
-    user.bills().fetch();
+    user.fetch();
 
     this._swapView(friendShow);
     

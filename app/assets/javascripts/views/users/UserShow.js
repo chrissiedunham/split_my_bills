@@ -4,10 +4,10 @@ window.SplitMyBills.Views.UserShow = Backbone.CompositeView.extend({
 
   initialize: function(){
     this.listenTo(this.model, "sync", this.render);
-    this.listenTo(this.collection, "add", this.addBill);
-    this.listenTo(this.collection, "remove", this.removeBill);
+    this.listenTo(this.model.bills(), "add", this.addBill);
+    this.listenTo(this.model.bills(), "remove", this.removeBill);
     
-    this.collection.each(this.addBill.bind(this));
+    this.model.bills().each(this.addBill.bind(this));
     this.addNewBillView();
   },
   events: {
@@ -45,7 +45,7 @@ window.SplitMyBills.Views.UserShow = Backbone.CompositeView.extend({
   },
 
   render: function(){
-    var content = this.template();
+    var content = this.template({ user: this.model });
     this.$el.html(content);
 
     this.renderSubviews();
