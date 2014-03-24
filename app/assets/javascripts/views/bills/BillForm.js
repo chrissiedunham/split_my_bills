@@ -4,9 +4,8 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
 
   initialize: function(options){
     this.user = options.user;
-
-
     this.listenTo(this.model, "sync", this.render);
+    
     this.model.debtors().each(this.addExistingDebtorSelectSubview.bind(this));
 
   },
@@ -51,7 +50,7 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
     $('button.add-bill').removeClass('hidden');
 
     var billData = $('form.add-bill').serializeJSON()['bill'];
-    this.user.credit_bills.create(billData);
+    this.user.credit_bills().create(billData);
 
   },
 

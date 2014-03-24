@@ -15,7 +15,7 @@ class Api::BillsController < ApplicationController
     if @bill.save
       flash.now[:success] = ["successfully saved bill"]
      # render json: @bill
-      render json: "bills/show"
+      render "bills/show"
     else
       render json: { errors: @bill.errors.full_messages }, status: 422
     end
