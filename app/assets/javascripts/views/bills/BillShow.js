@@ -7,8 +7,8 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
     this.user = options.user;
     this.listenTo(this.model, "sync", this.render);
 
-    this.listenTo(this.model.debtors(), "add sync", function() { debugger; this.render() });
-    this.listenTo(this.model.creditor(), "add sync", function() { debugger; this.render() });
+    this.listenTo(this.model.debtors(), "add sync", this.render);
+    this.listenTo(this.model.creditor(), "add sync", this.render);
 
     this.addEditSubview();
   },

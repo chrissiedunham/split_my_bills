@@ -30,6 +30,7 @@ class Api::BillsController < ApplicationController
   end
 
   def update
+    #bill.debtors_bills.destroy_all
     @bill = Bill.find(params[:id])
 
     if @bill.update_attributes(bill_params)
