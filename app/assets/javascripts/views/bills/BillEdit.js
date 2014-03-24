@@ -47,7 +47,7 @@ window.SplitMyBills.Views.BillEdit = Backbone.CompositeView.extend({
     $(event.target).parents('form').addClass('hidden');
     $('button.add-bill').removeClass('hidden');
 
-    var billData = $('form.add-bill').serializeJSON()['bill'];
+    var billData = $(this.$el).find('form').serializeJSON()['bill'];
     this.model.set(billData);
 
     this.model.save({

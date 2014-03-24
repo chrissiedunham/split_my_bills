@@ -64,7 +64,6 @@ window.SplitMyBills.Models.User = Backbone.Model.extend({
     this.credit_bills().set(data.credit_bills);
     this.debit_bills().set(data.debit_bills);
 //
-  debugger
 //     var all_bills = data.credit_bills.concat(data.debit_bills);
 //     this.bills().set(all_bills);
 

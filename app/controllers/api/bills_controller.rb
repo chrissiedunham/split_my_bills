@@ -30,13 +30,27 @@ class Api::BillsController < ApplicationController
   end
 
   def update
-    #bill.debtors_bills.destroy_all
     @bill = Bill.find(params[:id])
 
-    if @bill.update_attributes(bill_params)
-      render json: "bills/show"
-    else
+    begin
+      Bill.transaction do 
+        @bill.debtors_bills.each do |bill|
+          bill.destroy!
+        end
+        debtor_params[:debtor_ids].each_with_index do | id, i |
+
+          pct = debtor_params[:debtor_pcts][i]
+          amount_owed = DebtorsBills.get_amount_from_pct(bill_params[:amount], pct)
+          @bill.debtors_bills.new(:debtor_id => id, :amount_owed_cents => amount_owed)
+        end
+        
+        @bill.assign_attributes(bill_params)
+        @bill.save!
+      end
+    rescue
       render json: { errors: @bill.errors.full_messages }, status: 422
+    else
+      render "bills/show"
     end
   end
 
