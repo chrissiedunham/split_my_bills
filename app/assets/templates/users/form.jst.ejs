@@ -1,39 +1,23 @@
-  <form class="hidden add-friend-form form-horizontal" role="form">
+  <form class="hidden email-friend-form form-horizontal" role="form">
 
     <div class="form-group">
-      <label class="col-md-2 control-label">Email:</label>
+      <label class="col-md-2 control-label" for="email" >Email:</label>
       <div class="col-md-6">
-        <input type="text" class="form-control"name="bill[date]" id=""
+        <input type="text" class="form-control"name="bill[date]"
+        id="email"
         value="<%= bill.escape('date')%>" />
       </div>
-      
     </div>
 
     <div class="form-group">
-      <label class="col-md-2 control-label">Bill Name:</label>
-        <div class="col-md-6">
-          <input type="text" class="form-control" name="bill[name]" id=""
-          value="<%= bill.escape('name') %>"/>
-        </div>
-    </div>
-
-    <div class="form-group">
-      <label class="col-md-2 control-label">Bill Amount:</label>
-      <div class="col-md-6">
-        <input type="number" class="form-control" name="bill[amount]" id=""
-       value="<%=bill.escape('amount') %>"/>
-     </div>
-    </div>
-
-    <div class="form-group">
-      <label class="col-md-2 control-label">With:</label>
-      <div class="debtor-selects col-md-3"></div>
+      <label for="message"  class="col-md-2 control-label">Message:</label>
+      <div class="controls col-md-6">
+        <textarea name="email[message]" id="message" rows="8" cols="40"></textarea>
+      </div>
     </div>
       
-      <a class="add-debtor btn btn-primary btn-sm" type="submit">Add
-      Payee</a>
-    <button class="<%= bill.id ? "update-bill" : "create-bill"  %> submit-bill btn btn-primary btn-sm" type="submit">
-      <%=button_text %>
+    <button class="email-friend-btn btn btn-primary btn-sm" type="submit">
+      Send
     </button>
 
     <button class="cancel-bill btn btn-danger btn-sm" type="submit">
