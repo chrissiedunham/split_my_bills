@@ -4,11 +4,9 @@ window.SplitMyBills.Views.UserShow = Backbone.CompositeView.extend({
 
   initialize: function(){
     this.listenTo(this.model, "sync", this.render);
-    this.listenTo(this.model.bills(), "add", this.addBill);
-    this.listenTo(this.model.bills(), "remove", this.removeBill);
-    
-    this.model.credit_bills().each(this.addBill.bind(this));
+
     this.addNewBillView();
+    this.addBillsIndexView();
   },
   events: {
           
@@ -19,34 +17,27 @@ window.SplitMyBills.Views.UserShow = Backbone.CompositeView.extend({
 
   addNewBillView: function(){
     var newBill = new SplitMyBills.Models.Bill();
-    var newBillView = new SplitMyBills.Views.BillForm( { model: newBill, user: this.model } );
+    var newBillView = new SplitMyBills.Views.BillForm( { 
+      model: newBill, 
+      user: this.model 
+    });
     this.addSubview(".new", newBillView);
     newBillView.render();
   },
 
-  addBill: function(bill){
-    var billShowView = new SplitMyBills.Views.BillShow({ model: bill, user: this.model });            
-    var that = this;
-    bill.fetch( { 
-      success: function(){
-        that.addSubview(".bills", billShowView);
-        billShowView.render();
-      }
+  addBillsIndexView: function() {
+    var billsIndexView = new SplitMyBills.Views.BillsIndex( { 
+      collection: this.model.bills(), 
+      user: this.model
     });
+    this.addSubview(".bills-index", billsIndexView);
+    billsIndexView.render();
   },
-
+  
   hideNewBillForm: function(event){
     event.preventDefault();
     $('form.add-bill').addClass('hidden');
     $('button.add-bill').removeClass('hidden');
-  },
-
-  removeBill: function(bill){
-
-    var billShowView = _(this.subviews()[".bills"]).find(function(subview){
-      return subview.model == bill
-    });
-    this.removeSubview('.bills', billShowView);
   },
 
   render: function(){
