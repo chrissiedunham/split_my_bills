@@ -1,0 +1,32 @@
+<% action = (user.persisted? ? user_url(user) : users_url) %>
+<% method = (user.persisted? ? "put" : "post") %>
+<% message = (user.persisted? ? "Update user" : "Create user") %>
+
+<form role="form" action="<%= action %>" method="post">
+  <input 
+     name="_method"
+     type="hidden"
+     value="<%= method %>">
+  <input
+     name="authenticity_token"
+     type="hidden"
+     value="<%= form_authenticity_token %>">
+
+  <div class="form-group">
+    <label for="user_username">Username</label>
+    <input class="form-control"
+       id="user_username"
+       name="user[email]"
+       type="text">
+  </div>
+
+  <div class="form-group">
+    <label for="user_password">Password</label>
+    <input class="form-control"
+       id="user_password"
+       name="user[password]"
+       type="password">
+  </div>
+
+  <button class="btn btn-default" type="submit"><%= message %></button>
+</form>
