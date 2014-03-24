@@ -9,7 +9,7 @@
   <tbody class="friends">
   
     <% friends.each(function(friend) { %>
-    <tr><td><%= friend.escape('name') %></td></tr>
+    <tr><td><a href="#friends/<%= friend.get('id') %>"><%= friend.escape('name') %></a></td></tr>
     <% }) %>
   
   </tbody> 

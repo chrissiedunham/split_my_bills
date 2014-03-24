@@ -50,7 +50,8 @@ window.SplitMyBills.Views.UserShow = Backbone.CompositeView.extend({
   },
 
   render: function(){
-    var content = this.template({ user: this.model });
+    var showAddBillButton = (currentUserID == this.model.get('id'))
+    var content = this.template({ user: this.model, showAddBillButton: showAddBillButton });
     this.$el.html(content);
 
     this.renderSubviews();

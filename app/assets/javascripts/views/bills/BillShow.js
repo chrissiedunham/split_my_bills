@@ -44,7 +44,6 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
 
   render: function(){
     
-            debugger
     var content = this.template({ bill: this.model, debtors: this.model.debtors() });
     this.$el.html(content);
     this.renderSubviews();
