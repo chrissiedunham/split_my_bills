@@ -4,7 +4,6 @@ json.amount (bill.amount_cents / 100.00)
 
 json.creditor_email bill.creditor.email
 
-#json.net_owed_by_current_user bill.net_amount_owed(current_user)
 json.net_to_current_user bill.net_amount_owed(current_user)
 
 json.debtors bill.debtors do |debtor|

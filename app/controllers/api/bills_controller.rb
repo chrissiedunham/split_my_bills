@@ -5,19 +5,19 @@ class Api::BillsController < ApplicationController
   def create
     @bill = current_user.credit_bills.new(bill_params)
 
-    debtor_params[:debtor_ids].each_with_index do | id, i |
+      debtor_params[:debtor_ids].each_with_index do | id, i |
 
-      pct = debtor_params[:debtor_pcts][i]
-      amount_owed = DebtorsBills.get_amount_from_pct(bill_params[:amount], pct)
-      @bill.debtors_bills.new(:debtor_id => id, :amount_owed_cents => amount_owed)
-    end
+        pct = debtor_params[:debtor_pcts][i]
+        amount_owed = DebtorsBills.get_amount_from_pct(bill_params[:amount], pct)
+        @bill.debtors_bills.new(:debtor_id => id, :amount_owed_cents => amount_owed)
+      end
     
     if @bill.save
-      flash.now[:success] = ["successfully saved bill"]
-     # render json: @bill
+      flash[:success] = ["successfully saved bill"]
       render "bills/show"
     else
-      render json: { errors: @bill.errors.full_messages }, status: 422
+      flash.now[:errors] = [@bill.errors.full_messages]
+      render json: @bill.errors.full_messages, status: 422
     end
   end
 
@@ -26,7 +26,6 @@ class Api::BillsController < ApplicationController
     @debit_bills = current_user.debit_bills
     @current_user = current_user
     @bills = @credit_bills + @debit_bills
-#    render json: @bills.to_json(include: [:debtors])
     render "bills/index"
   end
 
@@ -38,18 +37,21 @@ class Api::BillsController < ApplicationController
         @bill.debtors_bills.each do |bill|
           bill.destroy!
         end
-        debtor_params[:debtor_ids].each_with_index do | id, i |
+        if debtor_params[:debtor_ids]
+          debtor_params[:debtor_ids].each_with_index do | id, i |
 
-          pct = debtor_params[:debtor_pcts][i]
-          amount_owed = DebtorsBills.get_amount_from_pct(bill_params[:amount], pct)
-          @bill.debtors_bills.new(:debtor_id => id, :amount_owed_cents => amount_owed)
+            pct = debtor_params[:debtor_pcts][i]
+            amount_owed = DebtorsBills.get_amount_from_pct(bill_params[:amount], pct)
+            @bill.debtors_bills.new(:debtor_id => id, :amount_owed_cents => amount_owed)
+          end
         end
         
         @bill.assign_attributes(bill_params)
         @bill.save!
       end
     rescue
-      render json: { errors: @bill.errors.full_messages }, status: 422
+      flash.now[:errors] = [@bill.errors.full_messages]
+      render json: @bill.errors.full_messages, status: 422
     else
       render "bills/show"
     end

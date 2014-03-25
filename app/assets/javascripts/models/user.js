@@ -67,18 +67,32 @@ window.SplitMyBills.Models.User = Backbone.Model.extend({
     });
    },
 
+  net_balance: function () {
+    var net = 0;
+    this.bills().each(function(bill) {
+      debugger
+      net += parseInt(bill.escape('net_to_current_user'));
+    })
+    return net;
+    
+  },
+
   parse: function(data){
     this.setBillsListeners(this.bills());
+
     this.credit_bills().set(data.credit_bills);
+    delete data.credit_bills;
+
     this.debit_bills().set(data.debit_bills);
+    delete data.debit_bills;
     
     this.relevant_bills().set(data.relevant_bills);
+    delete data.relevant_bills;
+
     this.friends().set(data.friends);
-    debugger
-    this.net_balance = data.net_balance
+    delete data.friends;
   
     return data;
-         
   }
 
 
