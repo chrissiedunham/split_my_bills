@@ -35,4 +35,5 @@ class Bill < ActiveRecord::Base
     self.amount_cents = (dollar_amount.to_f * 100)
   end
 
+
 end 

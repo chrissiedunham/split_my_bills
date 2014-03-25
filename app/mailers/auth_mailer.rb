@@ -8,7 +8,10 @@ class AuthMailer < ActionMailer::Base
     )
   end
 
-  def send_reminder_email(debtor)
+  def send_reminder_email(bill, debtor, amount_owed)
+
+    @bill = bill
+    @amount_owed = amount_owed
     mail(
       :to => debtor.email,
       :subject => "Pay your bill!"

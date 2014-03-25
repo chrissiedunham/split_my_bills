@@ -47,6 +47,7 @@ class User < ActiveRecord::Base
 
   def bills_relevant_to(user_id)
 
+    
     # where_cond = <<-SQL
     # (( creditor_id = :current_user_id)
     # OR
@@ -57,6 +58,11 @@ class User < ActiveRecord::Base
     #   where_cond
     # })
 
+  end
+
+  def amount_owed_on(bill)
+    debtor_bill = self.debtors_bills.where(:bill_id => bill.id).first
+    debtor_bill.amount_owed_cents / 100
   end
 
   def self.generate_session_token

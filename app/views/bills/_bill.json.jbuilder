@@ -8,15 +8,8 @@ json.debtors bill.debtors do |debtor|
   json.debtor_id debtor.id
   json.name debtor.name
   json.email debtor.email
+  json.amount_owed debtor.amount_owed_on(bill)
 
-
-  debtor.debtors_bills.each do |db|
-    if db.bill_id == bill.id 
-      json.db_id db.id
-      json.amount_owed (db.amount_owed_cents / 100.00)
-      json.db_bill_id db.bill_id
-    end
-  end
 end
 
 

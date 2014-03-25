@@ -15,7 +15,6 @@
           
         </form>
         <ul>
-          <% debugger %>
           <% bill.debtors().forEach(function(debtor) { %>
             <li><%= debtor.escape('email') %></li>
           <% }) %>
