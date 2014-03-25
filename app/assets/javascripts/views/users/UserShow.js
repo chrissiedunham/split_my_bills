@@ -21,7 +21,7 @@ window.SplitMyBills.Views.UserShow = Backbone.CompositeView.extend({
 
   addBillsIndexView: function() {
     var billsIndexView = new SplitMyBills.Views.BillsIndex( { 
-      collection: this.model.credit_bills(),
+      collection: this.model.bills(),
       user: this.model
     });
     this.addSubview(".bills-index", billsIndexView);

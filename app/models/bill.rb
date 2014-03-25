@@ -72,7 +72,7 @@ class Bill < ActiveRecord::Base
     (amount_owed_to(user).to_f - amount_owed_by(user).to_f)
   end
 
-  def total_amount_owed_to(user)
+  def amount_owed_to_from(creditor, debtor)
     Bill.find_by_sql([" 
       SELECT sum(amount_owed_cents)/100.00 as amount_owed
       FROM bills
@@ -82,9 +82,6 @@ class Bill < ActiveRecord::Base
       AND
       bills.id = :bill_id
     ", { user_id: user.id, bill_id: self.id  }]).last.amount_owed
-  end
-
-  def amount_owed_to_from(creditor, debtor)
   end
 
 end 

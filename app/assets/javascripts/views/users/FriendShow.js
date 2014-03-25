@@ -10,7 +10,7 @@ window.SplitMyBills.Views.FriendShow = Backbone.CompositeView.extend({
 
   addBillsIndexView: function() {
     var billsIndexView = new SplitMyBills.Views.BillsIndex( { 
-      collection: this.model.bills(),
+      collection: this.model.relevant_bills(),
       user: this.model
     });
     this.addSubview(".bills-index", billsIndexView);
