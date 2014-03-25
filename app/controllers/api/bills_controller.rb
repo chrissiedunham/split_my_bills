@@ -56,6 +56,7 @@ class Api::BillsController < ApplicationController
 
   def show
     @bill = Bill.find(params[:id])
+    @current_user = current_user
 #    render json: @bill.to_json(include: [:debtors])
      render "bills/show"
   end

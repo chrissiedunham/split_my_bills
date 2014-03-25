@@ -33,6 +33,14 @@ window.SplitMyBills.Models.User = Backbone.Model.extend({
     return this._bills;
     
   },
+  
+  relevant_bills: function() {
+    if(!this._relevant_bills){
+      this._relevant_bills = new SplitMyBills.Collections.Bills([], { user:this }); 
+    }
+    return this._relevant_bills;
+                  
+  },
 
   friends: function(){
     if(!this._friends){
@@ -63,13 +71,10 @@ window.SplitMyBills.Models.User = Backbone.Model.extend({
     this.setBillsListeners(this.bills());
     this.credit_bills().set(data.credit_bills);
     this.debit_bills().set(data.debit_bills);
-//
-//     var all_bills = data.credit_bills.concat(data.debit_bills);
-//     this.bills().set(all_bills);
-
-
+    
+    this.relevant_bills().set(data.relevant_bills);
     this.friends().set(data.friends);
-
+  
     return data;
          
   }

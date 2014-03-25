@@ -45,19 +45,34 @@ class User < ActiveRecord::Base
     user.try(:is_password?, password) ? user : nil
   end
 
-  def bills_relevant_to(user_id)
+  def bills_relevant_to(user)
+    if user.nil?
+      return all_bills
+    end
+    Bill.find_by_sql(["
+      SELECT bills.*
+      FROM bills
+      JOIN debtors_bills ON bills.id = debtors_bills.bill_id
+      JOIN users AS creditors on creditors.id = bills.creditor_id
+      WHERE 
+      (creditors.id = :current_user_id AND debtors_bills.debtor_id = :friend_id)
+      OR 
+      (debtors_bills.debtor_id = :current_user_id AND creditors.id = :friend_id)", 
+        { current_user_id: user.id, friend_id: self.id  }])
+  end
 
-    
-    # where_cond = <<-SQL
-    # (( creditor_id = :current_user_id)
-    # OR
-    # ( 
-    # SQL
-    # bill = Bill.where(where_cond, {
-    #
-    #   where_cond
-    # })
-
+  def all_bills
+    debugger
+    Bill.find_by_sql(["
+      SELECT * 
+      FROM bills
+      JOIN debtors_bills ON bills.id = debtors_bills.bill_id
+      JOIN users AS creditors on creditors.id = bills.creditor_id
+      WHERE 
+      creditors.id = :current_user_id
+      OR 
+      debtors_bills.debtor_id = :current_user_id",
+        { current_user_id: self.id  }])
   end
 
   def amount_owed_on(bill)

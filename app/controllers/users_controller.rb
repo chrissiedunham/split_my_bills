@@ -25,6 +25,7 @@ class UsersController < ApplicationController
   def show
     if params.include?(:id)
       @user = User.find(params[:id])
+      @current_user
       render "users/show"
     else
       redirect_to user_url(current_user)
