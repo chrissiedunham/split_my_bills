@@ -23,6 +23,7 @@ window.SplitMyBills.Models.Bill = Backbone.Model.extend({
     this.debtors().set(data.debtors);
     this.creditor().set(data.creditor);
 
+
     return data;
          
   }

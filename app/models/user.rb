@@ -76,7 +76,7 @@ class User < ActiveRecord::Base
 
   def amount_owed_on(bill)
     debtor_bill = self.debtors_bills.where(:bill_id => bill.id).first
-    debtor_bill.amount_owed_cents / 100
+    debtor_bill.amount_owed_cents / 100.00
   end
 
   def amount_owed_to(user)
@@ -88,11 +88,15 @@ class User < ActiveRecord::Base
       bills.creditor_id = :creditor_id 
       AND
       debtors_bills.debtor_id = :debtor_id
-      ", { creditor_id: user.id, debtor_id: self.id }])
+      ", { creditor_id: user.id, debtor_id: self.id }]).last.sum.to_i / 100.00
   end
 
   def amount_owed_by(user)
     user.amount_owed_to(self)
+  end
+
+  def net_owed_to(user)
+    amount_owed_to(user) - amount_owed_by(user)
   end
 
   def self.generate_session_token
