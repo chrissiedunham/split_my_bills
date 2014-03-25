@@ -1,5 +1,6 @@
 <h2>
-  <%= user.get('name') %>'s Bills 
+  <%= user.get('name') %>'s Bills (<%=
+  accounting.formatMoney(user.net_balance) %>)
 
 </h2>
   <div class="new"></div>  

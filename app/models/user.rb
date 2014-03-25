@@ -80,6 +80,7 @@ class User < ActiveRecord::Base
   end
 
   def amount_owed_to(user)
+    return 0 if user.id = self.id
     DebtorsBills.find_by_sql([ "
       SELECT sum(amount_owed_cents)
       FROM debtors_bills
@@ -91,13 +92,18 @@ class User < ActiveRecord::Base
       ", { creditor_id: user.id, debtor_id: self.id }]).last.sum.to_i / 100.00
   end
 
+  def total_credit
+    DebtorsBills.joins(:bill).where(bills: { creditor_id: self.id}).sum(:amount_owed_cents)/100.00
+  end
+
   def amount_owed_by(user)
     user.amount_owed_to(self)
   end
 
   def net_owed_to(user)
-    amount_owed_to(user) - amount_owed_by(user)
+    amount_owed_to(user).to_f - amount_owed_by(user).to_f
   end
+
 
   def self.generate_session_token
     SecureRandom::urlsafe_base64(16)

@@ -74,6 +74,8 @@ window.SplitMyBills.Models.User = Backbone.Model.extend({
     
     this.relevant_bills().set(data.relevant_bills);
     this.friends().set(data.friends);
+    debugger
+    this.net_balance = data.net_balance
   
     return data;
          

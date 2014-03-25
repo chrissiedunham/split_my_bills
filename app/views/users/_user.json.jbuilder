@@ -1,5 +1,13 @@
 json.(user, :name, :email, :id)
 
+total_debit = DebtorsBills.where(:debtor_id=> user.id).sum(:amount_owed_cents)/100.00
+total_credit = user.total_credit
+
+json.net_owed_to_current user.net_owed_to(current_user)
+json.total_credit  total_credit
+json.total_debit  total_debit
+json.net_balance (total_credit - total_debit)
+
 json.relevant_bills user.bills_relevant_to(current_user) do |bill|
   json.partial!("bills/bill", :bill => bill, :user => user, :current_user => current_user)
 end
@@ -16,10 +24,7 @@ end
 #json.owed_by_current_user user.amount_owed_to(current_user)
 
 json.friends user.friends do |friend|
-  json.id friend.id
   json.name friend.name
-  json.amount_owed_to user.amount_owed_to(friend)
-  json.amount_owed_by user.amount_owed_by(friend)
   json.net_owed_to user.net_owed_to(friend)
 end
 
