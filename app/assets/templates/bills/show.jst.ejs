@@ -1,7 +1,7 @@
 <td>
 
-  <a class="bill-link" href="#"><%= bill.escape('date') %>: <%= bill.escape('name') %></a>
-  <button type='button' class='close delete-bill' data-dismiss='alert'>×</button>
+  <h4><a class="bill-link" href="#"><%= bill.escape('date') %>: <%=
+      bill.escape('name') %></a></h4>
 
   <div class="bill-show hidden" data-id="<%= bill.get('id') %>" class"is-active" >
     <div>Paid by <%= bill.escape('creditor') %></div>
@@ -18,14 +18,14 @@
 
     <div>
       <button class="bill-edit-btn btn btn-sm btn-primary" type="submit">Edit bill</button>
-      <button class="delete-bill btn btn-sm btn-primary" type="submit">Delete bill</button>
-    </div>
-    <div>
+      <%= JST["send_reminder"]( { bill: bill }) %> 
     </div>
 
   </div>
 
   <div class="bill-edit"></div>
 </td>
-<td><%= JST["send_reminder"]( { bill: bill }) %> </td>
+<td>
+  <button type='button' class='close delete-bill' data-dismiss='alert'>×</button>
+</td>
 

@@ -10,10 +10,6 @@
       <div class="modal-body">
         Email recipients: 
 
-        <form>
-          <label>label</label>
-          
-        </form>
         <ul>
           <% bill.debtors().forEach(function(debtor) { %>
             <li><%= debtor.escape('email') %></li>

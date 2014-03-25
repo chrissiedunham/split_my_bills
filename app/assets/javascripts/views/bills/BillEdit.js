@@ -7,28 +7,23 @@ window.SplitMyBills.Views.BillEdit = Backbone.CompositeView.extend({
     this.listenTo(this.model, "sync", this.render);
 
     this.addBillForm();
-
   },
 
   events: {
     "click button.update-bill": "updateBill",
-    "click .cancel-bill-edit": "removeEditBillForm",
+    "click .cancel-bill-edit": "hideEditBillForm",
   },
 
   addBillForm: function() {
-    
     var billFormView = new SplitMyBills.Views.BillForm( {
       model: this.model,
       user: this.user
     })
     this.addSubview(".edit-form", billFormView);
     billFormView.render();
-               
   },
 
-
   render: function(){
-
     var content = this.template({ bill: this.model}); 
 
     this.$el.html(content);
@@ -36,7 +31,8 @@ window.SplitMyBills.Views.BillEdit = Backbone.CompositeView.extend({
     return this;
   },
 
-  removeEditBillForm: function(){
+  hideEditBillForm: function(event){
+    event.preventDefault();
     $(event.target).parents().closest('form').addClass('hidden');
   },
   
