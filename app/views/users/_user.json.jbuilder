@@ -15,6 +15,7 @@ end
 json.friends user.friends do |friend|
   json.id friend.id
   json.name friend.name
+  json.amount_owed user.amount_owed_to(friend)
 end
 
 

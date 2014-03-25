@@ -62,7 +62,6 @@ class User < ActiveRecord::Base
   end
 
   def all_bills
-    debugger
     Bill.find_by_sql(["
       SELECT * 
       FROM bills
@@ -78,6 +77,22 @@ class User < ActiveRecord::Base
   def amount_owed_on(bill)
     debtor_bill = self.debtors_bills.where(:bill_id => bill.id).first
     debtor_bill.amount_owed_cents / 100
+  end
+
+  def amount_owed_to(user)
+    DebtorsBills.find_by_sql([ "
+      SELECT sum(amount_owed_cents)
+      FROM debtors_bills
+      JOIN bills on bills.id = debtors_bills.bill_id
+      WHERE 
+      bills.creditor_id = :creditor_id 
+      AND
+      debtors_bills.debtor_id = :debtor_id
+      ", { creditor_id: user.id, debtor_id: self.id }])
+  end
+
+  def amount_owed_by(user)
+    user.amount_owed_to(self)
   end
 
   def self.generate_session_token
