@@ -45,6 +45,20 @@ class User < ActiveRecord::Base
     user.try(:is_password?, password) ? user : nil
   end
 
+  def bills_relevant_to(user_id)
+
+    # where_cond = <<-SQL
+    # (( creditor_id = :current_user_id)
+    # OR
+    # ( 
+    # SQL
+    # bill = Bill.where(where_cond, {
+    #
+    #   where_cond
+    # })
+
+  end
+
   def self.generate_session_token
     SecureRandom::urlsafe_base64(16)
   end

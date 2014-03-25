@@ -1,4 +1,4 @@
-<div class="modal fade" id="reminderEmailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="reminderEmailModal<%= bill.get('id') %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -6,8 +6,23 @@
         <h4 class="modal-title" id="myModalLabel">Are you sure you want
         to send this email?</h4>
       </div>
+
       <div class="modal-body">
+        Email recipients: 
+
+        <form>
+          <label>label</label>
+          
+        </form>
+        <ul>
+          <% debugger %>
+          <% bill.debtors().forEach(function(debtor) { %>
+            <li><%= debtor.escape('email') %></li>
+          <% }) %>
+        </ul>
       </div>
+
+
       <div class="modal-footer">
         <button type="button" class="btn btn-default"
           data-dismiss="modal">Cancel</button>
@@ -17,5 +32,6 @@
   </div>
 </div>
 <button class="bill-reminder-btn btn btn-sm btn-primary"
-  data-toggle="modal" data-target="#reminderEmailModal" type="submit">Send Reminder</button>
+  data-toggle="modal" data-target="#reminderEmailModal<%= bill.get('id')
+  %>" type="submit">Send Reminder</button>
 

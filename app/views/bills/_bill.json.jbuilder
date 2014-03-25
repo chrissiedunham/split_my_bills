@@ -7,6 +7,7 @@ json.creditor_email bill.creditor.email
 json.debtors bill.debtors do |debtor|
   json.debtor_id debtor.id
   json.name debtor.name
+  json.email debtor.email
 
 
   debtor.debtors_bills.each do |db|
