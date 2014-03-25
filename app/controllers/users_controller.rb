@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     if @user.save
       sign_in(@user)
       AuthMailer.signup_email(@user).deliver
-      render "users/show"
+      redirect_to "/"
     else
       flash.now[:errors] = @user.errors.full_messages
       render :new
