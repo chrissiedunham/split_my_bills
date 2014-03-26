@@ -11,8 +11,8 @@
         Email recipients: 
 
         <ul>
-          <% bill.debtors().forEach(function(debtor) { %>
-            <li><%= debtor.escape('email') %></li>
+          <% bill.debtorsBills().forEach(function(db) { %>
+            <li><%= db.escape('debtorEmail') %></li>
           <% }) %>
         </ul>
       </div>

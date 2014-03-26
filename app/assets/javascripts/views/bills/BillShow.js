@@ -7,7 +7,6 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
     this.user = options.user;
     this.listenTo(this.model, "change sync", this.render);
 
-    this.listenTo(this.model.debtors(), "add change", this.render);
     this.listenTo(this.model.creditor(), "add change", this.render);
     this.listenTo(this.model.debtorsBills(), "add remove change", this.render);
 
@@ -61,7 +60,7 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
 
   render: function(){
 
-    var content = this.template({ bill: this.model, debtors: this.model.debtors() });
+    var content = this.template({ bill: this.model });
     this.$el.html(content);
     this.renderSubviews();
 

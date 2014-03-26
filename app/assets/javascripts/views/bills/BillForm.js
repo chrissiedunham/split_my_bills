@@ -6,7 +6,7 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
     this.user = options.user;
     this.listenTo(this.model, "sync", this.render);
     
-    this.model.debtors().each(this.addExistingDebtorSelectSubview.bind(this));
+    this.model.debtorsBills().each(this.addExistingDebtorSelectSubview.bind(this));
   },
 
   events: {
