@@ -6,7 +6,6 @@ class Api::BillsController < ApplicationController
     @bill = current_user.credit_bills.new(bill_params)
 
       debtor_params[:debtor_ids].each_with_index do | id, i |
-      @bill.debtors_bills.new(:debtor_id => id, :amount_owed_cents => amount_owed)
         pct = debtor_params[:debtor_pcts][i]
         amount_owed = DebtorsBills.get_amount_from_pct(bill_params[:amount], pct)
         @bill.debtors_bills.new(:debtor_id => id, :amount_owed_cents => amount_owed)
