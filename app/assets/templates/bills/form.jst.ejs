@@ -24,26 +24,29 @@
 </div>
 
 
-<div class="form-group">
+<!-- <div class="form&#45;group"> -->
+<!--    -->
+<!--     <label class="col&#45;md&#45;2 control&#45;label">With: </label> -->
+<!--      -->
+<!--     <div class="debtor&#45;selects"> -->
+<!--     </div> -->
+  <!--   <select data&#45;placeholder="Enter other bill payees" multiple -->
+  <!--     class="col&#45;md&#45;4 form&#45;control chosen&#45;select" name="bill[debtor_ids][]" > -->
+  <!--     <% friends.forEach(function(friend) { %> -->
+  <!--       <option value="<%= friend.get('id') %>" > -->
+  <!--         <%= friend.escape('name') %> -->
+  <!--       </option> -->
+  <!--     <% }) %> -->
+  <!--   </select> -->
+  <!--    -->
+  <!-- </div> -->
+<!-- </div> -->
+
+<div class="debtor-selects">
   
-    <label class="col-md-2 control-label">With: </label>
-    <select data-placeholder="Enter other bill payees" multiple
-      class="col-md-4 form-control chosen-select" name="bill[debtor_ids][]" >
-      <% friends.forEach(function(friend) { %>
-        <option value="<%= friend.get('id') %>" >
-          <%= friend.escape('name') %>
-        </option>
-      <% }) %>
-    </select>
-    
-  </div>
 </div>
 
-<!-- <input class="form&#45;control pull&#45;right" type="number" name="bill[debtor_pcts[]" id="" value="" /> -->
-<!--   <span class="input&#45;group&#45;addon">%</span> -->
-<!-- <button type='button' class='close' data&#45;dismiss='alert'>×</button> -->
-<!--    -->
-<!--   <a class="add&#45;debtor btn btn&#45;primary btn&#45;sm" type="submit">Add -->
-<!--   Payee</a> -->
+  <a class="add-debtor btn btn-primary btn-sm" type="submit">Add
+  Payee</a>
 
 

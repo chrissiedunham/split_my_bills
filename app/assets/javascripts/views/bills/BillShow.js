@@ -11,7 +11,6 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
     this.listenTo(this.model.creditor(), "add change", this.render);
     this.listenTo(this.model.debtorsBills(), "add remove change", this.render);
 
-    debugger
     this.addEditSubview();
   },
 
