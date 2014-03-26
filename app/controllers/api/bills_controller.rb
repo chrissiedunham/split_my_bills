@@ -5,14 +5,15 @@ class Api::BillsController < ApplicationController
   def create
     @bill = current_user.credit_bills.new(bill_params)
 
+    if debtor_params[:debtor_ids]
       debtor_params[:debtor_ids].each_with_index do | id, i |
         pct = debtor_params[:debtor_pcts][i]
         amount_owed = DebtorsBills.get_amount_from_pct(bill_params[:amount], pct)
         @bill.debtors_bills.new(:debtor_id => id, :amount_owed_cents => amount_owed)
       end
+    end
     
     if @bill.save
-      flash[:success] = ["successfully saved bill"]
       render "bills/show"
     else
       render json: @bill.errors.full_messages, status: 422

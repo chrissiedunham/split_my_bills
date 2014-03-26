@@ -10,7 +10,7 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
   },
 
   events: {
-    "click a.add-debtor": "addNewDebtorSelectSubview",
+    "click .add-debtor": "addNewDebtorSelectSubview",
     "click .close": "removeDebtorSelect",
   },
 

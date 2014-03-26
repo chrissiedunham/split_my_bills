@@ -33,15 +33,14 @@ window.SplitMyBills.Views.BillNew = Backbone.CompositeView.extend({
     $('button.add-bill').removeClass('hidden');
 
     var billData = $('form.add-bill').serializeJSON()['bill'];
-    debugger
-    var that = this
+    var that = this;
     this.user.credit_bills().create(billData, {
       success: function(){
       },
       error: function(model, response){
-
-
-               debugger
+        that.showNewBillForm();
+        label = $('<label class="has-error control-label">Must have name</label>')
+        $('.errors-show').append(label);
       }, wait: true
 
 
@@ -66,7 +65,9 @@ window.SplitMyBills.Views.BillNew = Backbone.CompositeView.extend({
   },
   
   showNewBillForm: function(event){
-    event.preventDefault();
+    if (event) { 
+       event.preventDefault();
+    }
     $('form.add-bill').removeClass('hidden');
     $('button.add-bill').addClass('hidden');
     $('form.add-bill input').val("");
