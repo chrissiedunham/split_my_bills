@@ -70,7 +70,6 @@ window.SplitMyBills.Models.User = Backbone.Model.extend({
   net_balance: function () {
     var net = 0;
     this.bills().each(function(bill) {
-      debugger
       net += parseInt(bill.escape('net_to_current_user'));
     })
     return net;

@@ -33,6 +33,7 @@ window.SplitMyBills.Views.BillNew = Backbone.CompositeView.extend({
     $('button.add-bill').removeClass('hidden');
 
     var billData = $('form.add-bill').serializeJSON()['bill'];
+    debugger
     var that = this
     this.user.credit_bills().create(billData, {
       success: function(){

@@ -7,7 +7,6 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
     this.listenTo(this.model, "sync", this.render);
     
     this.model.debtors().each(this.addExistingDebtorSelectSubview.bind(this));
-
   },
 
   events: {
@@ -40,11 +39,22 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
   },
   render: function(){
 
-    var content = this.template({ bill: this.model}); 
+    var content = this.template({ bill: this.model, friends: this.user.friends() }); 
 
     this.$el.html(content);
     this.renderSubviews();
+    this._addSelects();
     return this;
+  },
+
+  _addSelects: function() {
+                 debugger
+    $('.chosen-select').chosen({
+      allow_single_deselect: true,
+      no_results_text: 'No results matched',
+      width: '100%',
+      disable_search_threshold: 3
+    });
   },
 
   removeDebtorSelect: function() {

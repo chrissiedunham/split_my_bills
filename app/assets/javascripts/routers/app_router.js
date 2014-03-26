@@ -24,11 +24,11 @@ window.SplitMyBills.Routers.AppRouter = Backbone.Router.extend({
     });
 
     this._swapView(userShow);
+    this._addSelects();
     
   },
 
   friendsIndex: function(){
-
     var user = SplitMyBills.users.getOrFetch(currentUserID);
     var friendsIndex = new SplitMyBills.Views.UsersIndex({
       collection: SplitMyBills.users
@@ -51,7 +51,15 @@ window.SplitMyBills.Routers.AppRouter = Backbone.Router.extend({
     
   },
 
-
+  _addSelects: function() {
+    debugger
+    $('.chosen-select').chosen({
+      allow_single_deselect: true,
+      no_results_text: 'No results matched',
+      width: '100%',
+      disable_search_threshold: 3
+    });
+  },
   
   _swapView: function(view){
     this.current_view && this.current_view.remove();

@@ -29,7 +29,7 @@ class UsersController < ApplicationController
       @current_user = current_user
       render "users/show"
     else
-      redirect_to user_url(current_user)
+      #
     end
   end
 

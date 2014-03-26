@@ -38,9 +38,8 @@ Backbone.CompositeView = Backbone.View.extend({
         subview.remove();
       });
     });
-    
-    Backbone.history.navigate('', { trigger: true });
   },
+
   removeSubview: function(selector, subview) {
     var selectorSubviews = this.subviews()[selector] || (this.subviews()[selector] = []);
 

@@ -1,4 +1,9 @@
 json.(bill, :id, :name, :date, :amount_cents, :creditor_id)
+
+
+
+
+
 json.creditor bill.creditor.name
 json.amount (bill.amount_cents / 100.00)
 

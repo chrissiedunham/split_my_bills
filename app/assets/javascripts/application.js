@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require accountingjs
 //= require jquery.ui.all
+//= require chosen-jquery
 //= require underscore
 //= require bootstrap
 //= require serialize_json
