@@ -13,10 +13,18 @@
      value="<%= form_authenticity_token %>">
 
   <div class="form-group">
-    <label for="user_username">Username</label>
+    <label for="user_email">Email</label>
     <input class="form-control"
-       id="user_username"
+       id="user_email"
        name="user[email]"
+       type="text">
+  </div>
+
+  <div class="form-group">
+    <label for="user_name">Name</label>
+    <input class="form-control"
+       id="user_name"
+       name="user[name]"
        type="text">
   </div>
 

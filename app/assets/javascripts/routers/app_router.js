@@ -31,7 +31,7 @@ window.SplitMyBills.Routers.AppRouter = Backbone.Router.extend({
   friendsIndex: function(){
     var user = SplitMyBills.users.getOrFetch(currentUserID);
     var friendsIndex = new SplitMyBills.Views.UsersIndex({
-      collection: SplitMyBills.users
+      collection: user.friends()
     });
 
     SplitMyBills.users.fetch();
