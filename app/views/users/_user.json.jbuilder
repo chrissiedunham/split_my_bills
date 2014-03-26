@@ -3,7 +3,7 @@ json.(user, :name, :email, :id)
 total_debit = DebtorsBills.where(:debtor_id=> user.id).sum(:amount_owed_cents)/100.00
 total_credit = user.total_credit
 
-#json.net_owed_to_current user.net_owed_to(current_user)
+json.net_owed_to_current user.net_owed_to(current_user)
 
 json.total_credit total_credit
 json.total_debit total_debit

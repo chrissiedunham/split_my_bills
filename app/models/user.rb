@@ -80,7 +80,7 @@ class User < ActiveRecord::Base
   end
 
   def amount_owed_to(user)
-    return 0 if user.id = self.id
+    return 0 if user.id == self.id
     DebtorsBills.find_by_sql([ "
       SELECT sum(amount_owed_cents)
       FROM debtors_bills
