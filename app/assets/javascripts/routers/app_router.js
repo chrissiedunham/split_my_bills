@@ -52,7 +52,6 @@ window.SplitMyBills.Routers.AppRouter = Backbone.Router.extend({
   },
 
   _addSelects: function() {
-    debugger
     $('.chosen-select').chosen({
       allow_single_deselect: true,
       no_results_text: 'No results matched',

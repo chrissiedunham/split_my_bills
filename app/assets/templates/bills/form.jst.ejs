@@ -30,7 +30,6 @@
     <select data-placeholder="Enter other bill payees" multiple
       class="col-md-4 form-control chosen-select" name="bill[debtor_ids][]" >
       <% friends.forEach(function(friend) { %>
-      <%debugger%>
         <option value="<%= friend.get('id') %>" >
           <%= friend.escape('name') %>
         </option>

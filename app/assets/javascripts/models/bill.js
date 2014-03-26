@@ -18,6 +18,15 @@ window.SplitMyBills.Models.Bill = Backbone.Model.extend({
     }
     return this._creditor;
   },
+
+  debtorsBills: function(){
+    if(!this._debtorsBills){ 
+      this._debtorsBills = new SplitMyBills.Collections.Debts([], { 
+        bill: this 
+      });
+    }
+    return this._debtorsBills;
+  },
   
  
   
@@ -25,7 +34,7 @@ window.SplitMyBills.Models.Bill = Backbone.Model.extend({
   parse: function(data){
     this.debtors().set(data.debtors);
     this.creditor().set(data.creditor);
-
+    this.debtorsBills().set(data.debtorsBills);
     return data;
          
   }

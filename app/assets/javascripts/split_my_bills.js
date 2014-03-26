@@ -19,6 +19,7 @@ window.SplitMyBills = {
   }
 };
 
+
 Backbone.CompositeView = Backbone.View.extend({
 
   addSubview: function(selector, subview){

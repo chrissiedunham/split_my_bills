@@ -48,7 +48,6 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
   },
 
   _addSelects: function() {
-                 debugger
     $('.chosen-select').chosen({
       allow_single_deselect: true,
       no_results_text: 'No results matched',

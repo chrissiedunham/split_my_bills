@@ -9,10 +9,14 @@
     <div>Amount: <%= accounting.formatMoney( bill.escape('amount') )%></div>
 
     <ul>
-      <% debtors.forEach(function(debtor){ %>
+      <% bill.debtorsBills().forEach(function(debt){ %>
       <li>
-        <%= debtor.escape('name') %> owes <%=
-        accounting.formatMoney(debtor.escape('amount_owed') )%>
+        <%= debt.escape('debtor') %> owes <%=
+        accounting.formatMoney(debt.escape('amount_owed'))%> 
+        <a class="mark-paid" data-id="<%= debt.escape('id') %>" href="#">
+            
+            <%= (debt.escape('paid') === "unpaid") ? "Mark paid" : "Mark unpaid" %>
+        </a>
       </li>
       <% }) %>
     </ul>

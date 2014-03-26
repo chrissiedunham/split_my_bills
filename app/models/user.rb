@@ -46,19 +46,20 @@ class User < ActiveRecord::Base
   end
 
   def bills_relevant_to(user)
-    if user.nil?
+    if user.id = self.id
       return all_bills
     end
-    Bill.find_by_sql(["
+    results = Bill.find_by_sql(["
       SELECT bills.*
       FROM bills
       JOIN debtors_bills ON bills.id = debtors_bills.bill_id
-      JOIN users AS creditors on creditors.id = bills.creditor_id
       WHERE 
-      (creditors.id = :current_user_id AND debtors_bills.debtor_id = :friend_id)
+      (bill.creditor_id = :current_user_id AND debtors_bills.debtor_id = :friend_id)
       OR 
-      (debtors_bills.debtor_id = :current_user_id AND creditors.id = :friend_id)", 
+      (debtors_bills.debtor_id = :current_user_id AND bills.creditor_id = :friend_id)", 
         { current_user_id: user.id, friend_id: self.id  }])
+      debugger
+      results
   end
 
   def all_bills

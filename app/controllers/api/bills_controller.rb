@@ -37,12 +37,12 @@ class Api::BillsController < ApplicationController
           bill.destroy!
         end
         if debtor_params[:debtor_ids]
-
           debtor_params[:debtor_ids].each do | id |
             pct = 100.00/(debtor_params[:debtor_ids].length + 1)
-            amount_owed = bill_params[:amount]*pct
+            amount_owed = bill_params[:amount].to_f*pct
             @bill.debtors_bills.new(:debtor_id => id, :amount_owed_cents => amount_owed)
           end
+
         end
         
         @bill.assign_attributes(bill_params)

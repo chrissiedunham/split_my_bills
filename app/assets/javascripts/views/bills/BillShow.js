@@ -5,11 +5,13 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
 
   initialize: function(options){
     this.user = options.user;
-    this.listenTo(this.model, "sync", this.render);
+    this.listenTo(this.model, "change sync", this.render);
 
-    this.listenTo(this.model.debtors(), "add sync", this.render);
-    this.listenTo(this.model.creditor(), "add sync", this.render);
+    this.listenTo(this.model.debtors(), "add change", this.render);
+    this.listenTo(this.model.creditor(), "add change", this.render);
+    this.listenTo(this.model.debtorsBills(), "add remove change", this.render);
 
+    debugger
     this.addEditSubview();
   },
 
@@ -19,6 +21,7 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
     "click .delete-bill": "deleteBill",
     "click .bill-edit-btn": "showEditForm",
     "click .send-reminder-email": "sendReminderEmail",
+    "click a.mark-paid": "markPaid"
   },
 
   addEditSubview: function(){
@@ -32,6 +35,21 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
 
   deleteBill: function(event){
     this.model.destroy();
+  },
+
+  markPaid: function(event){
+    event.preventDefault();
+
+    var id = $(event.target).attr("data-id");
+
+    $.ajax({
+      url: "/api/debtors_bills/" + id,
+      type: "PATCH",
+      data: { "paid": "paid" },
+      success: function() {
+      }
+    })                    
+
   },
 
   showEditForm: function(event){
@@ -57,6 +75,7 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
 
   sendReminderEmail: function(event){
     event.preventDefault();
+
     $.ajax({
       url: "/reminder_emails",
       type: "POST",

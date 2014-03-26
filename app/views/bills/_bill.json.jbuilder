@@ -1,9 +1,4 @@
 json.(bill, :id, :name, :date, :amount_cents, :creditor_id)
-
-
-
-
-
 json.creditor bill.creditor.name
 json.amount (bill.amount_cents / 100.00)
 
@@ -19,4 +14,10 @@ json.debtors bill.debtors do |debtor|
 
 end
 
+json.debtorsBills bill.debtors_bills do |db|
+  json.debtor db.debtor.name
+  json.amount_owed db.amount_owed_cents / 100.00
+  json.paid "unpaid" unless db.paid == "paid"
+  json.id db.id
+end
 

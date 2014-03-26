@@ -10,6 +10,7 @@ SplitMyBills::Application.routes.draw do
   resources :friendships, only: [:index]
   namespace :api, defaults: { format: :json } do
     resources :bills
+    resources :debtors_bills, only: [:update, :index, :show]
   end
   resource :reminder_emails, only: [:create]
   
