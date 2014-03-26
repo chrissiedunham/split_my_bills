@@ -43,6 +43,7 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
 
     this.$el.html(content);
     this.renderSubviews();
+    this.updateDebtorSelects();
 //    this._addSelects();
     return this;
   },

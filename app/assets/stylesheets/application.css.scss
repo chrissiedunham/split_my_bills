@@ -14,7 +14,18 @@
  */
 @import "bootstrap";
 
-.btn-mint .btn-default {
+
+
+.debtor-selects {
+    .col-md-6 { padding: 0 15px; }
+    .form-control { float: right;
+                    width: 50% 
+                    }
+    .close { padding: 0 10px 10px }
+
+
+}
+.btn-mint  {
 background: #5bc5a7;
 color: #fff;
 text-shadow: 0 -1px 0 #318970;
@@ -27,15 +38,31 @@ text-shadow: 0 -1px 0 #c83400;
 .navbar brand {
     color:white;
 }
+
+.text-success {
+    
+    color: #5bc5a7;
+}
+
+btn-danger {
+  color: white;
+  background: #ff652f;
+}
+.input-group-addon:first-child {
+border-right: 0;
+}
+.text-failuer {
+   color: ff652f
+}
+a {
+    color: #999;
+text-decoration: none;
+}
 .navbar {
 border-bottom: 1px solid #48be9d;
 -webkit-box-shadow: 0 0 3px rgba(0,0,0,0.5);
 -moz-box-shadow: 0 0 3px rgba(0,0,0,0.5);
 box-shadow: 0 0 3px rgba(0,0,0,0.5);
-background-color: #5bc5a7;
-}
-.credit {
-  color: green
 }
 
 body {

@@ -1,12 +1,19 @@
-<select class="form-control chosen-select" name="bill[debtor_ids][]" >
-  <% friends.forEach(function(friend) { %>
-    <option value="<%= friend.get('id') %>" >
-      <%= friend.escape('name') %>
-    </option>
-  <% }) %>
-</select>
+<label class="col-md-2 control-label">With:</label>
+<div class="input-group col-md-6">
+  
+  <button type='button' class='close' data-dismiss='alert'>×</button>
+  <span class="input-group-btn">
+  <select class="btn btn-default" name="bill[debtor_ids][]" >
+    <% friends.forEach(function(friend) { %>
+      <option value="<%= friend.get('id') %>" >
+        <%= friend.escape('name') %>
+      </option>
+    <% }) %>
+  </select>
+  </span>
 
-<input class="form-control pull-right" type="number" name="bill[debtor_pcts[]" id="" value="" />
-  <span class="input-group-addon">%</span>
-<button type='button' class='close' data-dismiss='alert'>×</button>
+  <input class="form-control" type="number" name="bill[debtor_pcts[]" id="" value="" />
+    <span class="input-group-addon">%</span>
 
+
+</div>
