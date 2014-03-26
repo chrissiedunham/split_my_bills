@@ -40,6 +40,8 @@ window.SplitMyBills.Views.BillNew = Backbone.CompositeView.extend({
       },
       error: function(model, response){
 
+
+               debugger
       }, wait: true
 
 

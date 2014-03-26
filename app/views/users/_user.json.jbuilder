@@ -3,13 +3,13 @@ json.(user, :name, :email, :id)
 total_debit = DebtorsBills.where(:debtor_id=> user.id).sum(:amount_owed_cents)/100.00
 total_credit = user.total_credit
 
-json.net_owed_to_current user.net_owed_to(current_user)
+#json.net_owed_to_current user.net_owed_to(current_user)
 
-json.total_credit  total_credit
-json.total_debit  total_debit
+json.total_credit total_credit
+json.total_debit total_debit
 json.net_balance (total_credit - total_debit)
 
-json.debtorsBills user.debtors_bills do |db|
+json.debtors_bills user.debtors_bills do |db|
   json.amount db.amount_owed_cents/100.00
   json.bill_name db.bill.name
   json.bill_creditor db.bill.creditor.name

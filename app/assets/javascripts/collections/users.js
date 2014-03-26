@@ -7,7 +7,7 @@ window.SplitMyBills.Collections.Users = Backbone.Collection.extend({
     var model;
     var users = this;
 
-    if ( model = users.get(id)){
+    if (model = users.get(id)){
       model.fetch();
       return model;
     } else {
