@@ -5,21 +5,20 @@ window.SplitMyBills.Views.FriendShow = Backbone.CompositeView.extend({
   initialize: function(){
 
     this.listenTo(this.model, "sync change", this.render);
-    this.listenTo(this.model.debts(), "add", this.render);
-    this.listenTo(this.model.debts(), "change", this.render);
-    this.listenTo(this.model.debts(), "remove", this.render);
+    this.listenTo(this.model.debtorsBills(), "add", this.render);
+    this.listenTo(this.model.debtorsBills(), "change", this.render);
+    this.listenTo(this.model.debtorsBills(), "remove", this.render);
 
-    this.addBillsIndexView();
+    this.addDebtorsBillsIndexView();
   },
 
-  addBillsIndexView: function() {
-      debugger
-  
-    var billsIndexView = new SplitMyBills.Views.BillsIndex( { 
-      collection: this.model.debts(),
+  addDebtorsBillsIndexView: function() {
+    var indexView = new SplitMyBills.Views.DebtorsBillsIndex( { 
+      collection: this.model.debtorsBills(),
+      user: this.model
     });
-    this.addSubview(".bills-index", billsIndexView);
-    billsIndexView.render();
+    this.addSubview(".debtors-bills-index", indexView);
+    indexView.render();
   },
 
   render: function(){

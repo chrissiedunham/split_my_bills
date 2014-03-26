@@ -2,14 +2,16 @@ window.SplitMyBills.Models.User = Backbone.Model.extend({
 
   urlRoot: '/users',
 
-  
-  debts: function(){
-    if(!this._debts){ this._debts = new SplitMyBills.Collections.Debts([], { user: this })} 
-    return this._debts
+  debtorsBills: function(){
+    if(!this._debtorsBills){ 
+      this._debtorsBills = new SplitMyBills.Collections.DebtorsBills([], { 
+        user: this 
+      });
+    } 
+    return this._debtorsBills;
   },
   credit_bills: function(){
     if(!this._credit_bills){
-    
       this._credit_bills = new SplitMyBills.Collections.Bills([], {
         user: this 
       });
@@ -92,8 +94,8 @@ window.SplitMyBills.Models.User = Backbone.Model.extend({
     this.relevant_bills().set(data.relevant_bills);
     delete data.relevant_bills;
 
-    this.debts().set(data.debts);
-    delete data.debts;
+    this.debtorsBills().set(data.debtorsBills);
+    delete data.debtorsBills;
 
     this.friends().set(data.friends);
     delete data.friends;

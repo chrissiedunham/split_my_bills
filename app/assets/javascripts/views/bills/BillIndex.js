@@ -15,8 +15,6 @@ window.SplitMyBills.Views.BillsIndex= Backbone.CompositeView.extend({
 
   addBill: function(bill){
 
-
-    //var debtShowView = new SplitMyBills.Views.DebtShow({ model: bill, user: this.user });
     var billShowView = new SplitMyBills.Views.BillShow({ model: bill, user: this.user });            
     var that = this;
     bill.fetch( { 

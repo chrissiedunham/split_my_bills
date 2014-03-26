@@ -2,25 +2,21 @@ class Api::DebtorsBillsController < ApplicationController
   before_action :require_signed_in!
 
   def update
-    @debt = DebtorsBills.find(params[:id])
-    if @debt.update_attributes( { paid: params[:paid] })
-      render :json => @debt
+    @debtors_bill = DebtorsBills.find(params[:id])
+    if @debtors_bill.update_attributes( { paid: params[:paid] })
+      render "debtors_bills/show"
     else 
       render :json => @debt.errors.full_messages
     end
   end
 
   def show
-    @debt = DebtorsBills.find(params[:id])
-    render :json => @debt 
+    @debtors_bill = DebtorsBills.find(params[:id])
+    render "debtors_bills/show"
   end
 
   def index
-    @debts = DebtorsBills.all
-    render :json => @debts
-  end
-
-  def debt_attributes
-    params.require('debt').permit('paid')
+    @debtors_bills = DebtorsBills.all
+    render "debtors_bills/index"
   end
 end

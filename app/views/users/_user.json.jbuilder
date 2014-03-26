@@ -9,7 +9,7 @@ json.total_credit  total_credit
 json.total_debit  total_debit
 json.net_balance (total_credit - total_debit)
 
-json.debts user.debtors_bills do |db|
+json.debtorsBills user.debtors_bills do |db|
   json.amount db.amount_owed_cents/100.00
   json.bill_name db.bill.name
   json.bill_creditor db.bill.creditor.name

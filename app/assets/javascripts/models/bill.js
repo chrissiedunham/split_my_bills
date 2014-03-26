@@ -21,7 +21,7 @@ window.SplitMyBills.Models.Bill = Backbone.Model.extend({
 
   debtorsBills: function(){
     if(!this._debtorsBills){ 
-      this._debtorsBills = new SplitMyBills.Collections.Debts([], { 
+      this._debtorsBills = new SplitMyBills.Collections.DebtorsBills([], { 
         bill: this 
       });
     }
