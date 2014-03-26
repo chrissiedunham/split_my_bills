@@ -49,7 +49,6 @@ window.SplitMyBills.Views.BillEdit = Backbone.CompositeView.extend({
 
     this.model.save({},{
       success: function(){
-        debugger
         that.model.fetch();
       }       
     });

@@ -40,12 +40,14 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
     event.preventDefault();
 
     var id = $(event.target).attr("data-id");
+    var that = this;
 
     $.ajax({
       url: "/api/debtors_bills/" + id,
       type: "PATCH",
       data: { "paid": "paid" },
       success: function() {
+        that.model.debtorsBills().fetch();
       }
     })                    
 
@@ -60,7 +62,7 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
 
   render: function(){
 
-    var content = this.template({ bill: this.model, debtors: this.model.debtors() });
+    var content = this.template({ bill: this.model, user: this.user, debtors: this.model.debtors() });
     this.$el.html(content);
     this.renderSubviews();
 

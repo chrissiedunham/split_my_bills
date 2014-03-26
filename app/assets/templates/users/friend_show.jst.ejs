@@ -1,5 +1,11 @@
 <h2>
-  Bills shared with <%= user.get('name') %> 
+  <% debtor = (user.get('net_owed_to_current') > 0) %>
+  Bills shared with <%= user.get('name') %>  
+  
+  <span class="<%= debtor ?
+    "text-success" : "debit" %>" >
+    (<%= debtor ? "owes you" : "you owe" %> <%= accounting.formatMoney(user.get('net_owed_to_current')) %>)
+  </span>
 </h2>
 
 <div class="debtors-bills-index"></div>
