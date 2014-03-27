@@ -1,5 +1,7 @@
 SplitMyBills::Application.routes.draw do
-  root :to => "static_pages#root"
+  root :to => "static_pages#home"
+  get '/dashboard' => 'static_pages#dashboard'
+  get '/guest' => 'sessions#guest'
   
   resource :session, only: [:new, :create, :destroy]
   resources :users, only: [:new, :create, :destroy] do
