@@ -5,6 +5,10 @@ window.SplitMyBills.Views.DebtorSelect = Backbone.View.extend({
     this.selected_debtor = options.selected_debtor             
   },
   template: JST["debtor_select"],
+  
+  events: {
+  
+  },
 
   render: function(){
 

@@ -2,30 +2,8 @@
   <div class="col-md-4 col-md-offset-4">
     <h1>Sign In</h1>
 
-    <form role="form" action="<%= session_url %>" method="post">
-
-      <input
-         name="authenticity_token"
-         type="hidden"
-         value="<%= form_authenticity_token %>">
-
-      <div class="form-group">
-        <label for="user_email">Email</label>
-        <input class="form-control"
-           id="user_email"
-           name="user[email]"
-           type="text">
-       </div>
-
-       <div class="form-group">
-        <label for="user_password">Password</label>
-        <input class="form-control"
-           id="user_password"
-           name="user[password]"
-           type="password">
-       </div>
-
-      <button class="btn btn-mint" type="submit">Sign In</button>
-    </form>
+    <%= render "form" %>
+      
   </div>
 </div>
+
