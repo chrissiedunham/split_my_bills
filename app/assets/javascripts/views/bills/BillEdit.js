@@ -39,8 +39,7 @@ window.SplitMyBills.Views.BillEdit = Backbone.CompositeView.extend({
   updateBill: function(event) {
 
     event.preventDefault();
-
-
+    
     var billData = $(this.$el).find('form').serializeJSON()['bill'];
     this.model.set(billData);
     var that = this;
