@@ -18,7 +18,7 @@ json.debtorsBills bill.debtors_bills do |db|
   json.debtor db.debtor.name
   json.debtorEmail db.debtor.email
   json.amount_owed db.amount_owed_cents / 100.00
-  json.paid "unpaid" unless db.paid == "paid"
+  json.paid db.paid == "paid" ? "Paid" : "Unpaid"
   json.id db.id
 end
 

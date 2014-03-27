@@ -7,6 +7,7 @@ gem 'backbone-on-rails'
 gem 'jquery-ui-rails'
 gem 'accountingjs-rails'
 gem 'figaro'
+gem 'thin'
 
 gem 'letter_opener'
 gem 'money_column'

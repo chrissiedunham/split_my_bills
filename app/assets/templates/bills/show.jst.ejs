@@ -1,8 +1,18 @@
 <td>
 
   <h4><a class="bill-link" href="#"><%= bill.escape('date') %>: <%=
-      bill.escape('name') %></a>: <%= accounting.formatMoney(
-    bill.escape('net_to_current_user')) %></h4>
+      bill.escape('name') %></a>
+    
+    <span class="pull-right">
+    <% debtor = (bill.escape('net_to_current_user') > 0) %>
+    (<%= debtor ? "You're owed" : "You owe"  %>
+    <span class="<%= debtor ? 'text-success' : 'text-failure' %>">
+      <%=
+      accounting.formatMoney(Math.abs(bill.escape('net_to_current_user'))) %>
+    </span>)
+  </span>
+  
+  </h4>
 
   <div class="bill-show hidden" data-id="<%= bill.get('id') %>" class"is-active" >
     <div>Paid by <%= bill.escape('creditor') %></div>
@@ -21,10 +31,12 @@
       <% }) %>
     </ul>
 
+    <% if (bill.escape('creditor_id') == user.id) { %>
     <div>
       <button class="bill-edit-btn btn btn-sm btn-primary" type="submit">Edit bill</button>
       <%= JST["send_reminder"]( { bill: bill }) %> 
     </div>
+    <% } %>
 
   </div>
 

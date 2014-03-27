@@ -17,6 +17,7 @@ class Bill < ActiveRecord::Base
   attr_reader :amount
 
   validates :name, :amount_cents, :creditor_id, :presence => true
+  validate :has_debtors
 
   belongs_to :creditor, 
     :class_name => "User",
@@ -76,6 +77,10 @@ class Bill < ActiveRecord::Base
 
   def net_amount_owed(user)
     (amount_owed_to(user).to_f - amount_owed_by(user).to_f)
+  end
+
+  def has_debtors
+    errors.add(:base, 'Please select at least one payee') if self.debtors_bills.blank?
   end
 
 end 

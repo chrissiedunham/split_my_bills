@@ -10,7 +10,6 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
     this.listenTo(this.model.creditor(), "add change", this.render);
     this.listenTo(this.model.debtorsBills(), "add remove change", this.render);
 
-    debugger
     this.addEditSubview();
   },
 
@@ -40,12 +39,14 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
     event.preventDefault();
 
     var id = $(event.target).attr("data-id");
+    var that = this;
 
     $.ajax({
       url: "/api/debtors_bills/" + id,
       type: "PATCH",
       data: { "paid": "paid" },
       success: function() {
+        that.model.debtorsBills().fetch();
       }
     })                    
 
@@ -53,14 +54,14 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
 
   showEditForm: function(event){
     event.preventDefault();                     
+    $(this.$el).find('.errors-show').empty();
     $(this.$el).find('.bill-form').removeClass('hidden');
     $(this.$el).find('.bill-show').addClass('hidden');
-    
   },
 
   render: function(){
 
-    var content = this.template({ bill: this.model });
+    var content = this.template({ bill: this.model, user: this.user, debtors: this.model.debtors() });
     this.$el.html(content);
     this.renderSubviews();
 
@@ -84,9 +85,5 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
       }
     })                    
   }
-  
-  
-  
-
 })
 

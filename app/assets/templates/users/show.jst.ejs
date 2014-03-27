@@ -1,8 +1,14 @@
 <h2>
-  <%= user.escape('name') %>'s Bills (<%=
-  accounting.formatMoney(user.net_balance()) %>)
+  <%= user.escape('name') %>'s Bills 
+
+    <% debtor = (user.escape('net_balance') > 0) %>
+    (<%= debtor ? "You're owed" : "You owe"  %>
+    <span class="<%= debtor ? 'text-success' : 'debit' %>">
+      <%= accounting.formatMoney(Math.abs(user.escape('net_balance'))) %>
+    </span>)
 
 </h2>
-  <div class="new"></div>  
+<div class="new"></div>  
 <div class="bills-index"></div>
+
 

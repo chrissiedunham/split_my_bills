@@ -10,8 +10,8 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
   },
 
   events: {
-    "click a.add-debtor": "addDebtorSelectSubview",
-    "click .close": "removeDebtorSelect",
+    "click .add-debtor": "addNewDebtorSelectSubview",
+    "click .remove-debtor": "removeDebtorSelect",
   },
 
   addDebtorSelectSubview: function(selected) {
@@ -43,18 +43,19 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
 
     this.$el.html(content);
     this.renderSubviews();
-    this._addSelects();
+    this.updateDebtorSelects();
+//    this._addSelects();
     return this;
   },
 
-  _addSelects: function() {
-    $('.chosen-select').chosen({
-      allow_single_deselect: true,
-      no_results_text: 'No results matched',
-      width: '100%',
-      disable_search_threshold: 3
-    });
-  },
+  // _addSelects: function() {
+  //   $('.chosen-select').chosen({
+  //     allow_single_deselect: true,
+  //     no_results_text: 'No results matched',
+  //     width: '100%',
+  //     disable_search_threshold: 3
+  //   });
+  // },
 
   removeDebtorSelect: function() {
 
@@ -68,6 +69,7 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
     var defaultPct = accounting.toFixed((100 / (numDebtors + 1)), 2);
 
     $(this.$el).find('.debtor-selects input').val(defaultPct);
+    debugger
                           
   },
 

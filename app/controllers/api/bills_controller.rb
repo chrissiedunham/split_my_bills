@@ -1,21 +1,22 @@
 class Api::BillsController < ApplicationController
   before_action :require_signed_in!
-  wrap_parameters :bill, :include => [:name, :date, :amount, :debtor_ids]
+  wrap_parameters :bill, :include => [:name, :date, :amount, :debtor_ids, :debtor_pcts]
 
   def create
     @bill = current_user.credit_bills.new(bill_params)
 
-      debtor_params[:debtor_ids].each do | id |
-        pct = 100.00/(debtor_params[:debtor_ids].length + 1)
-        amount_owed = bill_params[:amount].to_f*pct
+    if debtor_params[:debtor_ids]
+      debtor_params[:debtor_ids].each_with_index do | id, i |
+        id = id.to_i
+        pct = debtor_params[:debtor_pcts][i]
+        amount_owed = DebtorsBills.get_amount_from_pct(bill_params[:amount], pct)
         @bill.debtors_bills.new(:debtor_id => id, :amount_owed_cents => amount_owed)
       end
+    end
     
     if @bill.save
-      flash[:success] = ["successfully saved bill"]
       render "bills/show"
     else
-      flash.now[:errors] = [@bill.errors.full_messages]
       render json: @bill.errors.full_messages, status: 422
     end
   end
@@ -37,9 +38,9 @@ class Api::BillsController < ApplicationController
           bill.destroy!
         end
         if debtor_params[:debtor_ids]
-          debtor_params[:debtor_ids].each do | id |
-            pct = 100.00/(debtor_params[:debtor_ids].length + 1)
-            amount_owed = bill_params[:amount].to_f*pct
+          debtor_params[:debtor_ids].each_with_index do | id, i |
+            pct = debtor_params[:debtor_pcts][i]
+            amount_owed = DebtorsBills.get_amount_from_pct(bill_params[:amount], pct)
             @bill.debtors_bills.new(:debtor_id => id, :amount_owed_cents => amount_owed)
           end
 
@@ -74,7 +75,7 @@ class Api::BillsController < ApplicationController
   end
 
   def debtor_params
-    params.require(:bill).permit(:debtor_ids => [])
+    params.require(:bill).permit(:debtor_ids => [], :debtor_pcts => [])
   end
 end
   
