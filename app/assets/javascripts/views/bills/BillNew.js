@@ -39,8 +39,13 @@ window.SplitMyBills.Views.BillNew = Backbone.CompositeView.extend({
       },
       error: function(model, response){
         that.showNewBillForm();
-        label = $('<label class="has-error control-label">Must have name</label>')
-        $('.errors-show').append(label);
+
+        response.responseJSON.forEach(function(error) {
+          if (error === "Name can't be blank") { error = "Bill must have a name" };
+          if (error === "Debtors can't be blank") { error = "Please select at least one payee" };
+          label = JST["error"]( { message: error });
+          $('.errors-show').append(label);
+        })
       }, wait: true
 
 
@@ -68,6 +73,7 @@ window.SplitMyBills.Views.BillNew = Backbone.CompositeView.extend({
     if (event) { 
        event.preventDefault();
     }
+    $('.errors-show').empty();
     $('form.add-bill').removeClass('hidden');
     $('button.add-bill').addClass('hidden');
     $('form.add-bill input').val("");

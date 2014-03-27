@@ -55,9 +55,9 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
 
   showEditForm: function(event){
     event.preventDefault();                     
+    $(this.$el).find('.errors-show').empty();
     $(this.$el).find('.bill-form').removeClass('hidden');
     $(this.$el).find('.bill-show').addClass('hidden');
-    
   },
 
   render: function(){
@@ -86,9 +86,5 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
       }
     })                    
   }
-  
-  
-  
-
 })
 

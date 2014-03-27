@@ -7,17 +7,20 @@ class Api::BillsController < ApplicationController
 
     if debtor_params[:debtor_ids]
       debtor_params[:debtor_ids].each_with_index do | id, i |
+        id = id.to_i
         pct = debtor_params[:debtor_pcts][i]
         amount_owed = DebtorsBills.get_amount_from_pct(bill_params[:amount], pct)
         @bill.debtors_bills.new(:debtor_id => id, :amount_owed_cents => amount_owed)
       end
+      if @bill.save
+        render "bills/show"
+      else
+        render json: @bill.errors.full_messages, status: 422
+      end
+    else
+      render json: { responseJSON: "Please select at least one payee" }
     end
     
-    if @bill.save
-      render "bills/show"
-    else
-      render json: @bill.errors.full_messages, status: 422
-    end
   end
 
   def index

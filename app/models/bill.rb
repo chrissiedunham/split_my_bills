@@ -17,7 +17,6 @@ class Bill < ActiveRecord::Base
   attr_reader :amount
 
   validates :name, :amount_cents, :creditor_id, :presence => true
-  validates :debtors, :presence => true
 
   belongs_to :creditor, 
     :class_name => "User",
