@@ -1,5 +1,11 @@
-<form class="edit-bill hidden bill-form form-horizontal" role="form">
+<% if (bill.escape('creditor_id') == user.id) { %>
+<div>
+  <button class="bill-edit-btn btn btn-sm btn-primary" type="submit">Edit bill</button>
+  <%= JST["send_reminder"]( { bill: bill }) %> 
+</div>
+<% } %>
 
+<form class="edit-bill hidden bill-form form-horizontal" role="form">
 
   <div class="edit-form"></div>
   <div class="errors-show">

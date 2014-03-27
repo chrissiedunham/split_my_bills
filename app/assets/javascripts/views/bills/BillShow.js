@@ -6,7 +6,6 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
   initialize: function(options){
     this.user = options.user;
     this.listenTo(this.model, "change sync", this.render);
-
     this.listenTo(this.model.creditor(), "add change", this.render);
     this.listenTo(this.model.debtorsBills(), "add remove change", this.render);
 
@@ -17,7 +16,6 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
   events: {
     "click .bill-link": "toggleBillShow",
     "click .delete-bill": "deleteBill",
-    "click .bill-edit-btn": "showEditForm",
     "click .send-reminder-email": "sendReminderEmail",
     "click a.mark-paid": "markPaid"
   },
@@ -50,13 +48,6 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
       }
     })                    
 
-  },
-
-  showEditForm: function(event){
-    event.preventDefault();                     
-    $(this.$el).find('.errors-show').empty();
-    $(this.$el).find('.bill-form').removeClass('hidden');
-    $(this.$el).find('.bill-show').addClass('hidden');
   },
 
   render: function(){

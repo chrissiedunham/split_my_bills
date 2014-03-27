@@ -31,16 +31,16 @@
       <% }) %>
     </ul>
 
-    <% if (bill.escape('creditor_id') == user.id) { %>
-    <div>
-      <button class="bill-edit-btn btn btn-sm btn-primary" type="submit">Edit bill</button>
-      <%= JST["send_reminder"]( { bill: bill }) %> 
-    </div>
-    <% } %>
-
+    <!-- <% if (bill.escape('creditor_id') == user.id) { %> -->
+    <!-- <div> -->
+    <!--   <button class="bill&#45;edit&#45;btn btn btn&#45;sm btn&#45;primary" type="submit">Edit bill</button> -->
+    <!--   <%= JST["send_reminder"]( { bill: bill }) %>  -->
+    <!-- </div> -->
+    <!-- <% } %> -->
+    <!--  -->
+    <div class="bill-edit"></div>
   </div>
 
-  <div class="bill-edit"></div>
 </td>
 <td>
   <button type='button' class='close delete-bill' data-dismiss='alert'>×</button>
