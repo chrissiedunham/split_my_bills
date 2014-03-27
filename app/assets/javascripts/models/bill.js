@@ -2,6 +2,13 @@ window.SplitMyBills.Models.Bill = Backbone.Model.extend({
 
   urlRoot: '/api/bills',
 
+  creditor: function(){
+    if(!this._creditor){
+      this._creditor = new SplitMyBills.Models.User();
+    }
+    return this._creditor;
+  },
+
   debtors: function(){
     if(!this._debtors){
     
@@ -12,13 +19,6 @@ window.SplitMyBills.Models.Bill = Backbone.Model.extend({
     return this._debtors;
   },
 
-  creditor: function(){
-    if(!this._creditor){
-      this._creditor = new SplitMyBills.Models.User();
-    }
-    return this._creditor;
-  },
-
   debtorsBills: function(){
     if(!this._debtorsBills){ 
       this._debtorsBills = new SplitMyBills.Collections.DebtorsBills([], { 
@@ -27,14 +27,17 @@ window.SplitMyBills.Models.Bill = Backbone.Model.extend({
     }
     return this._debtorsBills;
   },
-  
- 
-  
  
   parse: function(data){
     this.debtors().set(data.debtors);
+    delete data.debtors
+
     this.creditor().set(data.creditor);
+    delete data.creditor
+
     this.debtorsBills().set(data.debtorsBills);
+    delete data.debtorBills
+
     return data;
          
   }
