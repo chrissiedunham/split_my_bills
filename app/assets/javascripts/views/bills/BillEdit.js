@@ -34,23 +34,28 @@ window.SplitMyBills.Views.BillEdit = Backbone.CompositeView.extend({
 
   hideEditBillForm: function(event){
     event.preventDefault();
-    $(event.target).parents().closest('form').addClass('hidden');
+    $('.bill-details[data-id='+ this.model.id + ']').removeClass('hidden');
+    $('.bill-edit-btn[data-id='+ this.model.id + ']').removeClass('hidden');
+    $('form.edit-bill[data-id='+ this.model.id + ']').addClass('hidden');
   },
   
   updateBill: function(event) {
 
     event.preventDefault();
+
+    $(event.target).parents('form').addClass('hidden');
+    $('button.add-bill').removeClass('hidden');
     
     var billData = $(this.$el).find('form').serializeJSON()['bill'];
-    this.model.set(billData);
     var that = this;
-    this.model.save({},{
+
+    //this.model.set();
+    this.model.save(billData, {
       success: function(){
         that.model.fetch();
-        $(event.target).parents('form').addClass('hidden');
-        $('button.add-bill').removeClass('hidden');
       },
       error: function(model, response){
+        that.showEditForm();
         response.responseJSON.forEach(function(error) {
           if (error === "Name can't be blank") { error = "Bill must have a name" };
           if (error === "Debtors can't be blank") { error = "Please select at least one payee" };
@@ -63,10 +68,13 @@ window.SplitMyBills.Views.BillEdit = Backbone.CompositeView.extend({
   },
 
   showEditForm: function(event){
-    event.preventDefault();                     
-    $(this.$el).find('.errors-show').empty();
-    $(this.$el).find('.bill-form').removeClass('hidden');
-    $(this.$el).find('.bill-show').addClass('hidden');
+    if (event) {
+    
+      event.preventDefault();                     
+    }
+    $('.bill-details[data-id='+ this.model.id + ']').addClass('hidden');
+    $('.bill-edit-btn[data-id='+ this.model.id + ']').addClass('hidden');
+    $('form.edit-bill[data-id='+ this.model.id + ']').removeClass('hidden');
   },
 
 })

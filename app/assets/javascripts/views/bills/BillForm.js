@@ -13,24 +13,24 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
     "click .remove-debtor": "removeDebtorSelect",
   },
 
-  addDebtorSelectSubview: function(selected) {
+  // addDebtorSelectSubview: function(selected) {
+  //
+  //   var debtorSelectView = new SplitMyBills.Views.DebtorSelect({
+  //     selected_debtor: selected,
+  //     friends: this.user.friends()
+  //   });
+  //   
+  //
+  //   this.addSubview(".debtor-selects", debtorSelectView);
+  //   debtorSelectView.render();
+  //
+  //   this.updateDebtorSelects(remove = false);
+  // },
 
-    var debtorSelectView = new SplitMyBills.Views.DebtorSelect({
-      selected_debtor: selected,
-      friends: this.user.friends()
-    });
-    
-
-    this.addSubview(".debtor-selects", debtorSelectView);
-    debtorSelectView.render();
-
-    this.updateDebtorSelects(remove = false);
-  },
-
-  addExistingDebtorSelectSubview: function(selected_debtor){
-    $('.debtor-selects').append(JST["debtor_select"]( { friends: this.user.friends() }));
-    //this.addDebtorSelectSubview(selected_debtor.escape('name'));
-  },
+  // addExistingDebtorSelectSubview: function(selected_debtor){
+  //   $('.debtor-selects').append(JST["debtor_select"]( { friends: this.user.friends() }));
+  //   //this.addDebtorSelectSubview(selected_debtor.escape('name'));
+  // },
 
   addNewDebtorSelectSubview: function(event){
     event.preventDefault();
@@ -44,7 +44,7 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
     var content = this.template({ bill: this.model, friends: this.user.friends() }); 
 
     this.$el.html(content);
-    this.renderSubviews();
+//    this.renderSubviews();
     this.updateDebtorSelects();
 //    this._addSelects();
     return this;
@@ -70,7 +70,6 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
     var defaultPct = accounting.toFixed((100 / (numDebtors + 1)), 2);
 
     $(this.$el).find('.debtor-selects input').val(defaultPct);
-    debugger
                           
   },
 

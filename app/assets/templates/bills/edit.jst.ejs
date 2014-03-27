@@ -1,11 +1,12 @@
 <% if (bill.escape('creditor_id') == user.id) { %>
 <div>
-  <button class="bill-edit-btn btn btn-sm btn-primary" type="submit">Edit bill</button>
-  <%= JST["send_reminder"]( { bill: bill }) %> 
+  <button class="bill-edit-btn btn btn-sm btn-primary" data-id="<%=
+    bill.id %>" type="submit">Edit bill</button>
 </div>
 <% } %>
 
-<form class="edit-bill hidden bill-form form-horizontal" role="form">
+<form class="edit-bill hidden bill-form form-horizontal" data-id="<%=
+  bill.get('id') %>" role="form">
 
   <div class="edit-form"></div>
   <div class="errors-show">
