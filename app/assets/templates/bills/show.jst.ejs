@@ -7,7 +7,8 @@
     <% debtor = (bill.escape('net_to_current_user') > 0) %>
     (<%= debtor ? "You're owed" : "You owe"  %>
     <span class="<%= debtor ? 'text-success' : 'text-failure' %>">
-      <%= accounting.formatMoney(bill.escape('net_to_current_user')) %>
+      <%=
+      accounting.formatMoney(Math.abs(bill.escape('net_to_current_user'))) %>
     </span>)
   </span>
   

@@ -11,7 +11,7 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
 
   events: {
     "click .add-debtor": "addNewDebtorSelectSubview",
-    "click .close": "removeDebtorSelect",
+    "click .remove-debtor": "removeDebtorSelect",
   },
 
   addDebtorSelectSubview: function(selected) {
@@ -69,6 +69,7 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
     var defaultPct = accounting.toFixed((100 / (numDebtors + 1)), 2);
 
     $(this.$el).find('.debtor-selects input').val(defaultPct);
+    debugger
                           
   },
 
