@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
 
     if @user
       sign_in(@user)
-      redirect_to "/"
+      redirect_to dashboard_url 
     else
       flash.now[:errors] = ["Invalid Credentials"]
       render :new
@@ -23,7 +23,13 @@ class SessionsController < ApplicationController
 
   def destroy
     sign_out
-    redirect_to new_session_url
+    redirect_to "/"
+  end
+
+  def guest
+    @user = User.find_by_credentials("chrissie@gmail.com", "asdfasdf")
+    sign_in(@user)
+    redirect_to dashboard_url
   end
 
   private

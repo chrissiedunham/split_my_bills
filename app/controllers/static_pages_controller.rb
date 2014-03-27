@@ -1,5 +1,7 @@
 class StaticPagesController < ApplicationController
-  before_action :require_signed_in!
-  def root
+  def dashboard
+  end
+
+  def home
   end
 end

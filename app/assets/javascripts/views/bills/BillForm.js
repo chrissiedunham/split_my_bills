@@ -6,7 +6,6 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
     this.user = options.user;
     this.listenTo(this.model, "sync", this.render);
     
-    this.model.debtorsBills().each(this.addExistingDebtorSelectSubview.bind(this));
   },
 
   events: {
@@ -29,12 +28,15 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
   },
 
   addExistingDebtorSelectSubview: function(selected_debtor){
-    this.addDebtorSelectSubview(selected_debtor.escape('name'));
+    $('.debtor-selects').append(JST["debtor_select"]( { friends: this.user.friends() }));
+    //this.addDebtorSelectSubview(selected_debtor.escape('name'));
   },
 
   addNewDebtorSelectSubview: function(event){
     event.preventDefault();
-    this.addDebtorSelectSubview("");
+    $('.debtor-selects').append(JST["debtor_select"]( { friends: this.user.friends() }));
+    this.updateDebtorSelects(remove = false);
+    //this.addDebtorSelectSubview("");
 
   },
   render: function(){
@@ -57,15 +59,14 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
   //   });
   // },
 
-  removeDebtorSelect: function() {
-
+  removeDebtorSelect: function(event) {
+    $(event.target).parent().remove();
     this.updateDebtorSelects(remove = true);
   },
 
   updateDebtorSelects: function(remove){
 
     var numDebtors = $(this.$el).find('.debtor-selects input').length
-    if (remove) { numDebtors -= 1 };
     var defaultPct = accounting.toFixed((100 / (numDebtors + 1)), 2);
 
     $(this.$el).find('.debtor-selects input').val(defaultPct);
