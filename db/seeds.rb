@@ -62,10 +62,10 @@ ActiveRecord::Base.transaction do
     bill4.debtors_bills.new(db) 
   end
   bill4.save!
-
-  bill5 = user6.credit_bills.new({ date: Date.parse('3-12-2014'), name: "Mom's bday", amount_cents: 8460 })
-  bill5.debtors_bills.new({debtor_id: 1, amount_owed_cents: 4230 })
-  bill5.save!
+#
+#   bill5 = user6.credit_bills.new({ date: Date.parse('3-12-2014'), name: "Mom's bday", amount_cents: 8460 })
+#   bill5.debtors_bills.new({debtor_id: 1, amount_owed_cents: 4230 })
+#   bill5.save!
 #
 #   bill5 = user5.credit_bills.new({ date: Date.parse('5-4-2015'), name: "Costco", amount_cents: 7356 })
 #   bill5.debtors_bills.new({ bill_id: 5, debtor_id: 1, amount_owed_cents: 2454})
