@@ -35,9 +35,9 @@ ActiveRecord::Base.transaction do
   bill1.save!
 
   
-  bill2 = user1.credit_bills.new({ date: Date.parse('11-3-2014'), name: "Rent", amount_cents: 300000 })
-  bill_2_debtors = [{ debtor_id: 2, amount_owed_cents: 1000000},
-                            { debtor_id: 3, amount_owed_cents: 1000000}]
+  bill2 = user1.credit_bills.new({ date: Date.parse('11-3-2014'), name: "Rent", amount_cents: 21000 })
+  bill_2_debtors = [{ debtor_id: 2, amount_owed_cents: 70000},
+                            { debtor_id: 3, amount_owed_cents: 70000}]
   bill_2_debtors.each do |db|
     bill2.debtors_bills.new(db) 
   end
@@ -46,7 +46,7 @@ ActiveRecord::Base.transaction do
 
   bill3 = user1.credit_bills.new({ date: Date.parse('11-3-2014'), name: "Electricity", amount_cents: 3396 })
   bill_3_debtors = [{ debtor_id: 2, amount_owed_cents: 1132},
-                            { debtor_id: 2, amount_owed_cents: 1132}]
+                            { debtor_id: 3, amount_owed_cents: 1132}]
   bill_3_debtors.each do |db|
     bill3.debtors_bills.new(db) 
   end
@@ -57,12 +57,12 @@ ActiveRecord::Base.transaction do
                             { debtor_id: 5, amount_owed_cents: 2000},
                             { debtor_id: 6, amount_owed_cents: 2000}]
 
-#
-#   bill_4_debtors.each do |db|
-#     bill4.debtors_bills.new(db) 
-#   end
-#   bill4.save!
-#
+
+  bill_4_debtors.each do |db|
+    bill4.debtors_bills.new(db) 
+  end
+  bill4.save!
+
 #
 #   bill5 = user5.credit_bills.new({ date: Date.parse('5-4-2015'), name: "Costco", amount_cents: 7356 })
 #   bill5.debtors_bills.new({ bill_id: 5, debtor_id: 1, amount_owed_cents: 2454})
