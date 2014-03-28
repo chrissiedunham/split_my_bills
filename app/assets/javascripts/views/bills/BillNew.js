@@ -36,6 +36,7 @@ window.SplitMyBills.Views.BillNew = Backbone.CompositeView.extend({
     var that = this;
     this.user.creditBills().create(billData, {
       success: function(){
+      that.user.fetch();
       },
       error: function(model, response){
         that.showNewBillForm();
@@ -43,7 +44,7 @@ window.SplitMyBills.Views.BillNew = Backbone.CompositeView.extend({
         response.responseJSON.forEach(function(error) {
           if (error === "Name can't be blank") { error = "Bill must have a name" };
           label = JST["error"]( { message: error });
-          $('.errors-show').append(label);
+          $('.add-bill .errors-show').append(label);
         })
       }, wait: true
 

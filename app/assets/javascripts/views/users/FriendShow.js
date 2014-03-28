@@ -5,6 +5,7 @@ window.SplitMyBills.Views.FriendShow = Backbone.CompositeView.extend({
   initialize: function(){
 
     this.listenTo(this.model, "sync change", this.render);
+    this.listenTo(this.model.bills(), "add change remove", this.render);
     this.listenTo(this.model.relevantBills(), "add", this.render);
     this.listenTo(this.model.relevantBills(), "change", this.render);
     this.listenTo(this.model.relevantBills(), "remove", this.render);
