@@ -1,22 +1,20 @@
 SplitMyBills
 ============
 
-This app provides a simple interface for keeping track of shared
-expenses
+A simple interface for keeping track of shared expenses
 
-# Dashboard
+## Dashboard
 
  + Add bills from your dashboard
  + Select friends who owe money on each bill
- + Customize percent owed by each friend or use the default
-   even-splitting
- + Edit or delete bills at any time
+ + Customize percent owed by each friend or use the default for even-splitting
+ + Edit or delete bills
  + Send email reminders
 
 
-# Friends
+## Friends
   + Send emails to invite friends to share bills
-  + View all friends and net amount owed at a glance
-  + Select individual friend to see all shared bills
+  + View all friends and net amount owed each friend
+  + Select individual friends to see all shared bills
 
 
