@@ -6,17 +6,71 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 #
-user = User.create([{ email: 'chrissie@gmail.com', name: "Chrissie", password: "asdfasdf"},
-                    { email: 'charlie@gmail.com', name: "Charlie", password: "asdfasdf"},
-                    { email: 'karen@gmail.com', name: "Karen", password_digest: "sdkw" }])
+#
+ActiveRecord::Base.transaction do
+  
+  user1 = User.create({ email: 'chrissie@gmail.com', name: "Chrissie", password: "asdfasdf"})
+  user2 = User.create({ email: 'charlie@gmail.com', name: "Charlie", password: "asdfasdf"})
+  user3 = User.create({ email: 'superdo@gmail.com', name: "Coco", password: "asdfasdf"})
+  user4 = User.create({ email: 'yoyo@gmail.com', name: "Karl", password_digest: "sdkw" })
+  user5 = User.create({ email: 'bobobo@gmail.com', name: "Bo", password_digest: "sdkw" })
+  user6 = User.create({ email: 'tjs_not_the_store@gmail.com', name: "TJ", password_digest: "sdkw"})
 
-friendships = Friendship.create([ { friend_1_id: 1, friend_2_id: 2},
-                                  { friend_1_id: 2, friend_2_id: 1},
-                                  { friend_1_id: 1, friend_2_id: 3},
-                                  { friend_1_id: 3, friend_2_id: 1},
-                                  { friend_1_id: 2, friend_2_id: 3},
-                                  { friend_1_id: 3, friend_2_id: 2} ])
+  friendships = Friendship.create([ { friend_1_id: 1, friend_2_id: 2},
+                                    { friend_1_id: 2, friend_2_id: 1},
+                                    { friend_1_id: 1, friend_2_id: 3},
+                                    { friend_1_id: 3, friend_2_id: 1},
+                                    { friend_1_id: 2, friend_2_id: 3},
+                                    { friend_1_id: 3, friend_2_id: 2},
+                                    { friend_1_id: 4, friend_2_id: 1},
+                                    { friend_1_id: 5, friend_2_id: 1},
+                                    { friend_1_id: 6, friend_2_id: 1},
+                                    { friend_1_id: 1, friend_2_id: 4},
+                                    { friend_1_id: 1, friend_2_id: 5},
+                                    { friend_1_id: 1, friend_2_id: 6} ])
+
+
+  bill1 = user1.credit_bills.new({ date: Date.parse('21-3-2014'), name: "TJs groceries", amount_cents: 5460 })
+  bill1.debtors_bills.new({ debtor_id: 2, amount_owed_cents: 2730})
+  bill1.save!
+
+  
+  bill2 = user1.credit_bills.new({ date: Date.parse('11-3-2014'), name: "Rent", amount_cents: 300000 })
+  bill_2_debtors = [{ debtor_id: 2, amount_owed_cents: 1000000},
+                            { debtor_id: 3, amount_owed_cents: 1000000}]
+  bill_2_debtors.each do |db|
+    bill2.debtors_bills.new(db) 
+  end
+  bill2.save!
+
+#
+#   bill3 = user1.credit_bills.new({ date: Date.parse('11-3-2014'), name: "Electricity", amount_cents: 3396 })
+#   bill_3_debtors = [{ debtor_id: 2, amount_owed_cents: 1132},
+#                             { debtor_id: 2, amount_owed_cents: 1132}]
+#   bill_3_debtors.each do |db|
+#     bill3.debtors_bills.new(db) 
+#   end
+#   bill3.save!
+#
+#   bill4 = user4.credit_bills.new({ date: Date.parse('3-4-2014'), name: "LA trip gas", amount_cents: 8000})
+#   bill_4_debtors = [{debtor_id: 1, amount_owed_cents: 2000},
+#                             { debtor_id: 5, amount_owed_cents: 2000},
+#                             { debtor_id: 6, amount_owed_cents: 2000}]
+#
+#
+#   bill_4_debtors.each do |db|
+#     bill4.debtors_bills.new(db) 
+#   end
+#   bill4.save!
+#
+#
+#   bill5 = user5.credit_bills.new({ date: Date.parse('5-4-2015'), name: "Costco", amount_cents: 7356 })
+#   bill5.debtors_bills.new({ bill_id: 5, debtor_id: 1, amount_owed_cents: 2454})
+#   bill5.save!
+#                             
+
+                            
 
 
 
-
+end

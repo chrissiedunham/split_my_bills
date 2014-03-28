@@ -20,7 +20,6 @@ window.SplitMyBills.Views.FriendInvite = Backbone.View.extend({
     $.ajax({
       url: "/reminder_emails",
       type: "POST",
-      data: { "bill_id": this.model.get('id') },
       success: function() {
         alert("You sent an email!") 
       }

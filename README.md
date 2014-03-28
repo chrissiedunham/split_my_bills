@@ -1,4 +1,3 @@
 SplitMyBills
 ============
 
-Final project

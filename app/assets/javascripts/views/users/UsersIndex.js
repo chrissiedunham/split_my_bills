@@ -11,7 +11,7 @@ window.SplitMyBills.Views.UsersIndex = Backbone.CompositeView.extend({
 
   addFriendInviteSubview: function(){
                        
-    var friendInviteView = new SplitMyBills.Views.FriendInvite();
+    var friendInviteView = new SplitMyBills.Views.FriendInvite( );
     this.addSubview(".friend-invite", friendInviteView);
     friendInviteView.render();
   },
