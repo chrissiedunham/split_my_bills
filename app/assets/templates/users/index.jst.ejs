@@ -12,7 +12,12 @@
   <tbody class="friends">
   
     <% friends.each(function(friend) { %>
-    <tr><td><a href="#friends/<%= friend.get('id') %>"><%= friend.escape('name') %></a></td></tr>
+    <tr><td><a href="#friends/<%= friend.get('id') %>"><%=
+          friend.escape('name') %></a></td>
+    
+      <% debtor = friend.escape('net_owed_to') < 0 ? "text-success" : "debit"  %>
+      <td class="<%= debtor %>"><%= accounting.formatMoney(Math.abs(friend.escape('net_owed_to'))) %></td>
+    </tr>
     <% }) %>
   
   </tbody> 
