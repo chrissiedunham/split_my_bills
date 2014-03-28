@@ -1,4 +1,4 @@
-<% if (bill.escape('creditor_id') == user.id) { %>
+<% if (bill.escape('creditor_id') == currentUserID) { %>
 <div>
   <button class="bill-edit-btn btn btn-sm btn-primary" data-id="<%=
     bill.id %>" type="submit">Edit bill</button>

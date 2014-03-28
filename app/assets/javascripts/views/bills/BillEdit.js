@@ -44,25 +44,23 @@ window.SplitMyBills.Views.BillEdit = Backbone.CompositeView.extend({
 
     event.preventDefault();
 
-    $(event.target).parents('form').addClass('hidden');
-    $('button.add-bill').removeClass('hidden');
     
     var billData = $(this.$el).find('form').serializeJSON()['bill'];
     var that = this;
 
-    this.model.set(billData);
-    this.model.save({}, {
+    this.model.save(billData, {
       success: function(){
         that.model.fetch();
         that.user.fetch();
+        this.showEditForm();
       },
       error: function(model, response){
         that.showEditForm();
+        $('.errors-show[data-id=' + that.model.id + ']').empty();
         response.responseJSON.forEach(function(error) {
           if (error === "Name can't be blank") { error = "Bill must have a name" };
           if (error === "Debtors can't be blank") { error = "Please select at least one payee" };
           label = JST["error"]( { message: error });
-          $('.errors-show[data-id=' + that.model.id + ']').empty();
           $('.errors-show[data-id=' + that.model.id + ']').append(label);
         })
       }, wait: true

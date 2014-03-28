@@ -38,19 +38,25 @@ class Api::BillsController < ApplicationController
           bill.destroy!
         end
         if debtor_params[:debtor_ids]
+          puts debtor_params[:debtor_ids].length
           debtor_params[:debtor_ids].each_with_index do | id, i |
+            puts "id of debtor is #{id}"
             pct = debtor_params[:debtor_pcts][i]
             amount_owed = DebtorsBills.get_amount_from_pct(bill_params[:amount], pct)
             @bill.debtors_bills.new(:debtor_id => id, :amount_owed_cents => amount_owed)
           end
+        else
+          puts "no ids"
 
+          puts "I have #{@bill.debtors.length}"
         end
         
+        puts "but got here before save"
         @bill.assign_attributes(bill_params)
         @bill.save!
       end
     rescue
-      flash.now[:errors] = [@bill.errors.full_messages]
+      puts "and rescued"
       render json: @bill.errors.full_messages, status: 422
     else
       render "bills/show"
