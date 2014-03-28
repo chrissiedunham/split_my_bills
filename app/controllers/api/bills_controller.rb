@@ -32,6 +32,7 @@ class Api::BillsController < ApplicationController
   def update
     @bill = Bill.find(params[:id])
 
+    other_errors = []
     begin
       Bill.transaction do 
         @bill.debtors_bills.each do |bill|
@@ -45,19 +46,16 @@ class Api::BillsController < ApplicationController
             amount_owed = DebtorsBills.get_amount_from_pct(bill_params[:amount], pct)
             @bill.debtors_bills.new(:debtor_id => id, :amount_owed_cents => amount_owed)
           end
+          @bill.assign_attributes(bill_params)
+          @bill.save!
         else
-          puts "no ids"
-
-          puts "I have #{@bill.debtors.length}"
+          other_errors << "Must have at least one payee"
+          raise "Error"
         end
         
-        puts "but got here before save"
-        @bill.assign_attributes(bill_params)
-        @bill.save!
       end
     rescue
-      puts "and rescued"
-      render json: @bill.errors.full_messages, status: 422
+      render json: @bill.errors.full_messages.concat(other_errors), status: 422
     else
       render "bills/show"
     end

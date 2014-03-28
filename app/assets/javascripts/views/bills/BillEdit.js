@@ -6,6 +6,7 @@ window.SplitMyBills.Views.BillEdit = Backbone.CompositeView.extend({
     this.user = options.user;
     this.listenTo(this.model, "sync", this.render);
 
+
     this.addBillForm();
   },
 
@@ -29,6 +30,7 @@ window.SplitMyBills.Views.BillEdit = Backbone.CompositeView.extend({
 
     this.$el.html(content);
     this.renderSubviews();
+    
     return this;
   },
 
@@ -49,10 +51,11 @@ window.SplitMyBills.Views.BillEdit = Backbone.CompositeView.extend({
     var that = this;
 
     this.model.save(billData, {
+      patch: true,
       success: function(){
         that.model.fetch();
         that.user.fetch();
-        this.showEditForm();
+        that.showEditForm();
       },
       error: function(model, response){
         that.showEditForm();

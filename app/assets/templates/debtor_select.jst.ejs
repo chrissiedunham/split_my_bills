@@ -5,7 +5,14 @@
   <span class="input-group-btn">
   <select class="btn btn-default" name="bill[debtor_ids][]" >
     <% friends.forEach(function(friend) { %>
-      <option value="<%= friend.get('id') %>" >
+
+    <% if (debtor) { %>
+      <% selected = (friend.escape('name') === debtor.escape('debtor')) ? 'selected = true' : '' %>
+      <% } else {%>
+      <% selected = '' %>
+    <% } %> 
+
+      <option value="<%= friend.get('id') %>" <%= selected %> >
         <%= friend.escape('name') %>
       </option>
     <% }) %>

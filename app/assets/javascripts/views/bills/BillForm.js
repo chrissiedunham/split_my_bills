@@ -13,51 +13,27 @@ window.SplitMyBills.Views.BillForm = Backbone.CompositeView.extend({
     "click .remove-debtor": "removeDebtorSelect",
   },
 
-  // addDebtorSelectSubview: function(selected) {
-  //
-  //   var debtorSelectView = new SplitMyBills.Views.DebtorSelect({
-  //     selected_debtor: selected,
-  //     friends: this.user.friends()
-  //   });
-  //   
-  //
-  //   this.addSubview(".debtor-selects", debtorSelectView);
-  //   debtorSelectView.render();
-  //
-  //   this.updateDebtorSelects(remove = false);
-  // },
+  addNewDebtorSelectSubview: function(event, debtor){
+    if(event) {
+    
+      event.preventDefault();
+    }
 
-  // addExistingDebtorSelectSubview: function(selected_debtor){
-  //   $('.debtor-selects').append(JST["debtor_select"]( { friends: this.user.friends() }));
-  //   //this.addDebtorSelectSubview(selected_debtor.escape('name'));
-  // },
-
-  addNewDebtorSelectSubview: function(event){
-    event.preventDefault();
-    $('.debtor-selects').append(JST["debtor_select"]( { friends: this.user.friends() }));
+    this.$el.find('.debtor-selects').append(JST["debtor_select"]( { debtor: debtor, friends: this.user.friends() }));
     this.updateDebtorSelects(remove = false);
-    //this.addDebtorSelectSubview("");
 
   },
   render: function(){
 
     var content = this.template({ bill: this.model, friends: this.user.friends() }); 
-
+    var that = this;
     this.$el.html(content);
-//    this.renderSubviews();
+    this.model.debtorsBills().each(function(debtor) {
+       that.addNewDebtorSelectSubview(null, debtor); 
+    })
     this.updateDebtorSelects();
-//    this._addSelects();
     return this;
   },
-
-  // _addSelects: function() {
-  //   $('.chosen-select').chosen({
-  //     allow_single_deselect: true,
-  //     no_results_text: 'No results matched',
-  //     width: '100%',
-  //     disable_search_threshold: 3
-  //   });
-  // },
 
   removeDebtorSelect: function(event) {
     $(event.target).parent().remove();
