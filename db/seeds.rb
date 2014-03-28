@@ -9,12 +9,12 @@
 #
 ActiveRecord::Base.transaction do
   
-  user1 = User.create({ email: 'chrissie@gmail.com', name: "Chrissie", password: "asdfasdf"})
+  user1 = User.create({ email: 'chrissie@gmail.com', name: "Chrissie Page", password: "asdfasdf"})
   user2 = User.create({ email: 'charlie@gmail.com', name: "Charlie Parker", password: "asdfasdf"})
-  user3 = User.create({ email: 'superdo@gmail.com', name: "Coco Rudnitzki", password: "asdfasdf"})
-  user4 = User.create({ email: 'yoyo@gmail.com', name: "Karl Hahn", password_digest: "sdkw" })
-  user5 = User.create({ email: 'bobobo@gmail.com', name: "Boris Wachov", password_digest: "sdkw" })
-  user6 = User.create({ email: 'tjs_not_the_store@gmail.com', name: "TJ", password_digest: "sdkw"})
+  user3 = User.create({ email: 'superdo@gmail.com', name: "Becca Samuels", password: "asdfasdf"})
+  user4 = User.create({ email: 'yoyo@gmail.com', name: "Naomi Swanson", password_digest: "sdkw"})
+  user5 = User.create({ email: 'bobobo@gmail.com', name: "Susan Pierce", password_digest: "sdkw"})
+  user6 = User.create({ email: 'golden@gmail.com', name: "Scott Page", password_digest: "sdkw"})
 
   friendships = Friendship.create([ { friend_1_id: 1, friend_2_id: 2},
                                     { friend_1_id: 2, friend_2_id: 1},
@@ -35,7 +35,7 @@ ActiveRecord::Base.transaction do
   bill1.save!
 
   
-  bill2 = user1.credit_bills.new({ date: Date.parse('11-3-2014'), name: "Rent", amount_cents: 21000 })
+  bill2 = user1.credit_bills.new({ date: Date.parse('11-3-2014'), name: "Rent", amount_cents: 210000 })
   bill_2_debtors = [{ debtor_id: 2, amount_owed_cents: 70000},
                             { debtor_id: 3, amount_owed_cents: 70000}]
   bill_2_debtors.each do |db|
@@ -63,6 +63,9 @@ ActiveRecord::Base.transaction do
   end
   bill4.save!
 
+  bill5 = user6.credit_bills.new({ date: Date.parse('3-12-2014'), name: "Mom's bday", amount_cents: 8460 })
+  bill5.debtors_bills.new({debtor_id: 1, amount_owed_cents: 4230 })
+  bill5.save!
 #
 #   bill5 = user5.credit_bills.new({ date: Date.parse('5-4-2015'), name: "Costco", amount_cents: 7356 })
 #   bill5.debtors_bills.new({ bill_id: 5, debtor_id: 1, amount_owed_cents: 2454})
