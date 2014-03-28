@@ -15,6 +15,7 @@ gem 'monetize'
 gem 'money'
 gem 'money-rails'
 gem 'chosen-rails'
+gem 'twitter-typeahead-rails'
 # Use postgresql as the database for Active Record
 gem 'pg'
 

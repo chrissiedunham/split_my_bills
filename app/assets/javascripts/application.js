@@ -18,6 +18,7 @@
 //= require underscore
 //= require bootstrap
 //= require serialize_json
+//= require twitter/typeahead
 //= require backbone
 //= require split_my_bills
 //= require_tree ../templates

@@ -49,7 +49,6 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
     })                    
 
   },
-
   render: function(){
 
     var content = this.template({ bill: this.model, user: this.user, debtors: this.model.debtors() });

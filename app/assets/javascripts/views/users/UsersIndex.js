@@ -21,9 +21,19 @@ window.SplitMyBills.Views.UsersIndex = Backbone.CompositeView.extend({
     this.$el.html(content);
 
     this.renderSubviews();
+    this.findFriends();
     return this;
   
-  }
+  },
+
+  findFriends: function() {
+
+    $('#search-friends').typeahead({
+      source: SplitMyBills.users
+    });
+
+   },
+
 
 
 })
