@@ -16,18 +16,15 @@
 
   <div class="bill-show hidden" data-id="<%= bill.get('id') %>" class"is-active" >
     <div class="bill-details" data-id="<%= bill.get('id') %>">
-      <div>Paid by <%= bill.escape('creditor') %></div>
-      <div>Amount: <%= accounting.formatMoney( bill.escape('amount') )%></div>
+      <% name =  (bill.escape('creditor_id') == currentUserID) ? "You" :
+      bill.escape('creditor') %>
+      <div><%= name %> paid <%= accounting.formatMoney( bill.escape('amount') )%></div>
 
       <ul>
         <% bill.debtorsBills().forEach(function(debt){ %>
         <li>
           <%= debt.escape('debtor') %> owes <%=
           accounting.formatMoney(debt.escape('amount_owed'))%> 
-          <a class="mark-paid" data-id="<%= debt.escape('id') %>" href="#">
-              
-              <%= (debt.escape('paid') === "unpaid") ? "Mark paid" : "Mark unpaid" %>
-          </a>
         </li>
         <% }) %>
       </ul>

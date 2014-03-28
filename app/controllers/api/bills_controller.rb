@@ -29,6 +29,10 @@ class Api::BillsController < ApplicationController
     render "bills/index"
   end
 
+  def markPaid
+    @bill = Bill.find(params[:id])
+  end
+
   def update
     @bill = Bill.find(params[:id])
 
@@ -81,5 +85,6 @@ class Api::BillsController < ApplicationController
   def debtor_params
     params.require(:bill).permit(:debtor_ids => [], :debtor_pcts => [])
   end
+
 end
   

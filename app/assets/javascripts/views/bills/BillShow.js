@@ -17,7 +17,8 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
     "click .bill-link": "toggleBillShow",
     "click .delete-bill": "deleteBill",
     "click .send-reminder-email": "sendReminderEmail",
-    "click a.mark-paid": "markPaid"
+    "click a.mark-paid": "markPaid",
+    
   },
 
   addEditSubview: function(){
@@ -36,11 +37,10 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
   markPaid: function(event){
     event.preventDefault();
 
-    var id = $(event.target).attr("data-id");
     var that = this;
 
     $.ajax({
-      url: "/api/debtors_bills/" + id,
+      url: "/api/bills/" + this.model.id,
       type: "PATCH",
       data: { "paid": "paid" },
       success: function() {
