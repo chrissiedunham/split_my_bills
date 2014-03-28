@@ -2,9 +2,9 @@
   Friends
 </h2>
 
-<!-- <div> -->
-<!--   <input type="text" class="form&#45;control" placeholder="Search for friends..."> -->
-<!-- </div> -->
+<div>
+  <input id="search-friends" type="text" class="form-control" placeholder="Search for friends...">
+</div>
 
 <div class="friend-invite"></div>
 
@@ -12,12 +12,21 @@
   <tbody class="friends">
   
     <% friends.each(function(friend) { %>
-    <tr><td><a href="#friends/<%= friend.get('id') %>"><%=
-          friend.escape('name') %></a></td>
-    
-      <% debtor = friend.escape('net_owed_to') < 0 ? "text-success" : "debit"  %>
-      <td class="<%= debtor %>"><%= accounting.formatMoney(Math.abs(friend.escape('net_owed_to'))) %></td>
-    </tr>
+      <tr>
+        <td>
+          <h4>
+            <a href="#friends/<%= friend.get('id') %>"><%=friend.escape('name') %></a>
+          </h4>
+        </td>
+      
+        <% debtor = friend.escape('net_owed_to') < 0 ? "text-success" : "debit"  %>
+
+        <td class="<%= debtor %>">
+          <h4>
+            <%=accounting.formatMoney(Math.abs(friend.escape('net_owed_to')))%>
+          </h4>
+        </td>
+      </tr>
     <% }) %>
   
   </tbody> 

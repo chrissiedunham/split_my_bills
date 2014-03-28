@@ -24,19 +24,14 @@
         <li>
           <%= debt.escape('debtor') %> owes <%=
           accounting.formatMoney(debt.escape('amount_owed'))%> 
+          <a><%= debt.escape('paid') == "Unpaid" ? "Mark paid" : "Mark unpaid"
+            %></a>
         </li>
         <% }) %>
       </ul>
     <div class="pull-right"><%= JST["send_reminder"]( { bill: bill }) %></div>
     </div>
 
-    <!-- <% if (bill.escape('creditor_id') == user.id) { %> -->
-    <!-- <div> -->
-    <!--   <button class="bill&#45;edit&#45;btn btn btn&#45;sm btn&#45;primary" type="submit">Edit bill</button> -->
-    <!--   <%= JST["send_reminder"]( { bill: bill }) %>  -->
-    <!-- </div> -->
-    <!-- <% } %> -->
-    <!--  -->
     <div class="bill-edit"></div>
   </div>
 
