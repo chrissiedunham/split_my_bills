@@ -29,7 +29,7 @@ class SessionsController < ApplicationController
   def guest
     @user = User.find_by_credentials("chrissie@gmail.com", "asdfasdf")
     sign_in(@user)
-    redirect_to dashboard_url
+    redirect_to "/dashboard#bills"
   end
 
   private

@@ -9,7 +9,7 @@ window.SplitMyBills.Routers.AppRouter = Backbone.Router.extend({
   },
 
   routes: {
-    "": "currentUserShow",
+    "bills": "currentUserShow",
     "friends" : "friendsIndex",
     "friends/:id" : "friendShow",
     "bills/past" : "billsPast"

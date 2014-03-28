@@ -1,0 +1,2 @@
+module InviteEmailsHelper
+end

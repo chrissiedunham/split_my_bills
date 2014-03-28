@@ -17,4 +17,15 @@ class AuthMailer < ActionMailer::Base
       :subject => "Pay your bill!"
     )
   end
+
+  def invite_email(email, message, user)
+    @email = email
+    @message = message
+    @user = user
+    mail(
+      :to => @email,
+      :subject => "Pay your bill!"
+    )
+    
+  end
 end

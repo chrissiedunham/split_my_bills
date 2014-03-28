@@ -24,8 +24,6 @@
         <li>
           <%= debt.escape('debtor') %> owes <%=
           accounting.formatMoney(debt.escape('amount_owed'))%> 
-          <a><%= debt.escape('paid') == "Unpaid" ? "Mark paid" : "Mark unpaid"
-            %></a>
         </li>
         <% }) %>
       </ul>

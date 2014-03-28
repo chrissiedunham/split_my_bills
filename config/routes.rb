@@ -14,6 +14,7 @@ SplitMyBills::Application.routes.draw do
     resources :bills
     resources :debtors_bills, only: [:update, :index, :show]
   end
+  resource :invite_emails, only: [:create]
   resource :reminder_emails, only: [:create]
   
   # The priority is based upon order of creation: first created -> highest priority.
