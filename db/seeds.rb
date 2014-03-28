@@ -9,14 +9,14 @@
 #
 ActiveRecord::Base.transaction do
   
-  user1 = User.create({ email: 'chrissie@gmail.com', name: "Chrissie Page", password: "asdfasdf"})
-  user2 = User.create({ email: 'charlie@gmail.com', name: "Charlie Parker", password: "asdfasdf"})
-  user3 = User.create({ email: 'superdo@gmail.com', name: "Naomi Rudnitzki", password: "asdfasdf"})
-  user4 = User.create({ email: 'yoyo@gmail.com', name: "Karl Hahn", password_digest: "sdkw" })
-  user5 = User.create({ email: 'bobobo@gmail.com', name: "Boris Walter", password_digest: "sdkw" })
-  user6 = User.create({ email: 'tjs_not_the_store@gmail.com', name: "TJ Page", password_digest: "sdkw"})
+  user1 = User.create!({ email: 'chrissie@gmail.com', name: "Chrissie Page", password: "asdfasdf"})
+  user2 = User.create!({ email: 'charlie@gmail.com', name: "Charlie Parker", password: "asdfasdf"})
+  user3 = User.create!({ email: 'superdo@gmail.com', name: "Naomi Rudnitzki", password: "asdfasdf"})
+  user4 = User.create!({ email: 'yoyo@gmail.com', name: "Karl Hahn", password_digest: "sdkw" })
+  user5 = User.create!({ email: 'bobobo@gmail.com', name: "Boris Walter", password_digest: "sdkw" })
+  user6 = User.create!({ email: 'tjs_not_the_store@gmail.com', name: "TJ Page", password_digest: "sdkw"})
 
-  friendships = Friendship.create([ { friend_1_id: 1, friend_2_id: 2},
+  friendships = Friendship.create!([ { friend_1_id: 1, friend_2_id: 2},
                                     { friend_1_id: 2, friend_2_id: 1},
                                     { friend_1_id: 1, friend_2_id: 3},
                                     { friend_1_id: 3, friend_2_id: 1},
@@ -62,12 +62,6 @@ ActiveRecord::Base.transaction do
     bill4.debtors_bills.new(db) 
   end
   bill4.save!
-
-#
-#   bill5 = user5.credit_bills.new({ date: Date.parse('5-4-2015'), name: "Costco", amount_cents: 7356 })
-#   bill5.debtors_bills.new({ bill_id: 5, debtor_id: 1, amount_owed_cents: 2454})
-#   bill5.save!
-#                             
 
                             
 
