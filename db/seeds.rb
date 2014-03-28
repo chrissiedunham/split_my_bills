@@ -9,7 +9,7 @@
 #
 ActiveRecord::Base.transaction do
   
-  user1 = User.create!({ email: 'chrissie@gmail.com', name: "Chrissie Page", password: "asdfasdf"})
+  user1 = User.create!({ email: 'chrissie@gmail.com', name: "Chrissie", password: "asdfasdf"})
   user2 = User.create!({ email: 'charlie@gmail.com', name: "Charlie Parker", password: "asdfasdf"})
   user3 = User.create!({ email: 'superdo@gmail.com', name: "Naomi Rudnitzki", password: "asdfasdf"})
   user4 = User.create!({ email: 'yoyo@gmail.com', name: "Karl Hahn", password_digest: "sdkw" })
