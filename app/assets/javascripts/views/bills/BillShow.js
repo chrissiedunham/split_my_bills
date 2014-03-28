@@ -65,12 +65,14 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
 
   sendReminderEmail: function(event){
 
+
     $.ajax({
       url: "/reminder_emails",
       type: "POST",
       data: { "bill_id": this.model.get('id') },
       success: function() {
-        alert("You sent an email!") 
+        $('.modal').modal('hide');
+
       }
     })                    
   }

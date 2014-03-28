@@ -4,6 +4,7 @@ class InviteEmailsController < ApplicationController
     @email = params[:email]
     @message = params[:message]
     AuthMailer.invite_email(@email, @message, @user).deliver
+    render json: @email
   end
 
 
