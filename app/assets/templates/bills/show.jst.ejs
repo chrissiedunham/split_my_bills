@@ -19,14 +19,23 @@
       bill.escape('creditor') %>
       <div><%= name %> paid <%= accounting.formatMoney( bill.escape('amount') )%></div>
 
-      <ul>
+      <ul class="debtors">
         <% bill.debtorsBills().forEach(function(debt){ %>
+
+          <% paid = (debt.escape('paid') == 'Unpaid') ? "mark-paid" :
+          "mark-unpaid" %>
+
         <li>
-          <%= debt.escape('debtor') %> owes <%=
-          accounting.formatMoney(debt.escape('amount_owed'))%> 
+          <% owes = (paid == 'mark-paid') ? "owes" : "paid" %>
+          <%= debt.escape('debtor') %> <%= owes %> <%=accounting.formatMoney(debt.escape('amount_owed'))%> 
+          <a class="<%= paid %>" data-id="<%=debt.get('id') %>" ><%=
+            (paid == 'mark-paid' ? "Mark Paid" : "")
+            %></a>
         </li>
+
         <% }) %>
       </ul>
+
       <% if (bill.get('creditor_id') == currentUserID) { %>
       <div class="pull-right"><%= JST["send_reminder"]( { bill: bill }) %></div>
       <% } %>
