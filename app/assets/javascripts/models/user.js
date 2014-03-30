@@ -6,13 +6,21 @@ window.SplitMyBills.Models.User = Backbone.Model.extend({
   // not the same as debit bills (actual bill objects on which user owed
   // money)
   //
-  debtorsBills: function(){
-    if(!this._debtorsBills){ 
-      this._debtorsBills = new SplitMyBills.Collections.DebtorsBills([], { 
+  dbsOwedByCurrentUser: function(){
+    if(!this._debtorsBillsBy){ 
+      this._debtorsBillsBy = new SplitMyBills.Collections.DebtorsBills([], { 
         user: this 
       });
     } 
-    return this._debtorsBills;
+    return this._debtorsBillsBy;
+  },
+  dbsOwedToCurrentUser: function(){
+    if(!this._debtorsBillsTo){ 
+      this._debtorsBillsTo = new SplitMyBills.Collections.DebtorsBills([], { 
+        user: this 
+      });
+    } 
+    return this._debtorsBillsTo;
   },
 
   bills: function() {
@@ -110,8 +118,11 @@ window.SplitMyBills.Models.User = Backbone.Model.extend({
     this.relevantBills().set(data.relevant_bills);
     delete data.relevant_bills;
 
-    this.debtorsBills().set(data.debtors_bills);
-    delete data.debtorsBills;
+    this.dbsOwedToCurrentUser().set(data.dbs_owed_to_current_user);
+    delete data.dbsOwedToCurrentUser;
+
+    this.dbsOwedByCurrentUser().set(data.dbs_owed_by_current_user);
+    delete data.dbsOwedByCurrentUser;
 
     this.friends().set(data.friends);
     delete data.friends;

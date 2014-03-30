@@ -104,6 +104,17 @@ class User < ActiveRecord::Base
     amount_owed_to(user).to_f - amount_owed_by(user).to_f
   end
 
+  def debtors_bills_owed_to(user)
+    DebtorsBills.find_by_sql([ "
+      SELECT debtors_bills.*
+      FROM debtors_bills
+      JOIN bills on bills.id = debtors_bills.bill_id
+      WHERE 
+      bills.creditor_id = :creditor_id 
+      AND
+      debtors_bills.debtor_id = :debtor_id
+      ", { creditor_id: user.id, debtor_id: self.id }])
+  end
 
   def self.generate_session_token
     SecureRandom::urlsafe_base64(16)
