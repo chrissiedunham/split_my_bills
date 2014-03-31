@@ -5,33 +5,6 @@
     accounting.formatMoney(Math.abs(user.get('net_owed_to_current'))) %>)
   </span>
 </h2>
-<table class="table"> 
-  <tbody class="dbs">
-  
-      <% user.dbsOwedToCurrentUser().each(function(db) { %>
-      <tr>
-        <td>
-          <h4>
-            <%= db.escape('bill_name') %> 
-            <span class="text-success"> (<%=accounting.formatMoney(db.escape('amount_owed'))%>)</span>          
-          </h4>
-        </td>
 
-      </tr>
-      <% }) %>
-
-      <% user.dbsOwedByCurrentUser().each(function(db) { %>
-      <tr>
-        <td>
-          <h4>
-            <%= db.escape('bill_name') %>
-            <span class="debit pull-right"><%=
-              accounting.formatMoney(db.escape('amount_owed'))%>)</span>          
-          </h4>
-        </td>
-      </tr>
-      <% }) %>
-
-  </tbody> 
-</table>
+<div class="debtors-bills-index"></div>
 

@@ -28,9 +28,6 @@
         <li>
           <% owes = (paid == 'mark-paid') ? "owes" : "paid" %>
           <%= debt.escape('debtor') %> <%= owes %> <%=accounting.formatMoney(debt.escape('amount_owed'))%> 
-          <a class="<%= paid %>" data-id="<%=debt.get('id') %>" ><%=
-            (paid == 'mark-paid' ? "Mark Paid" : "")
-            %></a>
         </li>
 
         <% }) %>
