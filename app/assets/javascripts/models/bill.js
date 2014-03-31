@@ -46,6 +46,7 @@ window.SplitMyBills.Models.Bill = Backbone.Model.extend({
     return belongs_to_current ? net : current_owes;
   },
  
+
   parse: function(data){
     this.debtors().set(data.debtors);
     delete data.debtors

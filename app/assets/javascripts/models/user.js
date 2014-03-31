@@ -22,6 +22,14 @@ window.SplitMyBills.Models.User = Backbone.Model.extend({
     } 
     return this._debtorsBillsTo;
   },
+  dbsWithCurrentUser: function(){
+    if(!this._dbsWithCurrentUser){ 
+      this._dbsWithCurrentUser = new SplitMyBills.Collections.DebtorsBills([], { 
+        user: this 
+      });
+    } 
+    return this._dbsWithCurrentUser;
+  },
 
   bills: function() {
     if(!this._bills){
@@ -74,7 +82,7 @@ window.SplitMyBills.Models.User = Backbone.Model.extend({
   net_balance: function () {
     var net = 0;
     this.bills().each(function(bill) {
-      net += parseInt(bill.escape('net_to_current_user'));
+      net += parseInt(bill.netToCurrentUser());
     })
     return net;
     
@@ -89,6 +97,21 @@ window.SplitMyBills.Models.User = Backbone.Model.extend({
     }
     return this._relevantBills;
     
+  },
+
+  setDBsListeners: function (DBs) {
+    this.listenTo(this.dbsOwedByCurrentUser(), 'add', function (model) {
+      DBs.add(model);
+    });
+    this.listenTo(this.dbsOwedToCurrentUser(), 'add', function (model) {
+      DBs.add(model);
+    });
+    this.listenTo(this.dbsOwedByCurrentUser(), 'remove', function (model) {
+      DBs.remove(model);
+    });
+    this.listenTo(this.dbsOwedToCurrentUser(), 'remove', function (model) {
+      DBs.remove(model);
+    });
   },
 
   setBillsListeners: function (bills) {

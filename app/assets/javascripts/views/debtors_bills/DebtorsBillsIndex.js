@@ -6,14 +6,13 @@ window.SplitMyBills.Views.DebtorsBillsIndex= Backbone.CompositeView.extend({
 
     this.user = options.user;
 
-    this.listenTo(this.collection, "add sync", this.render);
+    this.listenTo(this.collection, "add sync change", this.render);
     this.listenTo(this.collection, "add", this.addDebtorsBill);
     
     this.collection.each(this.addDebtorsBill.bind(this));
   },
 
   addDebtorsBill: function(debtorsBill){
-                    debugger
     var showView = new SplitMyBills.Views.DebtorsBillShow({ model: debtorsBill, user: this.user });            
     var that = this;
     debtorsBill.fetch( { 

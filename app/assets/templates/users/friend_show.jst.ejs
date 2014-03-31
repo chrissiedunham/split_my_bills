@@ -6,5 +6,13 @@
   </span>
 </h2>
 
-<div class="debtors-bills-index"></div>
+<div class="debtors-bills-index">
+
+  <% user.dbsOwedToCurrentUser().each(function(db) { %>
+
+  <% debugger %>
+  <%= JST["debtors_bills/show"]( { debtorsBill: db } ) %>
+  <% }) %>
+
+</div>
 
