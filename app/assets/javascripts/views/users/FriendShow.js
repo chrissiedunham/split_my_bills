@@ -8,12 +8,14 @@ window.SplitMyBills.Views.FriendShow = Backbone.CompositeView.extend({
     this.listenTo(this.model.debtorsBills(), "add change remove", this.render);
     this.addDebtorsBillsIndexView(); 
    },
-  //
-  // events: {
-  //         
-  //         
-  // },
-  //
+
+  events: {
+
+    "click .mark-paid": "markPaidUnpaid",
+    "click .mark-unpaid": "markPaidUnpaid",
+
+  },
+
   addDebtorsBillsIndexView: function() {
     var indexView = new SplitMyBills.Views.DebtorsBillsIndex( { 
       user: this.model,
@@ -21,6 +23,23 @@ window.SplitMyBills.Views.FriendShow = Backbone.CompositeView.extend({
     });
     this.addSubview(".debtors-bills-index", indexView);
     indexView.render();
+  },
+  markPaidUnpaid: function(event){
+    event.preventDefault();
+
+    var changeStatusTo = $(event.target).hasClass("mark-paid") ? true : false;
+    var that = this;
+    var id = $(event.target).attr("data-id");
+
+    $.ajax({
+      url: "/api/debtors_bills/" + id,
+      type: "PATCH",
+      data: { "paid": changeStatusTo},
+      success: function() {
+        that.model.fetch();
+      }
+    })                    
+
   },
 
   render: function(){
