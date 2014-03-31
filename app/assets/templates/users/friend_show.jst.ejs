@@ -13,16 +13,13 @@
         <td>
           <h4>
             <%= db.escape('bill_name') %> 
-            <span class="text-success"><%=accounting.formatMoney(db.escape('amount_owed'))%>)</span>          
+            <span class="text-success"> (<%=accounting.formatMoney(db.escape('amount_owed'))%>)</span>          
           </h4>
         </td>
 
       </tr>
       <% }) %>
 
-      <tr>
-        <td>You owe:</td>
-      </tr>
       <% user.dbsOwedByCurrentUser().each(function(db) { %>
       <tr>
         <td>
