@@ -9,11 +9,27 @@ window.SplitMyBills.Routers.AppRouter = Backbone.Router.extend({
   },
 
   routes: {
+    "": "home",
     "bills": "currentUserShow",
     "friends" : "friendsIndex",
     "friends/:id" : "friendShow",
-    "bills/past" : "billsPast"
+    "bills/:id" : "billShow"
   
+  },
+
+  home: function(){
+    var user = this.users.getOrFetch(currentUserID);
+    var that = this;
+    user.fetch({
+      success: function(){
+        var userShow = new SplitMyBills.Views.Home({
+          model: user
+        });
+
+        that._swapView(userShow);
+      } 
+    });
+
   },
 
   currentUserShow: function(){
@@ -25,7 +41,6 @@ window.SplitMyBills.Routers.AppRouter = Backbone.Router.extend({
     });
 
     this._swapView(userShow);
-    this._addSelects();
     
   },
 
@@ -55,6 +70,24 @@ window.SplitMyBills.Routers.AppRouter = Backbone.Router.extend({
     });
 
     
+  },
+  billShow: function(id){
+
+    var user = new SplitMyBills.Models.User( { id: currentUserID} );
+    var that = this;
+
+    user.fetch({
+      success: function(){
+        var bill = new SplitMyBills.Models.Bill( { id: id });
+        var billShow = new SplitMyBills.Views.BillShow({
+          model: bill,
+          user: user
+        });
+
+        that._swapView(billShow);
+      } 
+    });
+
   },
 
   _addSelects: function() {
