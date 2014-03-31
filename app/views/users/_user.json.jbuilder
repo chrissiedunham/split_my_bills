@@ -1,7 +1,5 @@
 json.(user, :name, :email, :id)
 
-
-
 json.net_owed_to_current user.net_owed_to(current_user)
 
 

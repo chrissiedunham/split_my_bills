@@ -27,6 +27,21 @@ window.SplitMyBills.Models.Bill = Backbone.Model.extend({
     }
     return this._debtorsBills;
   },
+
+  netToCurrentUser: function(){
+    var net = 0;
+    var current_owes = 0;
+    var belongs_to_current = true;
+    this.debtorsBills().each(function(db) {
+      if (db.get('debtor_id') == currentUserID) { 
+
+        current_owes = parseFloat(db.escape('amount_owed'));
+        belongs_to_current = false;
+      }
+      else {net += parseFloat(db.escape('amount_owed'));}
+    })
+    return belongs_to_current ? net : current_owes;
+  },
  
   parse: function(data){
     this.debtors().set(data.debtors);

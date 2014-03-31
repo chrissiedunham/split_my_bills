@@ -16,12 +16,6 @@ json.debtors_bills user.debtors_bills.includes(bill: :creditor) do |db|
   json.bill_creditor_id db.bill.creditor.id
 end
 
-json.credits DebtorsBills.joins(:bill).where(bills: {:creditor_id => user.id} ) do | cb |
-  json.bill_name cb.bill.name
-  json.bill_creditor cb.bill.creditor.name
-  json.bill_creditor_id cb.bill.creditor.id
-end
-
 json.relevant_bills user.bills_relevant_to(current_user) do |bill|
   json.partial!("bills/bill", :bill => bill, :user => user, :current_user => current_user)
 end
