@@ -20,7 +20,6 @@ describe Bill do
   
     it { should belong_to(:creditor) }
     it { should have_many(:debtors) }
-    # it { should have_many(:_bills)}
   
   end
 end

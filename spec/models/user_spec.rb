@@ -23,7 +23,7 @@ describe User do
     it { should have_many(:credit_bills) }
     it { should have_many(:debit_bills) }
     it { should have_many(:friends) }
-    # it { should have_many(:_bills)}
+    it { should have_many(:bills)}
   
   end
 end
