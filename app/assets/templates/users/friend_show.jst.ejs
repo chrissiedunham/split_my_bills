@@ -13,19 +13,29 @@
 
       <% markText = (db.escape('paid') === "true") ? "Mark Unpaid" : "Mark Paid" %>
       <% markClass = (db.escape('paid') === "true") ? "mark-unpaid" : "mark-paid" %>
-      <% statusText = (db.escape('paid') === "true") ? "paid you" :
-      "owes you" %>
+      <% statusText = (db.escape('paid') === "true") ? "Paid you" :"Owes you" %>
 
-      <li><%= db.get('debtor') %> <%= statusText %>  <%= db.get('amount_owed') %>
+      <li><%= statusText %>  <%= accounting.formatMoney(db.get('amount_owed')) %>
 
       <a href="#" class="<%= markClass %>" data-id="<%=db.get('id') %>"> <%= markText %> </a>
-    </li>
+      </li>
     <% }) %>
   </ul>
 
-  <% user.dbsOwedByCurrentUser().each(function(db) { %>
+  <ul>
+    
+    <% user.dbsOwedByCurrentUser().each(function(db) { %>
 
-  <%= JST["debtors_bills/show"]( { debtorsBill: db } ) %>
-  <% }) %>
+        <% markText = (db.escape('paid') === "true") ? "Mark Unpaid" : "Mark Paid" %>
+        <% markClass = (db.escape('paid') === "true") ? "mark-unpaid" : "mark-paid" %>
+        <% statusText = (db.escape('paid') === "true") ? "You paid" : "You owe" %>
+
+        <li><%= statusText %>  <%=
+        accounting.formatMoney(db.get('amount_owed')) %>
+
+        <a href="#" class="<%= markClass %>" data-id="<%=db.get('id') %>"> <%= markText %> </a>
+        </li>
+    <% }) %>
+  </ul>
 </div>
 
