@@ -24,6 +24,14 @@
         <li>
           <%= debt.escape('debtor') %> owes <%=
           accounting.formatMoney(debt.escape('amount_owed'))%> 
+
+          <% markText = (debt.escape('paid') === "true") ? "Mark unpaid" : "Mark Paid" %>
+          <% markClass = (debt.escape('paid') === "true") ? "mark-unpaid" : "mark-paid" %>
+
+          <a href="#" class="<%= markClass %>" data-id="<%=
+            debt.get('id') %>"> <%= markText %> </a>
+           
+
         </li>
         <% }) %>
       </ul>

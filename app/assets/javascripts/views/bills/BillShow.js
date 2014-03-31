@@ -17,7 +17,8 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
     "click .bill-link": "toggleBillShow",
     "click .delete-bill": "deleteBill",
     "click .send-reminder-email": "sendReminderEmail",
-    "click a.mark-paid": "markPaid",
+    "click .mark-paid": "markPaidUnpaid",
+    "click .mark-unpaid": "markPaidUnpaid",
     
   },
 
@@ -34,21 +35,24 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
     this.model.destroy();
   },
 
-  markPaid: function(event){
+  markPaidUnpaid: function(event){
     event.preventDefault();
 
+    var changeStatusTo = $(event.target).hasClass("mark-paid") ? true : false;
     var that = this;
+    var id = $(event.target).attr("data-id");
 
     $.ajax({
-      url: "/api/bills/" + this.model.id,
+      url: "/api/debtors_bills/" + id,
       type: "PATCH",
-      data: { "paid": "paid" },
+      data: { "paid": changeStatusTo},
       success: function() {
-        that.model.debtorsBills().fetch();
+        that.model.fetch();
       }
     })                    
 
   },
+
   render: function(){
 
     var content = this.template({ bill: this.model, user: this.user, debtors: this.model.debtors() });
