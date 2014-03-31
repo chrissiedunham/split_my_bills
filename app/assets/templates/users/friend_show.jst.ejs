@@ -1,8 +1,8 @@
 <h2>
-  <% debtor = (user.get('net_owed_to_current') > 0) %>
+  <% debtor = (user.netOwedToCurrentUser() > 0) %>
   Bills shared with <%= user.get('name') %> (<%= debtor ? "owes you" : "you owe" %> <span class="<%= debtor ? "text-success" : "debit" %>" >
     <%=
-    accounting.formatMoney(Math.abs(user.get('net_owed_to_current'))) %>)
+    accounting.formatMoney(Math.abs(user.netOwedToCurrentUser())) %>)
   </span>
 </h2>
 

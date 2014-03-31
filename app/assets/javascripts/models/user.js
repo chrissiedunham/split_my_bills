@@ -31,6 +31,19 @@ window.SplitMyBills.Models.User = Backbone.Model.extend({
     return this._dbsWithCurrentUser;
   },
 
+  netOwedToCurrentUser: function(){
+    var net = 0;
+    this.dbsOwedByCurrentUser().each(function(db) {
+      if (db.get('paid') == 'true') { 
+        net -= parseFloat(db.get('amount_owed'));
+      } 
+    })                       
+    this.dbsOwedToCurrentUser().each(function(db) {
+      if (db.get('paid') == false){ net += parseFloat(db.get('amount_owed')) } 
+    })                       
+    return net;
+  },
+
   bills: function() {
     if(!this._bills){
     
