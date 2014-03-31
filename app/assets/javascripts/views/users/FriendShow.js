@@ -5,19 +5,14 @@ window.SplitMyBills.Views.FriendShow = Backbone.CompositeView.extend({
   initialize: function(options){
 
     this.listenTo(this.model, "sync change", this.render);
-    this.listenTo(this.model.debtorsBills(), "add change remove", this.render);
+    this.listenTo(this.model.dbsWithCurrentUser(), "add change remove", this.render);
     this.addDebtorsBillsIndexView(); 
    },
-  //
-  // events: {
-  //         
-  //         
-  // },
-  //
+
   addDebtorsBillsIndexView: function() {
     var indexView = new SplitMyBills.Views.DebtorsBillsIndex( { 
       user: this.model,
-      collection: this.model.dbsWithCurrentUser()
+      collection: this.model.dbsWithCurrentUser() 
     });
     this.addSubview(".debtors-bills-index", indexView);
     indexView.render();
@@ -26,10 +21,10 @@ window.SplitMyBills.Views.FriendShow = Backbone.CompositeView.extend({
   render: function(){
     var content = this.template({ 
       user: this.model, 
-      debtorsBills: this.model.debtorsBills() 
     });
     this.$el.html(content);
 
+    this.renderSubviews();
     return this;
   },
 })
