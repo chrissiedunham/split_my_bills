@@ -4,9 +4,9 @@
       bill.escape('name') %></a>
     
     <span class="pull-right">
-    <% debtor = (bill.netToCurrentUser()) > 0 %>
-    (<%= debtor ? "You're owed" : "You owe"  %>
-    <span class="<%= debtor ? 'text-success' : 'debit' %>">
+    <% owner = (bill.get('creditor_id') == currentUserID)  %>
+    (<%= owner? "You're owed" : "You owe"  %>
+    <span class="<%= owner? 'text-success' : 'debit' %>">
       <%=
       accounting.formatMoney(Math.abs(bill.netToCurrentUser())) %></span>)
   </span>

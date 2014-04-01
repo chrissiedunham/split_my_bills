@@ -93,7 +93,7 @@ class User < ActiveRecord::Base
   end
 
   def total_credit
-    DebtorsBills.joins(:bill).where(bills: { creditor_id: self.id}).sum(:amount_owed_cents)/100.00
+    DebtorsBills.joins(:bill).where("bills.creditor_id = ? AND debtors_bills.paid = ?", self.id, false).sum(:amount_owed_cents)/100.00
   end
 
   def amount_owed_by(user)

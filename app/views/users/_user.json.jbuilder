@@ -6,15 +6,10 @@ json.net_owed_to_current user.net_owed_to(current_user)
 # Used for top of user show page
 total_debit = DebtorsBills.where(:debtor_id=> user.id).sum(:amount_owed_cents)/100.00
 total_credit = user.total_credit
-json.net_balance (total_credit - total_debit)
 
-# # Could be used for friends?
-# json.debtors_bills user.debtors_bills.includes(bill: :creditor) do |db|
-#   json.amount db.amount_owed_cents/100.00
-#   json.bill_name db.bill.name
-#   json.bill_creditor db.bill.creditor.name
-#   json.bill_creditor_id db.bill.creditor.id
-# end
+json.total_debit total_debit
+json.total_credit total_credit
+json.net_balance (total_credit - total_debit)
 
 # used by friends
 json.dbs_owed_to_current_user user.debtors_bills_owed_to(current_user) do |db|
