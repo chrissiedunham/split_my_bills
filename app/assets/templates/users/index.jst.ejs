@@ -2,9 +2,6 @@
   Friends
 </h2>
 
-<div>
-  <input id="search-friends" type="text" class="form-control" placeholder="Search for friends...">
-</div>
 
 <div class="friend-invite"></div>
 
@@ -21,11 +18,6 @@
       
         <% debtor = friend.escape('net_owed_to') < 0 ? "text-success" : "debit"  %>
 
-        <td class="<%= debtor %>">
-          <h4>
-            <%=accounting.formatMoney(Math.abs(friend.escape('net_owed_to')))%>
-          </h4>
-        </td>
       </tr>
     <% }) %>
   

@@ -4,9 +4,9 @@
       bill.escape('name') %></a>
     
     <span class="pull-right">
-    <% debtor = (bill.escape('net_to_current_user') > 0) %>
-    (<%= debtor ? "You're owed" : "You owe"  %>
-    <span class="<%= debtor ? 'text-success' : 'debit' %>">
+    <% owner = (bill.get('creditor_id') == currentUserID)  %>
+    (<%= owner? "You're owed" : "You owe"  %>
+    <span class="<%= owner? 'text-success' : 'debit' %>">
       <%=
       accounting.formatMoney(Math.abs(bill.netToCurrentUser())) %></span>)
   </span>
@@ -21,12 +21,16 @@
 
       <ul>
         <% bill.debtorsBills().forEach(function(debt){ %>
-        <li>
-          <%= debt.escape('debtor') %> owes <%=
-          accounting.formatMoney(debt.escape('amount_owed'))%> 
+          <% owesOrPaid = debt.escape('paid') == 'true'? "paid" : "owes" %> 
+          <% symbol = debt.escape('paid') == 'true' ? '<i class="fa fa-check"></i>' : "" %> 
 
-          <% markText = (debt.escape('paid') === "true") ? "Mark Unpaid" : "Mark Paid" %>
+          <% markText = (debt.escape('paid') === "true") ? "(Mark Unpaid)" : "(Mark Paid)" %>
           <% markClass = (debt.escape('paid') === "true") ? "mark-unpaid" : "mark-paid" %>
+
+          <li class="<%= markClass %>">
+          <%= debt.escape('debtor') %> <%= owesOrPaid %>
+          <%=accounting.formatMoney(debt.escape('amount_owed'))%> <%=
+          symbol %>
 
           <a href="#" class="<%= markClass %>" data-id="<%=
             debt.get('id') %>"> <%= markText %> </a>
