@@ -6,7 +6,7 @@ window.SplitMyBills.Views.BillsIndex= Backbone.CompositeView.extend({
 
     this.user = options.user;
 
-    this.listenTo(this.collection, "add change sync", this.render);
+    this.listenTo(this.collection, "add sync", this.render);
     this.listenTo(this.collection, "add", this.addBill);
     this.listenTo(this.collection, "remove", this.removeBill);
     
