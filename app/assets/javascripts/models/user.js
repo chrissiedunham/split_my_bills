@@ -31,6 +31,19 @@ window.SplitMyBills.Models.User = Backbone.Model.extend({
     return this._dbsWithCurrentUser;
   },
 
+  netOwedToCurrentUser: function(){
+    var net = 0;
+    this.dbsOwedByCurrentUser().each(function(db) {
+      if (db.get('paid') == false) { 
+        net -= parseFloat(db.get('amount_owed'));
+      } 
+    })                       
+    this.dbsOwedToCurrentUser().each(function(db) {
+      if (db.get('paid') == false){ net += parseFloat(db.get('amount_owed')) } 
+    })                       
+    return net;
+  },
+
   bills: function() {
     if(!this._bills){
     
@@ -131,6 +144,7 @@ window.SplitMyBills.Models.User = Backbone.Model.extend({
 
   parse: function(data){
     this.setBillsListeners(this.bills());
+    this.setDBsListeners(this.dbsWithCurrentUser());
 
     this.creditBills().set(data.credit_bills);
     delete data.credit_bills;
@@ -146,6 +160,7 @@ window.SplitMyBills.Models.User = Backbone.Model.extend({
 
     this.dbsOwedByCurrentUser().set(data.dbs_owed_by_current_user);
     delete data.dbsOwedByCurrentUser;
+
 
     this.friends().set(data.friends);
     delete data.friends;

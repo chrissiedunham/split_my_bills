@@ -1,48 +1,26 @@
+window.SplitMyBills.Models.Friend = Backbone.Model.extend({
 
+  urlRoot: '/users',
 
-total_debit = DebtorsBills.where(:debtor_id=> user.id).sum(:amount_owed_cents)/100.00
-total_credit = user.total_credit
-
-json.net_owed_to_current user.net_owed_to(current_user)
-
-json.total_credit total_credit
-json.total_debit total_debit
-json.net_balance (total_credit - total_debit)
-
-json.debtors_bills user.debtors_bills.includes(bill: :creditor) do |db|
-  json.amount db.amount_owed_cents/100.00
-  json.bill_name db.bill.name
-  json.bill_creditor db.bill.creditor.name
-  json.bill_creditor_id db.bill.creditor.id
-end
-
-json.relevant_bills user.bills_relevant_to(current_user) do |bill|
-  json.partial!("bills/bill", :bill => bill, :user => user, :current_user => current_user)
-end
-
-json.credit_bills user.credit_bills do |bill|
-  json.partial!("bills/bill", :bill => bill, :user => user, :current_user => current_user)
-end
-
-json.debit_bills user.debit_bills do |bill|
-  json.partial!("bills/bill", :bill => bill, :user => user, :current_user => current_user)
-end
-
-json.friends user.friends do |friend|
-  json.id friend.id
-  json.name friend.name
-  json.net_owed_to user.net_owed_to(friend)
-end
-
-
-
-  debtorsBills: function(){
-    if(!this._debtorsBills){ 
-      this._debtorsBills = new SplitMyBills.Collections.DebtorsBills([], { 
+  // Note that debtors bills represent the join on debtors and bills,
+  // not the same as debit bills (actual bill objects on which user owed
+  // money)
+  //
+  dbsOwedByCurrentUser: function(){
+    if(!this._debtorsBillsBy){ 
+      this._debtorsBillsBy = new SplitMyBills.Collections.DebtorsBills([], { 
         user: this 
       });
     } 
-    return this._debtorsBills;
+    return this._debtorsBillsBy;
+  },
+  dbsOwedToCurrentUser: function(){
+    if(!this._debtorsBillsTo){ 
+      this._debtorsBillsTo = new SplitMyBills.Collections.DebtorsBills([], { 
+        user: this 
+      });
+    } 
+    return this._debtorsBillsTo;
   },
 
   bills: function() {
@@ -127,4 +105,31 @@ end
       bills.remove(model);
     });
    },
+
+  parse: function(data){
+    this.setBillsListeners(this.bills());
+
+    this.creditBills().set(data.credit_bills);
+    delete data.credit_bills;
+
+    this.debitBills().set(data.debit_bills);
+    delete data.debit_bills;
+    
+    this.relevantBills().set(data.relevant_bills);
+    delete data.relevant_bills;
+
+    this.dbsOwedToCurrentUser().set(data.dbs_owed_to_current_user);
+    delete data.dbsOwedToCurrentUser;
+
+    this.dbsOwedByCurrentUser().set(data.dbs_owed_by_current_user);
+    delete data.dbsOwedByCurrentUser;
+
+    this.friends().set(data.friends);
+    delete data.friends;
+  
+    return data;
+  }
+
+
+})
 

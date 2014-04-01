@@ -33,14 +33,20 @@ window.SplitMyBills.Models.Bill = Backbone.Model.extend({
     var current_owes = 0;
     var belongs_to_current = true;
     this.debtorsBills().each(function(db) {
-      if (db.escape('paid') == "true" ) { 
-        net += 0;
-      } else if (db.get('debtor_id') == currentUserID) { 
+      if (db.get('debtor_id') == currentUserID) { 
         belongs_to_current = false;
-        current_owes = parseFloat(db.escape('amount_owed'));
+        if (db.escape('paid') == "true" ) { 
+          current_owes += 0;
+        } else {
+          current_owes = parseFloat(db.escape('amount_owed'));
+        }
       }
       else {
-        net += parseFloat(db.escape('amount_owed'));
+        if (db.escape('paid') == "true" ) { 
+          net += 0;
+        } else {
+          net += parseFloat(db.escape('amount_owed'));
+        }
       }
     })
     return belongs_to_current ? net : current_owes;

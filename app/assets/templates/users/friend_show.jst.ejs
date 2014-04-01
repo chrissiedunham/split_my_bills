@@ -1,13 +1,60 @@
 <h2>
-  <% debtor = (user.get('net_owed_to_current') > 0) %>
+  <% debtor = (user.netOwedToCurrentUser() >= 0) %>
+
   Bills shared with <%= user.get('name') %> (<%= debtor ? "owes you" : "you owe" %> <span class="<%= debtor ? "text-success" : "debit" %>" >
     <%=
-    accounting.formatMoney(Math.abs(user.get('net_owed_to_current'))) %>)
+    accounting.formatMoney(Math.abs(user.netOwedToCurrentUser())) %>)
   </span>
 </h2>
 
 <div class="debtors-bills-index">
+  <table class="table">
+    
+    <tbody>
+    <% user.dbsOwedToCurrentUser().each(function(db) { %>
 
+      <% markText = (db.escape('paid') === "true") ? 'Mark Unpaid' : "Mark Paid" %>
+      <% markClass = (db.escape('paid') === "true") ? "mark-unpaid" : "mark-paid" %>
+      <% statusText = (db.escape('paid') === "true") ? "Paid you" :"Owes you" %>
+      <% symbol = (db.escape('paid') === "true") ? '<i class="fa fa-check"></i>' :"" %>
 
+      <tr>
+        <td><%= db.escape('bill_name') %></td>
+        <td> 
+          <%= statusText %> <%= accounting.formatMoney(db.get('amount_owed')) %>
+          <%= symbol %>
+        </td>
+        <td>
+          <a href="#" class="<%= markClass %>" data-id="<%=db.get('id') %>"> <%= markText %> </a>
+        </td>
+      </tr>
+    <% }) %>
+    <% user.dbsOwedByCurrentUser().each(function(db) { %>
+
+      <% markText = (db.escape('paid') === "true") ? '<i class="fa fa-check"></i>' : "Mark Paid" %>
+      <% markClass = (db.escape('paid') === "true") ? "mark-unpaid" : "mark-paid" %>
+      <% statusText = (db.escape('paid') === "true") ? "You paid" :"You owe" %>
+      <% symbol = (db.escape('paid') === "true") ? '<i class="fa fa-check"></i>' :"" %>
+
+      <tr>
+        <td><%= db.escape('bill_name') %></td>
+        <td> 
+          <%= statusText %> <%=
+          accounting.formatMoney(db.get('amount_owed')) %> <%= symbol %>
+        </td>
+        <td>
+          <a href="#" class="<%= markClass %>" data-id="<%=db.get('id') %>"> <%= markText %> </a>
+        </td>
+      </tr>
+    <% }) %>
+    </tbody>
+  </table>
+
+  <table class="table">
+    
+    <tbody>
+    </tbody>
+  </table>
+    
 </div>
 

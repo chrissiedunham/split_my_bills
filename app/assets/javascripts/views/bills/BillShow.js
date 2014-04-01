@@ -35,6 +35,8 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
     this.model.destroy();
   },
 
+    "click .mark-paid": "markPaidUnpaid",
+    "click .mark-unpaid": "markPaidUnpaid",
   markPaidUnpaid: function(event){
     event.preventDefault();
 
