@@ -3,8 +3,8 @@
 
   Bills shared with <%= user.get('name') %> (<%= debtor ? "owes you" : "you owe" %> <span class="<%= debtor ? "text-success" : "debit" %>" >
     <%=
-    accounting.formatMoney(Math.abs(user.netOwedToCurrentUser())) %>)
-  </span>
+    accounting.formatMoney(Math.abs(user.netOwedToCurrentUser()))
+    %></span>)
 </h2>
 
 <div class="debtors-bills-index">
