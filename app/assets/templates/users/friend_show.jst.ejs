@@ -15,7 +15,8 @@
       <% markClass = (db.escape('paid') === "true") ? "mark-unpaid" : "mark-paid" %>
       <% statusText = (db.escape('paid') === "true") ? "Paid you" :"Owes you" %>
 
-      <li><%= statusText %>  <%= accounting.formatMoney(db.get('amount_owed')) %>
+      <li><%= db.escape('bill_name') %>: <%= statusText %> <%=
+      accounting.formatMoney(db.get('amount_owed')) %>
 
       <a href="#" class="<%= markClass %>" data-id="<%=db.get('id') %>"> <%= markText %> </a>
       </li>

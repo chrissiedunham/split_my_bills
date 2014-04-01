@@ -21,11 +21,6 @@
       
         <% debtor = friend.escape('net_owed_to') < 0 ? "text-success" : "debit"  %>
 
-        <td class="<%= debtor %>">
-          <h4>
-            <%=accounting.formatMoney(Math.abs(friend.escape('net_owed_to')))%>
-          </h4>
-        </td>
       </tr>
     <% }) %>
   
