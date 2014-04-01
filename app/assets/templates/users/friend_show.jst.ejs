@@ -18,7 +18,7 @@
       <% statusText = (db.escape('paid') === "true") ? "Paid you" :"Owes you" %>
       <% symbol = (db.escape('paid') === "true") ? '<i class="fa fa-check"></i>' :"" %>
 
-      <tr>
+      <tr class="<%= markClass %>">
         <td><%= db.escape('bill_name') %></td>
         <td> 
           <%= statusText %> <%= accounting.formatMoney(db.get('amount_owed')) %>
