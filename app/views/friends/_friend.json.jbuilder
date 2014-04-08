@@ -1,6 +1,5 @@
 json.(friend, :name, :email, :id)
 
-# used by friends
 json.dbs_owed_to_current_user dbs_owed_to_current do |db|
   json.partial!("debtors_bills/debtors_bill", :debtors_bill => db)
 end

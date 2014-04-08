@@ -1,7 +1,5 @@
 <td>
-
   <h4>
-    
     <span class="pull-right">
         <% debtor = (debtorsBill.escape('debtor_id') === currentUserID) %>
         <%= debtor ? "You're owed" : "You owe"  %>
@@ -9,9 +7,7 @@
           <%= accounting.formatMoney(Math.abs(debtorsBill.escape('amount_owed'))) %>
         </span>
     </span>
-  
   </h4>
-
 </td>
 
 

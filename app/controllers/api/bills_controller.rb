@@ -66,8 +66,7 @@ class Api::BillsController < ApplicationController
   end
 
   def show
-    @bill = Bill.find(params[:id])
-    @current_user = current_user
+    @bill = Bill.includes([{debtors_bills: :debtor}, :creditor]).find(params[:id])
     render "bills/show"
   end
 
