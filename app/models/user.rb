@@ -51,14 +51,14 @@ class User < ActiveRecord::Base
     self.includes(credit_bills: :debtors_bills).where(
         "bills.creditor_id = ? AND 
         debtors_bills.paid = ?", 
-        user.id, false)
+        user.id, false).references(:debtors_bills)
         .sum('debtors_bills.amount_owed_cents')/100
   end
 
   # needed for current user
   def self.total_debit(user)
     self.includes(:debtors_bills).where(
-      "users.id = ?", user.id)
+      "users.id = ?", user.id).references(:debtors_bills)
       .sum("debtors_bills.amount_owed_cents")/100
   end
   #   
