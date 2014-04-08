@@ -7,6 +7,7 @@ SplitMyBills::Application.routes.draw do
   resources :users, only: [:new, :create, :destroy] do
     resources :friendships, only: [:create, :destroy ]
   end
+  resources :friends, only: [:show, :index]
   
   resources :users, defaults: { format: :json }, only: [ :index, :show ] 
   resources :friendships, only: [:index]

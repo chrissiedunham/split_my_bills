@@ -2,48 +2,6 @@ window.SplitMyBills.Models.User = Backbone.Model.extend({
 
   urlRoot: '/users',
 
-  // Note that debtors bills represent the join on debtors and bills,
-  // not the same as debit bills (actual bill objects on which user owed
-  // money)
-  //
-  dbsOwedByCurrentUser: function(){
-    if(!this._debtorsBillsBy){ 
-      this._debtorsBillsBy = new SplitMyBills.Collections.DebtorsBills([], { 
-        user: this 
-      });
-    } 
-    return this._debtorsBillsBy;
-  },
-  dbsOwedToCurrentUser: function(){
-    if(!this._debtorsBillsTo){ 
-      this._debtorsBillsTo = new SplitMyBills.Collections.DebtorsBills([], { 
-        user: this 
-      });
-    } 
-    return this._debtorsBillsTo;
-  },
-  dbsWithCurrentUser: function(){
-    if(!this._dbsWithCurrentUser){ 
-      this._dbsWithCurrentUser = new SplitMyBills.Collections.DebtorsBills([], { 
-        user: this 
-      });
-    } 
-    return this._dbsWithCurrentUser;
-  },
-
-  netOwedToCurrentUser: function(){
-    var net = 0;
-    this.dbsOwedByCurrentUser().each(function(db) {
-      if (db.get('paid') == false) { 
-        net -= parseFloat(db.get('amount_owed'));
-      } 
-    })                       
-    this.dbsOwedToCurrentUser().each(function(db) {
-      if (db.get('paid') == false){ net += parseFloat(db.get('amount_owed')) } 
-    })                       
-    return net;
-  },
-
   bills: function() {
     if(!this._bills){
     
@@ -112,21 +70,6 @@ window.SplitMyBills.Models.User = Backbone.Model.extend({
     
   },
 
-  setDBsListeners: function (DBs) {
-    this.listenTo(this.dbsOwedByCurrentUser(), 'add', function (model) {
-      DBs.add(model);
-    });
-    this.listenTo(this.dbsOwedToCurrentUser(), 'add', function (model) {
-      DBs.add(model);
-    });
-    this.listenTo(this.dbsOwedByCurrentUser(), 'remove', function (model) {
-      DBs.remove(model);
-    });
-    this.listenTo(this.dbsOwedToCurrentUser(), 'remove', function (model) {
-      DBs.remove(model);
-    });
-  },
-
   setBillsListeners: function (bills) {
     this.listenTo(this.creditBills(), 'add', function (model) {
       bills.add(model);
@@ -144,7 +87,6 @@ window.SplitMyBills.Models.User = Backbone.Model.extend({
 
   parse: function(data){
     this.setBillsListeners(this.bills());
-    this.setDBsListeners(this.dbsWithCurrentUser());
 
     this.creditBills().set(data.credit_bills);
     delete data.credit_bills;
@@ -154,13 +96,6 @@ window.SplitMyBills.Models.User = Backbone.Model.extend({
     
     this.relevantBills().set(data.relevant_bills);
     delete data.relevant_bills;
-
-    this.dbsOwedToCurrentUser().set(data.dbs_owed_to_current_user);
-    delete data.dbsOwedToCurrentUser;
-
-    this.dbsOwedByCurrentUser().set(data.dbs_owed_by_current_user);
-    delete data.dbsOwedByCurrentUser;
-
 
     this.friends().set(data.friends);
     delete data.friends;

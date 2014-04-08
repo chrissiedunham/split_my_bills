@@ -4,9 +4,12 @@ json.amount (bill.amount_cents / 100.00)
 
 json.creditor_email bill.creditor.email
 
-json.net_to_current_user bill.net_amount_owed(current_user)
+json.debtorsBills bill.debtors_bills do |db|
+  json.paid db.paid
+  json.id db.id
+  json.amount_owed db.amount_owed_cents/100.00
 
-json.debtorsBills bill.debtors_bills.includes(:debtor) do |db|
-  json.partial!("debtors_bills/debtors_bill", :debtors_bill => db)
+  json.debtorEmail db.debtor.email
+  json.debtor db.debtor.name
 end
 

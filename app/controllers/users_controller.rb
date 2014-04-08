@@ -23,13 +23,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    if params.include?(:id)
-      @user = User.find(params[:id])
-      @current_user = current_user
-      render "users/show"
-    else
-      #
-    end
+    @user = User.includes(:credit_bills, :debit_bills).find_by(:id => current_user.id)
+    render "users/show"
   end
 
   private
