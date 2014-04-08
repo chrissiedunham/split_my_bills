@@ -5,7 +5,6 @@ json.(user, :name, :email, :id)
 
 # REFACTOR OUT TO DIFFERENT VIEW??
 # Used for top of user show page
-#total_debit = DebtorsBills.where(:debtor_id => user.id).sum(:amount_owed_cents)/100.00
 total_debit = User.total_debit(user)
 total_credit = User.total_credit(user)
 

@@ -61,20 +61,27 @@ class User < ActiveRecord::Base
       "users.id = ?", user.id)
       .sum("debtors_bills.amount_owed_cents")/100
   end
-  #
+  #   
 #   def debtors_bills_owed(owed_by_user, owed_to_user)
   # needed for friend show page
+  #
   def debtors_bills_owed_to(user)
-    DebtorsBills.find_by_sql([ "
-      SELECT debtors_bills.*
-      FROM debtors_bills
-      JOIN bills on bills.id = debtors_bills.bill_id
-      WHERE 
-      bills.creditor_id = :creditor_id 
-      AND
-      debtors_bills.debtor_id = :debtor_id
-      ", { creditor_id: user.id, debtor_id: self.id }])
+    self.includes(credit_bills: :debtors_bills).where(
+        "bills.creditor_id = ?",
+        user.id)
   end
+
+  # def debtors_bills_owed_to(user)
+  #   DebtorsBills.find_by_sql([ "
+  #     SELECT debtors_bills.*
+  #     FROM debtors_bills
+  #     JOIN bills on bills.id = debtors_bills.bill_id
+  #     WHERE 
+  #     bills.creditor_id = :creditor_id 
+  #     AND
+  #     debtors_bills.debtor_id = :debtor_id
+  #     ", { creditor_id: user.id, debtor_id: self.id }])
+  # end
 
   def self.generate_session_token
     SecureRandom::urlsafe_base64(16)
