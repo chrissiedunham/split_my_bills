@@ -24,7 +24,7 @@ class UsersController < ApplicationController
 
   def show
     if params.include?(:id)
-      @user = User.includes(credit_bills: :debtors_bills).find_by(:id => params[:id])
+      @user = User.find(params[:id])
       @current_user = current_user
       render "users/show"
     else
