@@ -8,19 +8,18 @@ json.total_credit total_credit
 json.net_balance (total_credit - total_debit)
 
 # used by main user show page
-json.credit_bills current_user.credit_bills do |bill|
-  json.partial!("bills/bill", :bill => bill, :user => user, :current_user => current_user)
+json.credit_bills user.credit_bills do |bill|
+  json.partial!("bills/bill", :bill => bill, :user => user)
 end
 
-json.debit_bills current_user.debit_bills do |bill|
-  json.partial!("bills/bill", :bill => bill, :user => user, :current_user => current_user)
+json.debit_bills user.debit_bills do |bill|
+  json.partial!("bills/bill", :bill => bill, :user => user)
 end
 
-# used only by current_user
-json.friends current_user.friends do |friend|
+# used only by user
+json.friends user.friends do |friend|
   json.id friend.id
   json.name friend.name
-#   json.net_owed_to user.net_owed_to(friend)
 end
 
 
