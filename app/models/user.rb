@@ -46,21 +46,24 @@ class User < ActiveRecord::Base
     user.try(:is_password?, password) ? user : nil
   end
 
+  # needed for current user
   def self.total_credit(user)
     self.includes(credit_bills: :debtors_bills).where(
         "bills.creditor_id = ? AND 
         debtors_bills.paid = ?", 
         user.id, false)
         .sum('debtors_bills.amount_owed_cents')/100
-
   end
 
-  def total_credit
-  
-    
-    DebtorsBills.joins(:bill).where("bills.creditor_id = ? AND debtors_bills.paid = ?", self.id, false).sum(:amount_owed_cents)/100.00
+  # needed for current user
+  def self.total_debit(user)
+    self.includes(:debtors_bills).where(
+      "users.id = ?", user.id)
+      .sum("debtors_bills.amount_owed_cents")/100
   end
-
+  #
+#   def debtors_bills_owed(owed_by_user, owed_to_user)
+  # needed for friend show page
   def debtors_bills_owed_to(user)
     DebtorsBills.find_by_sql([ "
       SELECT debtors_bills.*
