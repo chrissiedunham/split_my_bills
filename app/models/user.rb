@@ -46,52 +46,52 @@ class User < ActiveRecord::Base
     user.try(:is_password?, password) ? user : nil
   end
 
-  def bills_relevant_to(user)
-    if user.id == self.id
-      return all_bills
-    end
-    results = Bill.find_by_sql(["
-      SELECT bills.*
-      FROM bills
-      JOIN debtors_bills ON bills.id = debtors_bills.bill_id
-      WHERE 
-      (bills.creditor_id = :current_user_id AND debtors_bills.debtor_id = :friend_id)
-      OR 
-      (debtors_bills.debtor_id = :current_user_id AND bills.creditor_id = :friend_id)", 
-        { current_user_id: user.id, friend_id: self.id  }])
-      results
-  end
+  # def bills_relevant_to(user)
+  #   if user.id == self.id
+  #     return all_bills
+  #   end
+  #   results = Bill.find_by_sql(["
+  #     SELECT bills.*
+  #     FROM bills
+  #     JOIN debtors_bills ON bills.id = debtors_bills.bill_id
+  #     WHERE 
+  #     (bills.creditor_id = :current_user_id AND debtors_bills.debtor_id = :friend_id)
+  #     OR 
+  #     (debtors_bills.debtor_id = :current_user_id AND bills.creditor_id = :friend_id)", 
+  #       { current_user_id: user.id, friend_id: self.id  }])
+  #     results
+  # end
 
-  def all_bills
-    Bill.find_by_sql(["
-      SELECT * 
-      FROM bills
-      JOIN debtors_bills ON bills.id = debtors_bills.bill_id
-      JOIN users AS creditors on creditors.id = bills.creditor_id
-      WHERE 
-      creditors.id = :current_user_id
-      OR 
-      debtors_bills.debtor_id = :current_user_id",
-        { current_user_id: self.id  }])
-  end
+  # def all_bills
+  #   Bill.find_by_sql(["
+  #     SELECT * 
+  #     FROM bills
+  #     JOIN debtors_bills ON bills.id = debtors_bills.bill_id
+  #     JOIN users AS creditors on creditors.id = bills.creditor_id
+  #     WHERE 
+  #     creditors.id = :current_user_id
+  #     OR 
+  #     debtors_bills.debtor_id = :current_user_id",
+  #       { current_user_id: self.id  }])
+  # end
 
-  def amount_owed_on(bill)
-    debtor_bill = self.debtors_bills.where(:bill_id => bill.id).first
-    debtor_bill.amount_owed_cents / 100.00
-  end
+  # def amount_owed_on(bill)
+  #   debtor_bill = self.debtors_bills.where(:bill_id => bill.id).first
+  #   debtor_bill.amount_owed_cents / 100.00
+  # end
 
-  def amount_owed_to(user)
-    return 0 if user.id == self.id
-    DebtorsBills.find_by_sql([ "
-      SELECT sum(amount_owed_cents)
-      FROM debtors_bills
-      JOIN bills on bills.id = debtors_bills.bill_id
-      WHERE 
-      bills.creditor_id = :creditor_id 
-      AND
-      debtors_bills.debtor_id = :debtor_id
-      ", { creditor_id: user.id, debtor_id: self.id }]).last.sum.to_i / 100.00
-  end
+  # def amount_owed_to(user)
+  #   return 0 if user.id == self.id
+  #   DebtorsBills.find_by_sql([ "
+  #     SELECT sum(amount_owed_cents)
+  #     FROM debtors_bills
+  #     JOIN bills on bills.id = debtors_bills.bill_id
+  #     WHERE 
+  #     bills.creditor_id = :creditor_id 
+  #     AND
+  #     debtors_bills.debtor_id = :debtor_id
+  #     ", { creditor_id: user.id, debtor_id: self.id }]).last.sum.to_i / 100.00
+  # end
 
   def total_credit
     DebtorsBills.joins(:bill).where("bills.creditor_id = ? AND debtors_bills.paid = ?", self.id, false).sum(:amount_owed_cents)/100.00

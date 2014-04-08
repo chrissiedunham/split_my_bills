@@ -1,6 +1,6 @@
 json.(user, :name, :email, :id)
-
-json.net_owed_to_current user.net_owed_to(current_user)
+#
+# json.net_owed_to_current user.net_owed_to(current_user)
 
 
 # REFACTOR OUT TO DIFFERENT VIEW??
@@ -38,7 +38,7 @@ end
 json.friends current_user.friends do |friend|
   json.id friend.id
   json.name friend.name
-  json.net_owed_to user.net_owed_to(friend)
+#   json.net_owed_to user.net_owed_to(friend)
 end
 
 
