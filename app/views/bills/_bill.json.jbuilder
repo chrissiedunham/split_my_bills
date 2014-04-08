@@ -11,5 +11,6 @@ json.debtorsBills bill.debtors_bills do |db|
 
   json.debtorEmail db.debtor.email
   json.debtor db.debtor.name
+  json.debtor_id db.debtor.id
 end
 
