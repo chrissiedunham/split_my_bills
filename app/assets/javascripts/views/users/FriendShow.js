@@ -25,6 +25,7 @@ window.SplitMyBills.Views.FriendShow = Backbone.CompositeView.extend({
     this.addSubview(".debtors-bills-index", indexView);
     indexView.render();
   },
+
   markPaidUnpaid: function(event){
     event.preventDefault();
 
@@ -46,7 +47,6 @@ window.SplitMyBills.Views.FriendShow = Backbone.CompositeView.extend({
   render: function(){
     var content = this.template({ 
       user: this.model, 
-      debtorsBills: this.model.debtorsBills() 
     });
     this.$el.html(content);
 
