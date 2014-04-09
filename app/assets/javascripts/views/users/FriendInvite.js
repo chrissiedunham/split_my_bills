@@ -10,7 +10,8 @@ window.SplitMyBills.Views.FriendInvite = Backbone.View.extend({
   
   },
   events: {
-    "click .friend-invite": "sendInviteEmail"
+
+    "click .send-friend-invite": "sendInviteEmail"
   },
 
   sendInviteEmail: function(event){
@@ -25,6 +26,8 @@ window.SplitMyBills.Views.FriendInvite = Backbone.View.extend({
       type: "POST",
       data: data,
       success: function() {
+
+        $('.modal').modal('hide');
 
       }
     })                    
