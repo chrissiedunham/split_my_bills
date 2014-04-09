@@ -1,6 +1,6 @@
-window.SplitMyBills.Views.UsersIndex = Backbone.CompositeView.extend({
+window.SplitMyBills.Views.FriendsIndex = Backbone.CompositeView.extend({
 
-  template: JST["users/index"],
+  template: JST["friends/index"],
 
   initialize: function(){
     this.listenTo(this.collection, "add", this.render);
