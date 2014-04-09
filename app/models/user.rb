@@ -46,6 +46,12 @@ class User < ActiveRecord::Base
     user.try(:is_password?, password) ? user : nil
   end
 
+  def amount_owed_on(bill)
+    debtor_bill = self.debtors_bills.where(:bill_id => bill.id).first
+    debtor_bill.amount_owed_cents / 100.00
+  end
+
+
   # needed for current user
   def self.total_credit(user)
     self.includes(credit_bills: :debtors_bills).where(
