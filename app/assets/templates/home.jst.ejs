@@ -10,19 +10,20 @@
     
     <h3>You owe friends: 
       <span class="debit"><%=
-        accounting.formatMoney(Math.abs(user.escape('total_debit'))) %>  </span>
+        accounting.formatMoney(Math.abs(user.netDebit())) %>  </span>
     </h3>
 
     <h3>Friends owe you: 
       <span class="text-success">
-        <%= accounting.formatMoney(Math.abs(user.escape('total_credit'))) %>
+        <%= accounting.formatMoney(Math.abs(user.netCredit())) %>
       </span>
     </h3>
 
     <h3>Net balance:
       <% debtor = (user.escape('net_balance') > 0) %>
       <span class="<%= debtor ? 'text-success' : 'debit' %>">
-        <%= accounting.formatMoney(Math.abs(user.escape('net_balance'))) %></span>
+        <% debugger %>
+        <%= accounting.formatMoney(Math.abs(user.net_balance())) %></span>
     </h3>
   </div>
     

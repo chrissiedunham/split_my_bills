@@ -50,13 +50,24 @@ window.SplitMyBills.Models.User = Backbone.Model.extend({
     return this._friends;
   },
 
-  net_balance: function () {
+  netCredit: function(){
     var net = 0;
-    this.bills().each(function(bill) {
-      net += parseInt(bill.netToCurrentUser());
+    this.creditBills().each(function(bill) {
+      net += parseFloat(bill.netToCurrentUser());
     })
     return net;
-    
+  },
+
+  netDebit: function(){
+    var net = 0;
+    this.debitBills().each(function(bill) {
+      net += parseFloat(bill.netToCurrentUser());
+    })
+    return net;
+  },
+
+  net_balance: function (){
+    return this.netCredit() - this.netDebit(); 
   },
 
   relevantBills: function() {
