@@ -2,6 +2,7 @@ SplitMyBills
 ============
 
 A simple interface for keeping track of shared expenses
+Check it our live <a href="http://split-my-bills.herokuapp.com/">here</a>.
 
 ## Dashboard
 
