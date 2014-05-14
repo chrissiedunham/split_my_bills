@@ -44,7 +44,7 @@ window.SplitMyBills.Views.BillShow = Backbone.CompositeView.extend({
 
     $.ajax({
       url: "/api/debtors_bills/" + id,
-      type: "PATCH",
+      type: "PUT",
       data: { "paid": changeStatusTo},
       success: function() {
         that.model.fetch();
