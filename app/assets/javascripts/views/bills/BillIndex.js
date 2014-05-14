@@ -17,12 +17,13 @@ window.SplitMyBills.Views.BillsIndex= Backbone.CompositeView.extend({
 
     var billShowView = new SplitMyBills.Views.BillShow({ model: bill, user: this.user });            
     var that = this;
-    bill.fetch( { 
-      success: function(){
-        that.addSubview(".bills", billShowView);
-        billShowView.render();
-      }
-    });
+   bill.fetch( { 
+     success: function(){
+
+       that.addSubview(".bills", billShowView);
+       billShowView.render();
+     }
+   });
   },
 
   removeBill: function(bill){

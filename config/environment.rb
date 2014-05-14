@@ -16,6 +16,10 @@ elsif Rails.env.development?
   # Remember the letter_opener gem? It won't send real emails; it
   # just opens them in another tab.
   ActionMailer::Base.delivery_method = :letter_opener
+
+elsif Rails.env.test?
+  SAUCE_USERNAME = ENV['SAUCE_USERNAME']
+  SAUCE_ACCESS_KEY = ENV['SAUCE_ACCESS_KEY']
 end
 
 # Initialize the Rails application.

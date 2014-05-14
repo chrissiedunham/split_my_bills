@@ -51,7 +51,6 @@ window.SplitMyBills.Views.BillEdit = Backbone.CompositeView.extend({
     var that = this;
 
     this.model.save(billData, {
-      patch: true,
       success: function(){
         that.model.fetch();
         that.user.fetch();

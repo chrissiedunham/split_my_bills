@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature "the signup process" do
+feature "the signup process" :sauce => true, do
   scenario "has a new user page" do
     visit new_user_url
     expect(page).to have_content "Sign Up"
