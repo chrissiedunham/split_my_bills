@@ -66,7 +66,6 @@ class Api::BillsController < ApplicationController
   end
 
   def show
-    sleep 1
     @bill = Bill.includes([{debtors_bills: :debtor}, :creditor]).find(params[:id])
     render "bills/show"
   end
