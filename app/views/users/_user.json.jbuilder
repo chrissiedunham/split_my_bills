@@ -8,7 +8,7 @@ json.total_credit total_credit
 json.net_balance (total_credit - total_debit)
 
 # used by main user show page
-json.credit_bills user.credit_bills.includes(:debtors_bills) do |bill|
+json.credit_bills user.credit_bills do |bill|
   json.partial!("bills/bill", :bill => bill, :user => user)
 end
 

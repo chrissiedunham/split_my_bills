@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.includes(:credit_bills, :debit_bills).find_by(:id => current_user.id)
+    @user = User.includes(credit_bills: :debtors_bills, debit_bills: :debtors_bills).find_by(:id => current_user.id)
     render "users/show"
   end
 
